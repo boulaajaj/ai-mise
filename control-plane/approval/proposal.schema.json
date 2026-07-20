@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "harnessmith/proposal.schema.json",
+  "title": "Harnessmith change transaction proposal",
+  "description": "The only unit of persistent change. Approval covers this whole transaction, never individual file operations.",
+  "type": "object",
+  "required": ["proposal_id", "created_at", "purpose", "risk_category", "changes", "validations", "rollback_id", "expires_at"],
+  "additionalProperties": false,
+  "properties": {
+    "proposal_id": { "type": "string", "pattern": "^prop-[0-9]{8}-[a-z0-9]{6}$" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "purpose": {
+      "type": "object",
+      "required": ["plain_language", "trigger"],
+      "properties": {
+        "plain_language": { "type": "string", "minLength": 20, "description": "Must be understandable by a non-technical professional." },
+        "trigger": { "type": "string", "description": "What prompted this: interview answer, correction, retrospective finding, refactor threshold." }
+      }
+    },
+    "risk_category": { "enum": ["routine", "structural", "governance", "safety"] },
+    "changes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "action", "before_hash", "after_hash"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string", "description": "Workspace-relative. Validators reject protected paths, traversal, and symlink escapes." },
+          "action": { "enum": ["create", "modify", "delete", "rename"] },
+          "before_hash": { "type": ["string", "null"], "description": "SHA-256 of current content; null for create." },
+          "after_hash": { "type": ["string", "null"], "description": "SHA-256 of proposed content; null for delete." },
+          "rename_to": { "type": "string" }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Unknowns the proposal proceeds on; shown to the user in the approval view."
+    },
+    "validations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["validator", "passed"],
+        "properties": {
+          "validator": { "type": "string" },
+          "passed": { "type": "boolean" },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+    "predicted_eval_impact": { "type": "string", "description": "Required for retrospective-originated proposals (shadow mode): which eval should improve." },
+    "rollback_id": { "type": "string", "description": "Restore tag that reverses this transaction exactly." },
+    "expires_at": { "type": "string", "format": "date-time" }
+  }
+}

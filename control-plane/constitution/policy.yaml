@@ -1,0 +1,87 @@
+# Harnessmith authoritative policy — USER-OWNED.
+# This file is the constitution. It is never edited by any agent or automated
+# process. Changes to this file are a manual, user-initiated act.
+# Platform artifacts (CLAUDE.md, hooks, settings) are COMPILED from this file
+# by control-plane/adapters/ — they are projections, not sources of truth.
+
+meta:
+  policy_version: 0.1.0
+  owner: user            # the human professional; never an agent
+  schema: policy.schema.json
+
+identity:
+  product: harnessmith
+  boundary: >
+    Given a folder of real project materials: inspect it, ask a small number
+    of justified questions, propose an agent workspace in plain language,
+    build the approved version through a controlled transaction, and restore
+    any prior state exactly.
+
+protected_assets:
+  # Paths the mutation gateway must refuse to touch under ANY transaction.
+  # Enforced by validators/protected_path_validator, hooks, permission
+  # deny-rules, and OS permissions (defense in depth).
+  control_plane:
+    - control-plane/**            # the entire control plane, including this file
+  workspace_immutable:
+    - sources/**                  # evidence is append-only; originals never edited
+    - changes/approvals/**        # approval receipts are append-only
+    - decisions/ADR/**            # ADRs are append-only (supersede, never rewrite)
+
+approval:
+  unit: transaction               # never per-file-operation (approval-fatigue countermeasure)
+  requires:
+    - files_with_before_after_hashes
+    - plain_language_purpose
+    - risk_category
+    - validation_results
+    - rollback_identifier
+    - expiry
+  expiry_hours: 72                # an unused approval lapses
+  risk_categories: [routine, structural, governance, safety]
+  auto_approve: []                # nothing. Shadow mode (ADR-0003).
+
+interview:
+  question_contract:              # every question must state all four
+    - unresolved_decision
+    - possible_answers
+    - artifact_or_behavior_changed
+    - cost_of_wrong_assumption
+  batch_size_max: 4
+  round_cap: 4                    # then stop; remaining unknowns become assumptions
+  stop_rule: >
+    Stop when no unanswered question could materially change a high-risk
+    placement, behavior, or workflow. Publish an assumptions ledger.
+
+placement:
+  ambiguous_outcome: ask          # ambiguity is a first-class outcome, not a guess
+  prefer_weaker_home: true        # memory before rule; view before constitution
+  limits:                         # advisory platform guidance, checked by validators
+    claude_md_max_lines: 200
+    skill_md_max_lines: 500
+    memory_index_max_lines: 200
+    reference_depth: 1
+
+self_improvement:
+  mode: shadow                    # observe, propose, score, apply NOTHING (ADR-0003)
+  graduation:
+    min_real_sessions: 25         # configurable default, not a research finding
+    requires_stable_regressions: true
+  rejected_proposal_policy: must_not_recur
+
+review:
+  trajectory_review_every_n_retrospectives: 10   # configurable default
+  trajectory_review_max_interval_days: 30
+  trajectory_question: >
+    Would the user approve the complete present-day system if it were
+    proposed all at once?
+
+provenance:
+  safety_critical_traceability: 1.00
+  factual_traceability_min: 0.95
+  view_as_evidence: forbidden     # a view is never citable as evidence for a claim
+
+platform:
+  claude_code:
+    auto_memory: redirect         # disable or redirect ~/.claude auto-memory into
+    auto_memory_target: memory/   # the governed workspace, or rollback is incomplete

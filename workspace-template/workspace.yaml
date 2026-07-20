@@ -1,0 +1,7 @@
+# Generated per-workspace identity and configuration (data plane).
+# Filled in by the bootstrapper during Phase 2 construction; template only.
+workspace:
+  name: null
+  created: null
+  policy_version: null      # control-plane policy this workspace was compiled under
+  adapter: claude-code

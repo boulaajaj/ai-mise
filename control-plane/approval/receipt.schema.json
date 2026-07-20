@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "harnessmith/receipt.schema.json",
+  "title": "Harnessmith approval receipt",
+  "description": "Append-only record linking a proposal to a human decision and the resulting applied state. Stored in approval-store/ (control plane) and mirrored to workspace changes/approvals/.",
+  "type": "object",
+  "required": ["receipt_id", "proposal_id", "decision", "decided_at", "approved_scope_hash"],
+  "additionalProperties": false,
+  "properties": {
+    "receipt_id": { "type": "string", "pattern": "^rcpt-[0-9]{8}-[a-z0-9]{6}$" },
+    "proposal_id": { "type": "string" },
+    "decision": { "enum": ["approved", "approved_with_modifications", "rejected"] },
+    "decided_at": { "type": "string", "format": "date-time" },
+    "decided_by": { "type": "string", "default": "user" },
+    "approved_scope_hash": { "type": "string", "description": "SHA-256 over the canonical serialized change set actually approved — detects post-approval swaps." },
+    "modifications": { "type": "array", "items": { "type": "string" } },
+    "rejection_reason": { "type": "string", "description": "Feeds rejection learning: a rejected proposal must not recur (policy.self_improvement)." },
+    "applied": {
+      "type": "object",
+      "description": "Present only after gateway application succeeds.",
+      "required": ["applied_at", "result_hashes", "restore_tag", "commit"],
+      "properties": {
+        "applied_at": { "type": "string", "format": "date-time" },
+        "result_hashes": { "type": "object", "additionalProperties": { "type": "string" }, "description": "path → SHA-256 after apply; must match proposal after_hash values." },
+        "restore_tag": { "type": "string" },
+        "commit": { "type": "string" },
+        "validation_evidence": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

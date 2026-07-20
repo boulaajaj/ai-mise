@@ -1,0 +1,15 @@
+# Derived, rebuildable state — never versioned (ADR-0004 §4)
+**/ops/index.db
+*.sqlite
+*.db
+
+# Local scratch
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+
+# Approval store contents are per-installation (schemas are versioned; receipts of a real installation live with that installation)
+control-plane/approval/approval-store/*
+!control-plane/approval/approval-store/.gitkeep
