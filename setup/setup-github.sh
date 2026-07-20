@@ -22,13 +22,13 @@ echo "==> Pushed main"
 
 # --- 2. Milestones ----------------------------------------------------------
 declare -a MS=(
-  "Phase 0 â€” Contract & Threat Model|Product boundary, schemas, protected assets, 34 bypass scenarios, baselines. Exit: what is authoritative vs generated, and which process may change each item, is stated and testable."
-  "Phase 1 â€” Read-Only Bootstrapper|Inventory, inspector, unknowns ledger, decision-aware questions, proposal. No writes. Exit: an Arduino proposal Amine would seriously consider approving."
-  "Phase 2 â€” Governed Construction|Mutation gateway, receipts, validators, restore. Exit: unauthorized writes fail, approved writes succeed, restore reproduces exact hashes."
-  "Phase 3 â€” Claude Code Adapter|Compile policy into CLAUDE.md/rules/settings/hooks; auto-memory redirect. Exit: Arduino workspace beats plain /init without protected-path violations."
-  "Phase 4 â€” Evidence-Backed Knowledge|Source manifests, claims with provenance, OKF views, citation validation. Exit: every important claim traces to source, user decision, or explicit inference."
-  "Phase 5 â€” Retrospective Shadow Mode|Correction collection, proposals, rejection learning, predicted eval impact, no auto-apply. Exit: accepted proposals improve metrics; rejected ones stop recurring."
-  "Phase 6 â€” Controlled Self-Improvement & Second Pilot|Executable diffs behind transaction approval; community-website pilot as the true generality test."
+  "Phase 0 — Contract & Threat Model|Product boundary, schemas, protected assets, 34 bypass scenarios, baselines. Exit: what is authoritative vs generated, and which process may change each item, is stated and testable."
+  "Phase 1 — Read-Only Bootstrapper|Inventory, inspector, unknowns ledger, decision-aware questions, proposal. No writes. Exit: an Arduino proposal Amine would seriously consider approving."
+  "Phase 2 — Governed Construction|Mutation gateway, receipts, validators, restore. Exit: unauthorized writes fail, approved writes succeed, restore reproduces exact hashes."
+  "Phase 3 — Claude Code Adapter|Compile policy into CLAUDE.md/rules/settings/hooks; auto-memory redirect. Exit: Arduino workspace beats plain /init without protected-path violations."
+  "Phase 4 — Evidence-Backed Knowledge|Source manifests, claims with provenance, OKF views, citation validation. Exit: every important claim traces to source, user decision, or explicit inference."
+  "Phase 5 — Retrospective Shadow Mode|Correction collection, proposals, rejection learning, predicted eval impact, no auto-apply. Exit: accepted proposals improve metrics; rejected ones stop recurring."
+  "Phase 6 — Controlled Self-Improvement & Second Pilot|Executable diffs behind transaction approval; community-website pilot as the true generality test."
 )
 existing_ms=$(gh api "repos/$FULL/milestones?state=all" -q '.[].title')
 for entry in "${MS[@]}"; do
@@ -60,13 +60,13 @@ make_issue() {
   echo "==> Issue created: $title"
 }
 
-M0="Phase 0 â€” Contract & Threat Model"
-M1="Phase 1 â€” Read-Only Bootstrapper"
-M2="Phase 2 â€” Governed Construction"
-M3="Phase 3 â€” Claude Code Adapter"
-M4="Phase 4 â€” Evidence-Backed Knowledge"
-M5="Phase 5 â€” Retrospective Shadow Mode"
-M6="Phase 6 â€” Controlled Self-Improvement & Second Pilot"
+M0="Phase 0 — Contract & Threat Model"
+M1="Phase 1 — Read-Only Bootstrapper"
+M2="Phase 2 — Governed Construction"
+M3="Phase 3 — Claude Code Adapter"
+M4="Phase 4 — Evidence-Backed Knowledge"
+M5="Phase 5 — Retrospective Shadow Mode"
+M6="Phase 6 — Controlled Self-Improvement & Second Pilot"
 
 make_issue "Capture baselines: plain /init run + manual Arduino workspace snapshot" "$M0" \
 "Run /init (also try CLAUDE_CODE_NEW_INIT=1) on the Arduino Digger repo and snapshot the output. Snapshot the manually built Arduino workspace as the second baseline. Store under control-plane/evaluation/baselines/ (or record locations if too large).
@@ -84,7 +84,7 @@ make_issue "Exercise proposal/receipt schemas with worked examples" "$M0" \
 Exit: examples committed under control-plane/approval/examples/ and validating clean."
 
 make_issue "Run inspector on Arduino Digger materials (golden thread kickoff)" "$M1" \
-"Point skills/inspector at the real Arduino materials (raw materials only â€” NOT the hand-built harness). Produce manifest.json, findings.md, unknowns ledger.
+"Point skills/inspector at the real Arduino materials (raw materials only — NOT the hand-built harness). Produce manifest.json, findings.md, unknowns ledger.
 
 Exit: findings cite manifest paths; the unknowns ledger is honest (includes what inspection could not determine)." golden-thread
 
@@ -119,7 +119,7 @@ make_issue "Automate the 34 threat scenarios" "$M2" \
 Exit (scorecard row Governance): zero protected-path bypasses across the suite."
 
 make_issue "Hash-exact restore test (rules AND memory together)" "$M2" \
-"Build a workspace, apply 3 transactions, corrupt something, Restore. Assert the restored tree is hash-identical to the tagged state, including memory/ (the ratchet problem â€” ADR-0003 context).
+"Build a workspace, apply 3 transactions, corrupt something, Restore. Assert the restored tree is hash-identical to the tagged state, including memory/ (the ratchet problem — ADR-0003 context).
 
 Exit (scorecard row Rollback): restore reproduces the exact governed file tree."
 
@@ -134,7 +134,7 @@ make_issue "Auto-memory redirect/disable during governed sessions" "$M3" \
 Exit: after a governed session, no workspace-relevant memory exists outside the governed tree."
 
 make_issue "Pin and wrap upstream skill-creator (do not fork yet)" "$M3" \
-"Pin a version of anthropics/skills skill-creator; wrap it for generating workspace skills (evals-first, negative examples in descriptions). Fork only when composition cannot deliver a required change â€” record that decision as an ADR if it happens.
+"Pin a version of anthropics/skills skill-creator; wrap it for generating workspace skills (evals-first, negative examples in descriptions). Fork only when composition cannot deliver a required change — record that decision as an ADR if it happens.
 
 Exit: one Arduino workspace skill generated through the wrapper, with evals."
 
@@ -149,7 +149,7 @@ make_issue "Shadow-mode retrospectives: collection, proposals, rejection learnin
 Exit: accepted proposals improve their predicted eval; a rejected proposal does not reappear."
 
 make_issue "Executable diffs behind transaction approval (graduation)" "$M6" \
-"After the graduation criteria in policy.yaml (min real sessions + stable regressions), allow retrospectives to prepare executable change-sets â€” still through the full gateway (proposal, receipt, stage, validate, apply).
+"After the graduation criteria in policy.yaml (min real sessions + stable regressions), allow retrospectives to prepare executable change-sets — still through the full gateway (proposal, receipt, stage, validate, apply).
 
 Exit: one real self-improvement lands end-to-end with a complete audit trail."
 
