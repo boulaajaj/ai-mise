@@ -1,0 +1,19 @@
+{
+  "receipt_id": "rcpt-20260721-x1y2z3",
+  "proposal_id": "prop-20260721-d4e5f6",
+  "decision": "approved_with_modifications",
+  "decided_at": "2026-07-21T11:20:00Z",
+  "decided_by": "user",
+  "approved_scope_hash": "6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c",
+  "modifications": ["Checklist offered before motor tests only, not every hardware session."],
+  "applied": {
+    "applied_at": "2026-07-21T11:22:00Z",
+    "result_hashes": {
+      "skills/preflight-check/SKILL.md": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
+      "generated/claude-code/CLAUDE.md": "8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b"
+    },
+    "restore_tag": "restore-20260721-0008",
+    "commit": "0000000000000000000000000000000000000000",
+    "validation_evidence": ["protected_path_validator: pass", "frontmatter_validator: pass", "link_validator: pass"]
+  }
+}

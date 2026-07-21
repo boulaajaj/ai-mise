@@ -1,0 +1,32 @@
+{
+  "proposal_id": "prop-20260721-d4e5f6",
+  "created_at": "2026-07-21T11:00:00Z",
+  "purpose": {
+    "plain_language": "Create a saved procedure for pre-flight hardware checks, and mention it in your assistant's standing instructions so it offers the checklist before any motor test.",
+    "trigger": "Retrospective finding: the same 6-step check was performed manually in 4 of the last 5 sessions."
+  },
+  "risk_category": "structural",
+  "changes": [
+    {
+      "path": "skills/preflight-check/SKILL.md",
+      "action": "create",
+      "before_hash": null,
+      "after_hash": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b"
+    },
+    {
+      "path": "generated/claude-code/CLAUDE.md",
+      "action": "modify",
+      "before_hash": "5f6e7d8c9b0a1f2e3d4c5b6a7f8e9d0c1b2a3f4e5d6c7b8a9f0e1d2c3b4a5f6e",
+      "after_hash": "8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b"
+    }
+  ],
+  "assumptions": [],
+  "validations": [
+    { "validator": "protected_path_validator", "passed": true, "detail": "no protected-path violations" },
+    { "validator": "frontmatter_validator", "passed": true, "detail": "SKILL.md 84 lines, description within 1024 chars" },
+    { "validator": "link_validator", "passed": true, "detail": "all references resolve, depth 1" }
+  ],
+  "predicted_eval_impact": "Preflight-check eval scenario pass rate should rise; no regression evals affected.",
+  "rollback_id": "restore-20260721-0008",
+  "expires_at": "2026-07-24T11:00:00Z"
+}

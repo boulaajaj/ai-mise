@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ai-mise/policy.schema.json",
+  "title": "AI-Mise authoritative policy",
+  "description": "Schema for control-plane/constitution/policy.yaml. The policy file is user-owned; this schema exists so a broken policy fails loudly, not silently.",
+  "type": "object",
+  "required": ["meta", "identity", "protected_assets", "approval", "interview", "placement", "self_improvement", "review", "provenance", "platform"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["policy_version", "owner", "schema"],
+      "additionalProperties": false,
+      "properties": {
+        "policy_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "owner": { "const": "user" },
+        "schema": { "type": "string" }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "required": ["product", "boundary"],
+      "additionalProperties": false,
+      "properties": {
+        "product": { "type": "string", "minLength": 1 },
+        "boundary": { "type": "string", "minLength": 40 }
+      }
+    },
+    "protected_assets": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "items": { "type": "string", "minLength": 1 }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "required": ["unit", "requires", "expiry_hours", "risk_categories", "auto_approve"],
+      "additionalProperties": false,
+      "properties": {
+        "unit": { "const": "transaction" },
+        "requires": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "expiry_hours": { "type": "number", "exclusiveMinimum": 0 },
+        "risk_categories": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "auto_approve": { "type": "array", "maxItems": 0, "description": "Must stay empty while self_improvement.mode is shadow (ADR-0003)." }
+      }
+    },
+    "interview": {
+      "type": "object",
+      "required": ["question_contract", "batch_size_max", "round_cap", "stop_rule"],
+      "additionalProperties": false,
+      "properties": {
+        "question_contract": { "type": "array", "minItems": 4, "items": { "type": "string" } },
+        "batch_size_max": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "round_cap": { "type": "integer", "minimum": 1, "maximum": 20 },
+        "stop_rule": { "type": "string", "minLength": 20 }
+      }
+    },
+    "placement": {
+      "type": "object",
+      "required": ["ambiguous_outcome", "prefer_weaker_home", "limits"],
+      "additionalProperties": false,
+      "properties": {
+        "ambiguous_outcome": { "const": "ask" },
+        "prefer_weaker_home": { "const": true },
+        "limits": {
+          "type": "object",
+          "required": ["claude_md_max_lines", "skill_md_max_lines", "memory_index_max_lines", "reference_depth"],
+          "additionalProperties": false,
+          "properties": {
+            "claude_md_max_lines": { "type": "integer", "minimum": 10 },
+            "skill_md_max_lines": { "type": "integer", "minimum": 50 },
+            "memory_index_max_lines": { "type": "integer", "minimum": 10 },
+            "reference_depth": { "const": 1 }
+          }
+        }
+      }
+    },
+    "self_improvement": {
+      "type": "object",
+      "required": ["mode", "graduation", "rejected_proposal_policy"],
+      "additionalProperties": false,
+      "properties": {
+        "mode": { "enum": ["shadow", "graduated"] },
+        "graduation": {
+          "type": "object",
+          "required": ["min_real_sessions", "requires_stable_regressions"],
+          "additionalProperties": false,
+          "properties": {
+            "min_real_sessions": { "type": "integer", "minimum": 1 },
+            "requires_stable_regressions": { "const": true }
+          }
+        },
+        "rejected_proposal_policy": { "const": "must_not_recur" }
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": ["trajectory_review_every_n_retrospectives", "trajectory_review_max_interval_days", "trajectory_question"],
+      "additionalProperties": true,
+      "properties": {
+        "trajectory_review_every_n_retrospectives": { "type": "integer", "minimum": 1 },
+        "trajectory_review_max_interval_days": { "type": "integer", "minimum": 1 },
+        "trajectory_question": { "type": "string", "minLength": 20 }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["safety_critical_traceability", "factual_traceability_min", "view_as_evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "safety_critical_traceability": { "const": 1.0 },
+        "factual_traceability_min": { "type": "number", "minimum": 0, "maximum": 1 },
+        "view_as_evidence": { "const": "forbidden" }
+      }
+    },
+    "platform": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  }
+}

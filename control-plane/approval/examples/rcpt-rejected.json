@@ -1,0 +1,9 @@
+{
+  "receipt_id": "rcpt-20260721-q4r5s6",
+  "proposal_id": "prop-20260721-a1b2c3",
+  "decision": "rejected",
+  "decided_at": "2026-07-21T10:05:00Z",
+  "decided_by": "user",
+  "approved_scope_hash": "0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e",
+  "rejection_reason": "The July 18 log was from a bench test with a blocked fan - not representative. Do not record this as a normal-operation observation, and do not re-propose without new evidence."
+}
