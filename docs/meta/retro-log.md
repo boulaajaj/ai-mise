@@ -18,13 +18,13 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
 - Rejected previously, do not re-propose: applying retrospective changes
   automatically (ADR-0003); wiki as source of truth (ADR-0002).
 
-
 ## 2026-07-20 — Rename to AI-Mise + prior-art intake + ADR-0005 (Cowork session)
 
-- What shipped: repo renamed harnessmith → ai-mise (GitHub redirect active);
-  full internal reference sweep; docs/prior-art.md (12-project watchlist with
-  6 reuse decisions to file as issues); ADR-0005 (Builder vs Workspace as two
-  enforced conversational identities, from Amine's observation).
+- What shipped: repo renamed from the original working name to ai-mise (GitHub
+  redirect active); full internal reference sweep; docs/prior-art.md
+  (12-project watchlist with 6 reuse decisions to file as issues); ADR-0005
+  (Builder vs Workspace as two enforced conversational identities, from
+  Amine's observation).
 - Corrections received: Amine rejected two rounds of naming (craft-metaphor,
   then developer-jargon) — lesson recorded: names must pass the "any human,
   first read" test, which is also the product's own plain-language rule.
@@ -33,5 +33,12 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
 - Proposals: file the 6 reuse-decision issues from prior-art.md; add threat
   scenario 35 (workspace session acts on structural instruction without
   handoff) to scenarios.md next session.
-- Rejected previously, do not re-propose: bird/metaphor names; harness-jargon
-  names; base64 cross-environment file transfer.
+- Rejected previously, do not re-propose: metaphor names; jargon names;
+  base64 cross-environment file transfer.
+
+## 2026-07-21 — Old-name purge (user-directed history edit)
+
+- Amine directed a full purge of the pre-rename working name from the repo
+  (chose purge over archive when asked). This entry's predecessor was reworded
+  accordingly — a user-initiated exception to append-only, recorded here so
+  the history edit is itself in the history.
