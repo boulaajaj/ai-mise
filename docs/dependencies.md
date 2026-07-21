@@ -15,5 +15,10 @@ Only acceptable answer: a renderer — never the data. New dependencies must add
 | Claude Code | primary runtime (adapter target) | the runtime — workspace remains readable/usable as plain files; adapter thesis (ADR-0001) exists precisely for this | PASS by design |
 | gh CLI | GitHub automation | convenience; replaceable by API/web | PASS |
 | GitHub Copilot code review | automated PR reviewer | a reviewer, never data — instructions are plain markdown in-repo; reviews are advisory | PASS |
+| GitHub Actions (CI) | runs validators/scanners on every change | automation convenience; all checks are runnable locally (same scripts) | PASS |
+| CodeQL | security scanning (free, public repos) | a scanner; findings are advisory copies, code untouched | PASS |
+| Semgrep (OSS rules) | pattern scanning, tokenless, advisory | a scanner; nothing canonical | PASS |
+| Dependabot | dependency update alerts | an alerting service; nothing canonical | PASS |
+| SonarCloud (pending setup) | code-quality dashboard, free for public repos | a dashboard; requires SONAR_TOKEN — see issue; data stays in repo | PASS (pending) |
 
 Standing rule: anything that would flip a row to FAIL (canonical data inside an app database, a format only one vendor reads) is rejected at proposal time by the provenance/format validators (Phase 2+).

@@ -1,0 +1,83 @@
+name: CI
+
+# Mini CI (issues #27/#28): the repo's own validators run on every change —
+# the self-hosting ladder's "workspace checks run without a human remembering"
+# rung, applied to this repo first. Strict: failures block (make this a
+# required status check on main once green).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validators:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validation libraries
+        run: pip install pyyaml jsonschema
+
+      - name: Policy validates against schema
+        run: >
+          python control-plane/validation/validate_policy.py
+          --policy control-plane/constitution/policy.yaml
+          --schema control-plane/constitution/policy.schema.json
+
+      - name: Approval schema examples validate
+        run: |
+          python - <<'PYEOF'
+          import json, pathlib, jsonschema
+          root = pathlib.Path('control-plane/approval')
+          ps = json.loads((root/'proposal.schema.json').read_text())
+          rs = json.loads((root/'receipt.schema.json').read_text())
+          fails = 0
+          for f in sorted((root/'examples').glob('*.json')):
+              doc = json.loads(f.read_text())
+              schema = ps if f.name.startswith('prop') else rs
+              errs = list(jsonschema.Draft202012Validator(schema).iter_errors(doc))
+              print(f.name, 'PASS' if not errs else 'FAIL: ' + errs[0].message)
+              fails += bool(errs)
+          raise SystemExit(1 if fails else 0)
+          PYEOF
+
+      - name: Protected-path validator self-test (every failure mode must fire)
+        run: |
+          cat > /tmp/bad-proposal.json <<'JSONEOF'
+          {"proposal_id":"prop-20260101-selfok","created_at":"2026-01-01T00:00:00Z",
+           "purpose":{"plain_language":"Self-test: this proposal must be rejected.","trigger":"ci"},
+           "risk_category":"routine",
+           "changes":[
+             {"path":"sources/evidence.md","action":"modify","before_hash":"aa","after_hash":"bb"},
+             {"path":"../escape.md","action":"create","before_hash":null,"after_hash":"cc"},
+             {"path":"generated/claude-code/CLAUDE.md","action":"modify","before_hash":"dd","after_hash":"ee"}],
+           "validations":[],"rollback_id":"r","expires_at":"2026-01-02T00:00:00Z"}
+          JSONEOF
+          mkdir -p /tmp/ws
+          if python control-plane/validation/protected_path_validator.py \
+               --workspace /tmp/ws \
+               --policy control-plane/constitution/policy.yaml \
+               --proposal /tmp/bad-proposal.json; then
+            echo "SELF-TEST FAILED: a violating proposal passed the validator"
+            exit 1
+          else
+            echo "self-test OK: violations were caught"
+          fi
+
+      - name: Mind map is fresh (ADR-0006 — generated views never go stale)
+        run: |
+          python tools/generate_mindmap.py
+          git diff --exit-code docs/mindmap.md \
+            || (echo "docs/mindmap.md is stale — run: python tools/generate_mindmap.py" && exit 1)
+
+      - name: CLAUDE.md within size limit
+        run: |
+          lines=$(wc -l < CLAUDE.md)
+          echo "CLAUDE.md: $lines lines (limit 200)"
+          [ "$lines" -le 200 ]
