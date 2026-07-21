@@ -38,9 +38,19 @@ jobs:
           ps = json.loads((root/'proposal.schema.json').read_text())
           rs = json.loads((root/'receipt.schema.json').read_text())
           fails = 0
-          for f in sorted((root/'examples').glob('*.json')):
+          files = sorted((root/'examples').glob('*.json'))
+          if not files:
+              print('FAIL: no example files found'); raise SystemExit(1)
+          for f in files:
+              if f.name.startswith('prop-'):
+                  schema = ps
+              elif f.name.startswith('rcpt-'):
+                  schema = rs
+              else:
+                  print(f.name, 'FAIL: unknown example prefix (expected prop-* or rcpt-*)')
+                  fails += 1
+                  continue
               doc = json.loads(f.read_text())
-              schema = ps if f.name.startswith('prop') else rs
               errs = list(jsonschema.Draft202012Validator(schema).iter_errors(doc))
               print(f.name, 'PASS' if not errs else 'FAIL: ' + errs[0].message)
               fails += bool(errs)
@@ -60,15 +70,26 @@ jobs:
            "validations":[],"rollback_id":"r","expires_at":"2026-01-02T00:00:00Z"}
           JSONEOF
           mkdir -p /tmp/ws
-          if python control-plane/validation/protected_path_validator.py \
-               --workspace /tmp/ws \
-               --policy control-plane/constitution/policy.yaml \
-               --proposal /tmp/bad-proposal.json; then
-            echo "SELF-TEST FAILED: a violating proposal passed the validator"
+          set +e
+          out=$(python control-plane/validation/protected_path_validator.py \
+                  --workspace /tmp/ws \
+                  --policy control-plane/constitution/policy.yaml \
+                  --proposal /tmp/bad-proposal.json)
+          rc=$?
+          set -e
+          echo "$out"
+          if [ "$rc" -ne 1 ]; then
+            echo "SELF-TEST FAILED: expected exit code 1 (violations), got $rc"
             exit 1
-          else
-            echo "self-test OK: violations were caught"
           fi
+          # Each distinct failure mode in the bad proposal must be individually reported:
+          for needle in "protected path" "escapes workspace root" "tier mismatch"; do
+            if ! echo "$out" | grep -q "$needle"; then
+              echo "SELF-TEST FAILED: failure mode not reported: $needle"
+              exit 1
+            fi
+          done
+          echo "self-test OK: all three failure modes fired individually"
 
       - name: Mind map is fresh (ADR-0006 — generated views never go stale)
         run: |
