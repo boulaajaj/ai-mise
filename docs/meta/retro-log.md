@@ -61,3 +61,24 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
   climb it immediately; "later" is only legitimate when machinery is missing.
 - Proposals: when mini CI ships (#27/#28), add it as a required status check
   on main so validators gate merges mechanically.
+
+## 2026-07-21 — Review loop live + free scanners (Cowork session)
+
+- What shipped: Copilot review instructions (PR #30) + auto-review ruleset;
+  mini CI with validator self-test and mind-map freshness (PR #31, closes the
+  automation half of #28); CodeQL, Semgrep (advisory), Dependabot; secret
+  scanning + push protection enabled; SonarCloud setup filed (needs Amine).
+- Corrections received: Amine — activate the full review loop (request →
+  wait → fix → reply → resolve → re-review) and keep the record in threads.
+  Done: PR #30's em-dash finding fixed, replied with root cause, thread
+  resolved; same class fixed proactively on #31 before review.
+- Corrections from reality: one-time helper scripts got committed into PR
+  branches twice (git add -A before cleanup). Lesson: helper scripts live
+  outside the worktree or in .gitignore. Also: retro-log appends now require
+  a PR since main is protected — the ladder creating exactly the friction it
+  predicted; acceptable, batch entries with session-end PRs.
+- Arduino-DiggerSetup inspected (found on GitHub, public): 13 workflows,
+  self-testing wiki-lint, advisory/strict convention — two patterns reused
+  into our CI same-day. It is the manual baseline in living form (issue #1).
+- Proposals: make ci.yml a required status check once green on main;
+  gitignore one-time scripts.
