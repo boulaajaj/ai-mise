@@ -14,6 +14,6 @@ Only acceptable answer: a renderer — never the data. New dependencies must add
 | pyyaml / jsonschema | full-strength validation | strict validation; validators degrade gracefully (validate_policy.py fallback mode) | PASS |
 | Claude Code | primary runtime (adapter target) | the runtime — workspace remains readable/usable as plain files; adapter thesis (ADR-0001) exists precisely for this | PASS by design |
 | gh CLI | GitHub automation | convenience; replaceable by API/web | PASS |
-| GitHub Copilot code review | automated PR reviewer | a reviewer, never data - instructions are plain markdown in-repo; reviews are advisory | PASS |
+| GitHub Copilot code review | automated PR reviewer | a reviewer, never data — instructions are plain markdown in-repo; reviews are advisory | PASS |
 
 Standing rule: anything that would flip a row to FAIL (canonical data inside an app database, a format only one vendor reads) is rejected at proposal time by the provenance/format validators (Phase 2+).
