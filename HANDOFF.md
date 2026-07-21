@@ -1,4 +1,4 @@
-# Handoff — continuing Harnessmith in Claude Code
+# Handoff — continuing AI-Mise in Claude Code
 
 This repo is the Phase 0 deliverable (contract + threat model) plus the Phase 1
 read-only inspector skeleton. This file tells a Claude Code session (or you)
@@ -7,7 +7,7 @@ exactly how to push it and what to do next.
 ## 0. GitHub setup — one command (first action)
 
 ```bash
-cd harnessmith
+cd ai-mise
 bash setup/setup-github.sh
 ```
 
@@ -18,7 +18,7 @@ scope. Re-running never duplicates milestones or issues.
 
 ## 0.5 This repo governs itself
 
-harnessmith is self-hosting: read `CLAUDE.md` (the dev-harness rules) and
+ai-mise is self-hosting: read `CLAUDE.md` (the dev-harness rules) and
 `docs/meta/dev-harness.md` (how this repo evolves under its own governance —
 shadow-mode retrospectives in `docs/meta/retro-log.md`, `meta-harness` issues,
 periodic trajectory reviews). End every working session by appending a

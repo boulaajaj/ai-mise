@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic source inventory for Harnessmith (Acquire step).
+"""Deterministic source inventory for AI-Mise (Acquire step).
 
 Walks a source folder, hashes every regular file (SHA-256), and emits a
 manifest JSON plus a human-readable summary. Read-only by construction:

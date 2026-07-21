@@ -1,14 +1,21 @@
-# Harnessmith
+# AI-Mise
 
-**A governed workspace compiler.** Harnessmith converts raw project materials and user decisions into an auditable, versioned, agent-ready workspace — without ever allowing the agent to silently rewrite its own governing rules.
+**Your AI *mise en place*.** In a professional kitchen, *mise en place* means everything prepped, in its place, and ready before the cooking starts — so the chef can just cook. AI-Mise does that for AI: it converts raw project materials and your decisions into an auditable, versioned, agent-ready workspace — without you having to keep up with the latest AI setup, and without ever allowing the agent to silently rewrite the rules you gave it.
 
-> Tell it what you do. It forges the AI workspace that helps you do it — and it can never quietly change the rules you gave it.
+> Tell it what you do. It sets everything in place — and it can never quietly change the rules you gave it.
 
 ## Product boundary (one sentence)
 
-Given a folder of real project materials, Harnessmith inspects it, asks a small number of justified questions, proposes an agent workspace in plain language, builds the approved version through a controlled transaction, and can restore any prior state exactly.
+Given a folder of real project materials, AI-Mise inspects it, asks a small number of justified questions, proposes an agent workspace in plain language, builds the approved version through a controlled transaction, and can restore any prior state exactly.
 
 **Explicitly out of scope for the first release:** automatic self-improvement, SQLite, full wiki generation, multi-platform adapters, scheduled retrospectives, voice UX, marketplace distribution.
+
+## Two identities (ADR-0005)
+
+You talk to two clearly distinguished things, and every session announces which one is present:
+
+- **The Builder** — sets up and changes how your workspace works. Interviews you, proposes, constructs, refactors, runs retrospectives. All changes go through the approval gateway.
+- **Your assistant** — the compiled workspace that helps with your actual work every day. It *structurally cannot* change its own rules; if you ask it to, it records your request and hands off: "That's a change to how I work — let me bring in the Builder."
 
 ## The two planes
 
@@ -18,7 +25,7 @@ Given a folder of real project materials, Harnessmith inspects it, asks a small 
 | Written by | The user, manually and rarely | The agent — but **only through the mutation gateway** |
 | Trust stance | Outside the agent's writable area; protected by OS + Claude Code permissions | Everything here is replaceable, restorable, and generated |
 
-The workspace's `CLAUDE.md`, hooks, and skills are **generated platform projections** compiled from the control plane's policy — never the authoritative constitution itself. This is what keeps the accumulated knowledge portable: swap the adapter, keep the workspace.
+The workspace's `CLAUDE.md`, hooks, and skills are **generated platform projections** compiled from the control plane's policy — never the authoritative constitution itself. Swap the adapter, keep the workspace: that's the portability promise.
 
 **Honesty note:** on a personal machine this boundary is protection against *accident and drift* — a confused or drifting agent — not against a determined adversary. A true security boundary requires OS-level sandboxing. The threat suite in `control-plane/threat-tests/` is scoped accordingly.
 
@@ -32,7 +39,7 @@ Proposal → User approval of exact change set → Approval receipt
         → Apply through gateway → Commit + restore tag + audit record
 ```
 
-Approval covers a **transaction** (files, before/after hashes, plain-language purpose, risk category, validation results, rollback id, expiry) — not individual file operations. This is the design answer to approval fatigue: fewer approvals, each one meaningful.
+Approval covers a **transaction** (files, before/after hashes, plain-language purpose, risk category, validation results, rollback id, expiry) — not individual file operations. Fewer approvals, each one meaningful.
 
 ## Knowledge has three layers
 
@@ -43,15 +50,15 @@ knowledge/   atomic claims with provenance (source span, authority, status,
 views/       rebuildable synthesis — wiki pages, reports; never the source of truth
 ```
 
-A wiki page may say "the left ESC temperature spike is probably telemetry-related." The claim beneath it must say which log supports it, whether the user said it or the agent inferred it, and what superseded it. This prevents synthesis decay — AI summaries feeding AI summaries until nobody remembers the original fact.
+A view is never citable as evidence for a claim. This single rule prevents synthesis decay — AI summaries feeding AI summaries until nobody remembers the original fact.
 
 ## Non-technical surface (first-class requirement, every phase)
 
-The person using a Harnessmith workspace never sees git, YAML, schemas, or hashes. They see: **Save Version · What Changed? · Safe Experiment · Keep It / Discard · Restore** — and proposals written in plain language. Any phase whose exit test can't be explained to a non-technical professional isn't done.
+The person using an AI-Mise workspace never sees git, YAML, schemas, or hashes. They see: **Save Version · What Changed? · Safe Experiment · Keep It / Discard · Restore** — and proposals written in plain language. Any phase whose exit test can't be explained to a non-technical professional isn't done.
 
 ## Status
 
-Phase 0 (contract + threat model) — **this repository is the Phase 0 deliverable**, plus the Phase 1 read-only inspector skeleton. See `HANDOFF.md` for the build sequence and next actions, `docs/architecture.md` for the full design, and `docs/history/blueprint-v1.md` + `docs/decisions/` for how we got here.
+Phase 0 (contract + threat model) — **this repository is the Phase 0 deliverable**, plus the Phase 1 read-only inspector skeleton. See `HANDOFF.md` for next actions, `docs/architecture.md` for the design, `docs/prior-art.md` for what we deliberately reuse from other projects, and `docs/decisions/` for why the architecture is shaped this way.
 
 ## The golden thread
 

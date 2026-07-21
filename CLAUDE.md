@@ -1,4 +1,4 @@
-# harnessmith — development harness
+# ai-mise — development harness
 
 This repo builds a governed workspace compiler. It governs its own development
 the same way: this file is the *projection* of the authoritative docs below —

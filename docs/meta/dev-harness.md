@@ -1,7 +1,7 @@
-# The meta-harness: how harnessmith evolves itself
+# The meta-harness: how ai-mise evolves itself
 
 A tool that compiles governed, self-improving workspaces must be developed
-inside one. This document defines harnessmith's own harness — deliberately the
+inside one. This document defines ai-mise's own harness — deliberately the
 same shape as the product, one level up. It is also the product's first test
 fixture: every mechanism we impose on user workspaces gets tried here first.
 

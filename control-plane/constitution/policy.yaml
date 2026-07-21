@@ -1,4 +1,4 @@
-# Harnessmith authoritative policy — USER-OWNED.
+# AI-Mise authoritative policy — USER-OWNED.
 # This file is the constitution. It is never edited by any agent or automated
 # process. Changes to this file are a manual, user-initiated act.
 # Platform artifacts (CLAUDE.md, hooks, settings) are COMPILED from this file
@@ -10,7 +10,7 @@ meta:
   schema: policy.schema.json
 
 identity:
-  product: harnessmith
+  product: ai-mise
   boundary: >
     Given a folder of real project materials: inspect it, ask a small number
     of justified questions, propose an agent workspace in plain language,

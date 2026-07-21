@@ -1,9 +1,9 @@
 ---
-name: harnessmith-inspector
-description: Read-only inspection of a folder of project materials to prepare a Harnessmith workspace proposal. Use when asked to inspect, bootstrap, or "harnessmith" a project folder, or to produce a workspace proposal from raw materials. Produces a source inventory, findings, an unknowns ledger, decision-changing questions, and a plain-language proposal. Do NOT use for building or modifying a workspace (Phase 2+), for general code review, or when the user asks a direct question about their project's content.
+name: ai-mise-inspector
+description: Read-only inspection of a folder of project materials to prepare a AI-Mise workspace proposal. Use when asked to inspect, bootstrap, or "ai-mise" a project folder, or to produce a workspace proposal from raw materials. Produces a source inventory, findings, an unknowns ledger, decision-changing questions, and a plain-language proposal. Do NOT use for building or modifying a workspace (Phase 2+), for general code review, or when the user asks a direct question about their project's content.
 ---
 
-# Harnessmith Inspector (Phase 1 — strictly read-only)
+# AI-Mise Inspector (Phase 1 — strictly read-only)
 
 You inspect; you never write inside the target folder. Your entire output is
 analysis files written to a separate `--out` directory the user names.

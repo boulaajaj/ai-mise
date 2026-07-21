@@ -2,7 +2,7 @@
 # One-time repair: milestone titles / issue bodies / committed script picked up
 # double-encoded em-dashes (UTF-8 read as CP1252, re-encoded). Pure-ASCII file.
 set -euo pipefail
-FULL="boulaajaj/harnessmith"
+FULL="boulaajaj/ai-mise"
 BAD=$'\xc3\xa2\xe2\x82\xac\xe2\x80\x9d'   # mojibake of em-dash
 EM=$'\xe2\x80\x94'                        # proper em-dash
 

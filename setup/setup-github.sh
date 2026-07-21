@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# harnessmith one-shot GitHub setup: repo + push + milestones + issues.
+# ai-mise one-shot GitHub setup: repo + push + milestones + issues.
 # Requirements: gh (authenticated, repo scope), git. Run from the repo root.
 # Idempotent-ish: safe to re-run; existing milestones/issues are not duplicated.
 set -euo pipefail
 
 OWNER="$(gh api user -q .login)"
-REPO="harnessmith"
+REPO="ai-mise"
 FULL="$OWNER/$REPO"
 echo "==> GitHub account: $OWNER"
 
@@ -159,7 +159,7 @@ make_issue "Second pilot: community-website domain (true generality test)" "$M6"
 Exit: written report; decision on whether the method generalizes."
 
 make_issue "meta: run dev retrospectives and evolve the repo's own harness" "$M0" \
-"harnessmith is self-hosting: the repo follows the same governance it compiles for users (see CLAUDE.md and docs/meta/dev-harness.md). At the end of each working session, append a retro-log entry; file improvement proposals as meta-harness issues; every ~10 entries or monthly, run a trajectory review (would Amine approve today's repo proposed all at once?).
+"ai-mise is self-hosting: the repo follows the same governance it compiles for users (see CLAUDE.md and docs/meta/dev-harness.md). At the end of each working session, append a retro-log entry; file improvement proposals as meta-harness issues; every ~10 entries or monthly, run a trajectory review (would Amine approve today's repo proposed all at once?).
 
 This issue stays open as the standing meta-harness anchor. Exit: never (recurring); close only if the meta-harness design is superseded by ADR." meta-harness
 

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "harnessmith/proposal.schema.json",
-  "title": "Harnessmith change transaction proposal",
+  "$id": "ai-mise/proposal.schema.json",
+  "title": "AI-Mise change transaction proposal",
   "description": "The only unit of persistent change. Approval covers this whole transaction, never individual file operations.",
   "type": "object",
   "required": ["proposal_id", "created_at", "purpose", "risk_category", "changes", "validations", "rollback_id", "expires_at"],

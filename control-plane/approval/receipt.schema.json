@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "harnessmith/receipt.schema.json",
-  "title": "Harnessmith approval receipt",
+  "$id": "ai-mise/receipt.schema.json",
+  "title": "AI-Mise approval receipt",
   "description": "Append-only record linking a proposal to a human decision and the resulting applied state. Stored in approval-store/ (control plane) and mirrored to workspace changes/approvals/.",
   "type": "object",
   "required": ["receipt_id", "proposal_id", "decision", "decided_at", "approved_scope_hash"],

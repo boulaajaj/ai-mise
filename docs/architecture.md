@@ -1,10 +1,10 @@
-# Harnessmith Architecture (v2)
+# AI-Mise Architecture (v2)
 
 This is the working architecture, superseding `docs/history/blueprint-v1.md` after external review. The review's corrections and the responses to it are recorded in `docs/decisions/` (ADR-0001..0004). Research grounding and sources live in blueprint-v1's source list; claims below are labeled **[verified]** (survived adversarial verification against primary sources), *[prior art]* (fetched and extracted, not adversarially verified), or *[default]* (a configurable product choice, not a research finding).
 
 ## 1. Framing
 
-Harnessmith is a **governed workspace compiler**: input = raw project materials + user decisions; output = an auditable, versioned, agent-ready workspace. The compiler may be probabilistic; the governance may not be.
+AI-Mise is a **governed workspace compiler**: input = raw project materials + user decisions; output = an auditable, versioned, agent-ready workspace. The compiler may be probabilistic; the governance may not be.
 
 Three founding constraints, inherited from the original product vision:
 
@@ -128,7 +128,7 @@ Every artifact is inventoried automatically; narrative wiki pages exist only for
 9. **Retrospect (shadow mode initially, ADR-0003)** — classify repeated evidence, generate proposals, predict which eval should improve, apply **nothing** automatically. Graduation to prepared executable change-sets only after ~20–30 real sessions with stable regression tests *[default]*.
 10. **Trajectory review** — periodically (*[default]* every 10th retrospective or monthly): "Would the user approve the complete present-day system if proposed all at once?" Counters compositional drift *[prior art]*.
 
-Claude Code auto-memory note: native auto-memory lives outside the repo under `~/.claude/projects/.../memory` — during Harnessmith-controlled sessions it must be disabled or redirected into `workspace/memory/`, or rollback is incomplete.
+Claude Code auto-memory note: native auto-memory lives outside the repo under `~/.claude/projects/.../memory` — during AI-Mise-controlled sessions it must be disabled or redirected into `workspace/memory/`, or rollback is incomplete.
 
 ## 8. Evaluation scorecard
 
