@@ -42,3 +42,22 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
   (chose purge over archive when asked). This entry's predecessor was reworded
   accordingly — a user-initiated exception to append-only, recorded here so
   the history edit is itself in the history.
+
+
+## 2026-07-21 — PR-only flow (correction from Amine)
+
+- Correction received: Amine caught the repo committing directly to main —
+  "ai-mise should do as it says others should do." A textbook self-hosting
+  ladder violation: we preached no-unreviewed-mutations while pushing straight
+  to the trunk.
+- Fix shipped: branch protection on main (PRs required, enforced for admins,
+  no force-push, no deletion); CLAUDE.md rule added; dev-harness mapping
+  updated — the PR is the proposal, Amine's merge is the approval receipt.
+  This entry itself lands via the first PR.
+- Diagnosis: the gap existed because the dev harness was discipline, not
+  enforcement (already noted in issue #19's ladder comment) — but this rung
+  needed no new machinery, only GitHub settings, so there was no excuse to
+  wait for Phase 2. Lesson for the product: when an enforcement rung is free,
+  climb it immediately; "later" is only legitimate when machinery is missing.
+- Proposals: when mini CI ships (#27/#28), add it as a required status check
+  on main so validators gate merges mechanically.
