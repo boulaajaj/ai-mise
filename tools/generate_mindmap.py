@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Generate the repo mind map as committed Mermaid (ADR-0006).
 
-Scans all tracked .md files, extracts [[wikilinks]] and relative markdown
-links between them, and emits docs/mindmap.md containing a Mermaid graph.
-The output is GENERATED — never hand-edit; regenerate with:
+Scans all tracked .md files, extracts [[wikilinks]], relative markdown links,
+and backtick path references (`docs/architecture.md`) between them, and emits
+docs/mindmap.md containing a Mermaid graph. The output is GENERATED — never
+hand-edit; regenerate with:
 
     python tools/generate_mindmap.py
 
@@ -21,6 +22,7 @@ SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv"}
 
 WIKILINK = re.compile(r"\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]")
 MDLINK = re.compile(r"\]\(([^)#\s]+\.md)(?:#[^)]*)?\)")
+BACKTICK = re.compile(r"`([A-Za-z0-9_.\\/-]+\.md)`")
 
 
 def node_id(rel: str) -> str:
@@ -54,6 +56,14 @@ def main() -> int:
             t = by_stem.get(m.group(1).strip().lower())
             if t:
                 targets.add(t)
+        for m in BACKTICK.finditer(text):
+            cand = m.group(1).replace("\\", "/")
+            if cand in md_files:
+                targets.add(cand)
+            else:
+                t2 = by_stem.get(Path(cand).stem.lower())
+                if t2:
+                    targets.add(t2)
         for m in MDLINK.finditer(text):
             cand = (p.parent / m.group(1)).resolve()
             try:

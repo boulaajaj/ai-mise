@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE - do not edit. Regenerate: python tools/generate_mindmap.py (ADR-0006) -->
 
-Nodes: 19 markdown files · Edges: 0 links · The link graph inside the files is the source of truth; this is only a rendered view.
+Nodes: 19 markdown files · Edges: 22 links · The link graph inside the files is the source of truth; this is only a rendered view.
 
 ```mermaid
 graph LR
@@ -31,4 +31,26 @@ graph LR
   subgraph skills_g[skills]
     skills_inspector_SKILL_md["SKILL"]
   end
+  CLAUDE_md --> HANDOFF_md
+  CLAUDE_md --> control_plane_threat_tests_scenarios_md
+  CLAUDE_md --> docs_architecture_md
+  CLAUDE_md --> docs_history_blueprint_v1_md
+  CLAUDE_md --> docs_meta_dev_harness_md
+  HANDOFF_md --> CLAUDE_md
+  HANDOFF_md --> control_plane_threat_tests_scenarios_md
+  HANDOFF_md --> docs_architecture_md
+  HANDOFF_md --> docs_history_blueprint_v1_md
+  HANDOFF_md --> docs_meta_dev_harness_md
+  HANDOFF_md --> docs_meta_retro_log_md
+  HANDOFF_md --> skills_inspector_SKILL_md
+  README_md --> CLAUDE_md
+  README_md --> HANDOFF_md
+  README_md --> docs_architecture_md
+  README_md --> docs_prior_art_md
+  docs_architecture_md --> docs_history_blueprint_v1_md
+  docs_decisions_ADR_0006_formats_over_tools_md --> docs_dependencies_md
+  docs_history_blueprint_v1_md --> docs_architecture_md
+  docs_meta_dev_harness_md --> CLAUDE_md
+  docs_meta_dev_harness_md --> docs_meta_retro_log_md
+  docs_meta_retro_log_md --> docs_meta_dev_harness_md
 ```
