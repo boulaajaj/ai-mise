@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE - do not edit. Regenerate: python tools/generate_mindmap.py (ADR-0006) -->
 
-Nodes: 19 markdown files · Edges: 24 links · The link graph inside the files is the source of truth; this is only a rendered view.
+Nodes: 20 markdown files · Edges: 24 links · The link graph inside the files is the source of truth; this is only a rendered view.
 
 ```mermaid
 graph LR
@@ -18,6 +18,7 @@ graph LR
     docs_decisions_ADR_0004_claim_hygiene_md["ADR-0004-claim-hygiene"]
     docs_decisions_ADR_0005_builder_vs_workspace_md["ADR-0005-builder-vs-workspace"]
     docs_decisions_ADR_0006_formats_over_tools_md["ADR-0006-formats-over-tools"]
+    docs_decisions_ADR_0007_challenge_before_compliance_md["ADR-0007-challenge-before-compliance"]
     docs_dependencies_md["dependencies"]
     docs_deployment_md["deployment"]
     docs_history_blueprint_v1_md["blueprint-v1"]
