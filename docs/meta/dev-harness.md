@@ -13,7 +13,7 @@ fixture: every mechanism we impose on user workspaces gets tried here first.
 | Generated projection | `CLAUDE.md` (projection of docs/; docs win on conflict) |
 | Decision records | `docs/decisions/` ADRs (append-only) + issue threads |
 | Placement rubric | architecture.md §5, applied to our own knowledge: recurring dev procedure → skill or script; every-session fact → CLAUDE.md; evolving understanding → docs/meta/retro-log.md |
-| Mutation gateway | PRs/commits referencing issues; protected paths listed in policy.yaml apply to us too |
+| Mutation gateway | protected main + PR-only merges: the PR is the proposal, Amine's merge is the approval receipt; protected paths in policy.yaml apply to us too |
 | Retrospective (shadow mode) | `retro-log.md` entries — observations and proposals only; changes land only as reviewed commits |
 | Trajectory review | Every ~10 retro entries or monthly: re-read the ADRs + retro log and ask "would Amine approve today's repo proposed all at once?" File findings as a `meta-harness` issue |
 | Eval harness | The threat suite + validator self-tests are our own regression tier; phase exit tests are our capability tier |
