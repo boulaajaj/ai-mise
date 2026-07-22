@@ -1,0 +1,25 @@
+name: Semgrep
+
+# Open-source rules, tokenless. Advisory only (Arduino-DiggerSetup pattern):
+# continue-on-error keeps this from blocking merges. To make strict, remove
+# continue-on-error — the step itself fails honestly on findings.
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  semgrep:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install semgrep
+        run: pip install semgrep
+      - name: Scan (OSS rules)
+        run: semgrep scan --config auto --error --exclude .git
