@@ -5,9 +5,9 @@ title: Direction — living executive summary
 
 # Direction (refreshed at every direction review)
 
-*Last review: 2026-07-23. This page is a plain-language view: it carries no
-inline claim labels by design — authority for every statement lives in the
-linked decisions, issues, and the repository itself.*
+*Last review: 2026-07-23. This page is a friendly summary, not the official
+record — the detailed reasoning behind every statement lives in the linked
+decisions and work items.*
 
 ## What AI-Mise is
 

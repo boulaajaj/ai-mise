@@ -89,7 +89,7 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
 - What was attempted / what shipped: direction retrospective as a procedure
   (mission / constraints / opportunities); docs/meta/direction.md created as
   the living executive summary; repo description rewritten in plain language;
-  persona-first extensions recorded on #46 and #20; recurrence issue filed.
+  persona-first extensions recorded on #46 and #20; recurrence issue filed (#52).
 - Corrections received (from Amine): repo description spoke compiler jargon
   to humans; session reports used insider words ("canon"); retrospectives
   redefined as daily-orientation procedures — the set-everything-in-place
