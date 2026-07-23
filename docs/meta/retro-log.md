@@ -92,7 +92,8 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
   persona-first extensions recorded on #46 and #20; recurrence issue filed.
 - Corrections received (from Amine): repo description spoke compiler jargon
   to humans; session reports used insider words ("canon"); retrospectives
-  redefined as daily-orientation procedures — this IS the mise en place.
+  redefined as daily-orientation procedures — the set-everything-in-place
+  ritual the product is named for.
 - Diagnosis: the voice rule was enforced on product surfaces but not on our
   own public description and reporting — the gap was ours, not the rules'.
 - Proposals: direction reviews recur at trigger points (tracked in the new

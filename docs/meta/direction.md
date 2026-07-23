@@ -20,17 +20,21 @@ underneath, for any profession.
 
 The foundation governs itself: every change reviewed by AI before merging,
 every decision recorded, everything undoable, checks running automatically.
-The governance, validators, and inspector draft are built; construction,
-knowledge, and the persona are designed and tracked as issues. It does not yet build a workspace for anyone —
+The parts that check and protect are built; the parts that build a
+workspace for someone are designed and tracked as work items. It does not yet build a workspace for anyone —
 it proves the rules on itself first.
 
 ## Current direction
 
-1. The kernel is written ([[METHOD]]) — the part that outlives platforms.
-2. Next: kernel-or-adapter audit; Amine's Arduino baselines; then the first
-   real test — the inspector reads a real project and proposes, gently.
-3. Then: install-by-pointing-at-the-repo, isolation from existing setups,
-   the named persona, the dashboard.
+1. The core promise is written down ([[METHOD]]) — the part that will
+   still be true when today's AI platforms are gone.
+2. Next: check that every document is either timeless or clearly marked
+   replaceable; Amine captures the comparison snapshots of his Arduino
+   project; then the first real test — it reads a real project and gently
+   proposes how to help.
+3. Then: install it by pointing at this project, never touching what a
+   person already has set up, the assistant each user names, and the
+   at-a-glance view of progress and open questions.
 
 ## Alignment watch (found at this review)
 
