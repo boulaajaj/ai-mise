@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE - do not edit. Regenerate: python tools/generate_mindmap.py (ADR-0006) -->
 
-Nodes: 27 markdown files · Edges: 45 links · The link graph inside the files is the source of truth; this is only a rendered view.
+Nodes: 28 markdown files · Edges: 46 links · The link graph inside the files is the source of truth; this is only a rendered view.
 
 ```mermaid
 graph LR
@@ -31,6 +31,7 @@ graph LR
     docs_deployment_md["deployment"]
     docs_history_blueprint_v1_md["blueprint-v1"]
     docs_meta_dev_harness_md["dev-harness"]
+    docs_meta_direction_md["direction"]
     docs_meta_retro_log_md["retro-log"]
     docs_prior_art_md["prior-art"]
   end
@@ -85,5 +86,6 @@ graph LR
   docs_history_blueprint_v1_md --> docs_architecture_md
   docs_meta_dev_harness_md --> CLAUDE_md
   docs_meta_dev_harness_md --> docs_meta_retro_log_md
+  docs_meta_direction_md --> METHOD_md
   docs_meta_retro_log_md --> docs_meta_dev_harness_md
 ```
