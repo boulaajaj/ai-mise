@@ -44,6 +44,8 @@ issue #19). Review PRs against that governance first, code style second.
 - CLAUDE.md must stay under 200 lines; any SKILL.md under 500 lines; skill reference
   files linked at most one level deep from their SKILL.md.
 
+- Ubiquitous language ([[ADR-0009-domain-language-and-structure|ADR-0009]]): flag any new domain term that duplicates a concept already in `docs/GLOSSARY.md` under a different word; the PR either reuses the existing term or adds the new one to the glossary with justification.
+
 ## 5. Code conventions
 
 - Python is stdlib-first. Flag new third-party imports without an ADR justifying them.

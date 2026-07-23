@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE - do not edit. Regenerate: python tools/generate_mindmap.py (ADR-0006) -->
 
-Nodes: 25 markdown files · Edges: 34 links · The link graph inside the files is the source of truth; this is only a rendered view.
+Nodes: 27 markdown files · Edges: 45 links · The link graph inside the files is the source of truth; this is only a rendered view.
 
 ```mermaid
 graph LR
@@ -16,6 +16,7 @@ graph LR
     control_plane_threat_tests_scenarios_md["scenarios"]
   end
   subgraph docs_g[docs]
+    docs_GLOSSARY_md["GLOSSARY"]
     docs_architecture_md["architecture"]
     docs_decisions_ADR_0001_control_plane_separation_md["ADR-0001-control-plane-separation"]
     docs_decisions_ADR_0002_evidence_claims_views_md["ADR-0002-evidence-claims-views"]
@@ -25,6 +26,7 @@ graph LR
     docs_decisions_ADR_0006_formats_over_tools_md["ADR-0006-formats-over-tools"]
     docs_decisions_ADR_0007_challenge_before_compliance_md["ADR-0007-challenge-before-compliance"]
     docs_decisions_ADR_0008_no_modes_tiered_application_md["ADR-0008-no-modes-tiered-application"]
+    docs_decisions_ADR_0009_domain_language_and_structure_md["ADR-0009-domain-language-and-structure"]
     docs_dependencies_md["dependencies"]
     docs_deployment_md["deployment"]
     docs_history_blueprint_v1_md["blueprint-v1"]
@@ -40,6 +42,8 @@ graph LR
     skills_inspector_SKILL_md["SKILL"]
   end
   _github_copilot_instructions_md --> control_plane_threat_tests_scenarios_md
+  _github_copilot_instructions_md --> docs_GLOSSARY_md
+  _github_copilot_instructions_md --> docs_decisions_ADR_0009_domain_language_and_structure_md
   _github_copilot_instructions_md --> docs_dependencies_md
   _github_copilot_instructions_md --> docs_meta_retro_log_md
   _github_instructions_docs_instructions_md --> docs_dependencies_md
@@ -63,12 +67,21 @@ graph LR
   README_md --> METHOD_md
   README_md --> docs_architecture_md
   README_md --> docs_prior_art_md
+  docs_GLOSSARY_md --> METHOD_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0001_control_plane_separation_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0002_evidence_claims_views_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0003_shadow_mode_self_improvement_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0005_builder_vs_workspace_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0007_challenge_before_compliance_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0008_no_modes_tiered_application_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0009_domain_language_and_structure_md
   docs_architecture_md --> docs_history_blueprint_v1_md
   docs_decisions_ADR_0006_formats_over_tools_md --> docs_dependencies_md
   docs_decisions_ADR_0007_challenge_before_compliance_md --> _github_copilot_instructions_md
   docs_decisions_ADR_0008_no_modes_tiered_application_md --> control_plane_threat_tests_scenarios_md
   docs_decisions_ADR_0008_no_modes_tiered_application_md --> docs_decisions_ADR_0005_builder_vs_workspace_md
   docs_decisions_ADR_0008_no_modes_tiered_application_md --> docs_decisions_ADR_0007_challenge_before_compliance_md
+  docs_decisions_ADR_0009_domain_language_and_structure_md --> docs_GLOSSARY_md
   docs_history_blueprint_v1_md --> docs_architecture_md
   docs_meta_dev_harness_md --> CLAUDE_md
   docs_meta_dev_harness_md --> docs_meta_retro_log_md
