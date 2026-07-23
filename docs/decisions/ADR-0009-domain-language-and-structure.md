@@ -9,7 +9,7 @@ DDD's value is not folders; it is **ubiquitous language** *[prior art — Evans,
 
 ## Decision
 
-1. **Ship a glossary** — [[GLOSSARY|docs/GLOSSARY.md]], the ubiquitous language: Kernel, Control Plane, Data Plane / Workspace, Constitution, Proposal, Receipt, Mutation Gateway, Claim, View, Source, Memory, Skill, Hook, Adapter, Builder, Setup change, Completeness. One line each, cross-linked. This is the DDD backbone; folders are downstream of it.
+1. **Ship a glossary** — [[GLOSSARY]] (`docs/GLOSSARY.md`), the ubiquitous language: Kernel, Control Plane, Data Plane / Workspace, Constitution, Proposal, Receipt, Mutation Gateway, Claim, View, Source, Memory, Skill, Hook, Adapter, Builder, Setup change, Completeness. One line each, cross-linked. This is the DDD backbone; folders are downstream of it.
 2. **Name the bounded contexts** (already physically separated — DDD by accident, now on purpose): **Governance** (control-plane/constitution, approval, validation), **Construction** (mutation, adapters), **Knowledge** (sources, claims, views, memory), **Method/Kernel** (METHOD.md, docs/decisions), **Meta** (dev-harness, the repo governing itself). Record the map in the glossary; do not move files yet.
 3. **Migrate incrementally.** When a phase first touches a context, align that context's folders to the map in the same PR — never a big-bang move. The mind map regenerates; CI keeps it honest.
 4. **The glossary is enforced.** Copilot instructions gain: flag new terms that duplicate an existing glossary concept under a different word (the anti-synonym rule — the practical test of ubiquitous language).

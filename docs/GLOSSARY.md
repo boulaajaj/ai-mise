@@ -31,7 +31,7 @@ If you need a new term, add it here or reuse the existing one.
 
 ## Knowledge context
 
-- **Workspace / data plane** — the per-project world the agent works in; all generated, replaceable, restorable.
+- **Workspace** — the per-project world the agent works in; all generated, replaceable, restorable. (Architecture docs call this the *data plane* — same concept, one canonical term here.)
 - **Source** — immutable evidence, hashed, append-only. Never edited ([[ADR-0002-evidence-claims-views|ADR-0002]]).
 - **Claim** — an atomic fact with provenance (source, authority, confidence, validity). Traceable.
 - **View** — rebuildable synthesis (wiki page, report, mind map). Never cited as evidence for a claim.
