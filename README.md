@@ -14,7 +14,8 @@ Given a folder of real project materials, AI-Mise inspects it, asks a small numb
 
 ## One assistant — you name it
 
-The person using AI-Mise meets exactly one thing: an assistant they name at
+This is the promise being built (see Status below for what runs today):
+the person using AI-Mise meets exactly one thing — an assistant they name at
 the first hello. Small help is applied at once and can always be undone;
 changes to how the assistant works are announced in plain words and wait for
 a good moment. Nobody is asked to switch modes, and words like "builder" or
