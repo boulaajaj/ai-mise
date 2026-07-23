@@ -86,18 +86,17 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
 
 ## 2026-07-23 — Direction review 1 (triggered by Amine: "we are already failing at our own repository")
 
-- Mission check: persona-first assistant, any human, any profession; the
-  named persona is the only face; mechanics invisible unless curiosity asks.
-  Confirmed as the product's center (comments on #46, #20).
-- Misalignments found: (1) repo description spoke compiler jargon to humans —
-  fixed; (2) session reports used insider words ("canon") — voice rule now
-  applies to our own reporting; (3) retros redefined as daily-orientation
-  procedures (mission / constraints / opportunities), not only
-  correction-processing — this IS the mise en place.
-- What worked: the review loop closed its first full class-fix (stray
-  scripts → gitignore) with the reviewer enforcing the retro-log's own
-  proposal; five review rounds, zero unreviewed merges.
-- New standing artifact: docs/meta/direction.md — living executive summary,
-  refreshed each direction review (new issue tracks recurrence).
-- Do not re-propose: modes; per-merge human approval (delegated with
-  re-review rule); calendar retrospectives.
+- What was attempted / what shipped: direction retrospective as a procedure
+  (mission / constraints / opportunities); docs/meta/direction.md created as
+  the living executive summary; repo description rewritten in plain language;
+  persona-first extensions recorded on #46 and #20; recurrence issue filed.
+- Corrections received (from Amine): repo description spoke compiler jargon
+  to humans; session reports used insider words ("canon"); retrospectives
+  redefined as daily-orientation procedures — this IS the mise en place.
+- Diagnosis: the voice rule was enforced on product surfaces but not on our
+  own public description and reporting — the gap was ours, not the rules'.
+- Proposals: direction reviews recur at trigger points (tracked in the new
+  issue); the any-human bar applies to every outward-facing sentence,
+  including session reports.
+- Rejected previously, do not re-propose: modes; per-merge human approval
+  (standing delegation + re-review rule); calendar retrospectives.

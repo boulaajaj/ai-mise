@@ -5,7 +5,9 @@ title: Direction — living executive summary
 
 # Direction (refreshed at every direction review)
 
-*Last review: 2026-07-23. This page must pass the "any human, first read" bar.*
+*Last review: 2026-07-23. This page is a plain-language view: it carries no
+inline claim labels by design — authority for every statement lives in the
+linked decisions, issues, and the repository itself.*
 
 ## What AI-Mise is
 
@@ -18,13 +20,13 @@ underneath, for any profession.
 
 The foundation governs itself: every change reviewed by AI before merging,
 every decision recorded, everything undoable, checks running automatically.
-Roughly a quarter built (governance, validators, inspector draft), three
-quarters designed and tracked. It does not yet build a workspace for anyone —
+The governance, validators, and inspector draft are built; construction,
+knowledge, and the persona are designed and tracked as issues. It does not yet build a workspace for anyone —
 it proves the rules on itself first.
 
 ## Current direction
 
-1. The kernel is written ([[METHOD]]) — one page that outlives platforms.
+1. The kernel is written ([[METHOD]]) — the part that outlives platforms.
 2. Next: kernel-or-adapter audit; Amine's Arduino baselines; then the first
    real test — the inspector reads a real project and proposes, gently.
 3. Then: install-by-pointing-at-the-repo, isolation from existing setups,
