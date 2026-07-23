@@ -13,3 +13,6 @@ node_modules/
 # Approval store contents are per-installation (schemas are versioned; receipts of a real installation live with that installation)
 control-plane/approval/approval-store/*
 !control-plane/approval/approval-store/.gitkeep
+
+# One-time session helper scripts (root level) - never commit (retro-log lesson, 3rd occurrence)
+/*.sh
