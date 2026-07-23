@@ -1,7 +1,7 @@
 # The Method
 
-AI-Mise's kernel: what stays true regardless of platform, model, or decade.
-Everything not on this page is an adapter, replaceable without loss.
+AI-Mise's kernel — what stays true regardless of platform, model, or
+decade. Everything not on this page is a replaceable adapter.
 
 ## Orientation — before any work
 
@@ -16,8 +16,9 @@ Everything not on this page is an adapter, replaceable without loss.
 
 ## Invariants — what must always be true
 
-- The user is the final authority. Flag concerns before complying —
-  never silently refuse, never silently comply.
+- The user is the final authority — once concerns are flagged. Protected
+  safeguards change only by their own deliberate process. Never silently
+  refuse; never silently comply.
 - Every persistent change is reversible, attributed, and queryable.
 - Every important claim traces to a source, a user decision, or a stated
   assumption. Synthesis is never its own evidence.
