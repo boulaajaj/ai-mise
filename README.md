@@ -12,12 +12,21 @@ Given a folder of real project materials, AI-Mise inspects it, asks a small numb
 
 **Explicitly out of scope for the first release:** automatic self-improvement, SQLite, full wiki generation, multi-platform adapters, scheduled retrospectives, voice UX, marketplace distribution.
 
-## Two identities (ADR-0005)
+## One assistant — you name it
 
-You talk to two clearly distinguished things, and every session announces which one is present:
+The person using AI-Mise meets exactly one thing: an assistant they name at
+the first hello. Small help is applied at once and can always be undone;
+changes to how the assistant works are announced in plain words and wait for
+a good moment. Nobody is asked to switch modes, and words like "builder" or
+"compiler" never reach them.
 
-- **The Builder** — sets up and changes how your workspace works. Interviews you, proposes, constructs, refactors, runs retrospectives. All changes go through the approval gateway.
-- **Your assistant** — the compiled workspace that helps with your actual work every day. It *structurally cannot* change its own rules; if you ask it to, it records your request and hands off: "That's a change to how I work — let me bring in the Builder."
+---
+
+*Everything below this line is the mechanic's manual — how it works inside.
+The person using AI-Mise never needs any of it.* Internally, the machinery
+that changes the setup is separate from the machinery that does the work
+([[ADR-0005-builder-vs-workspace|ADR-0005]], [[ADR-0008-no-modes-tiered-application|ADR-0008]]) — separation the user benefits from
+without ever seeing.
 
 ## The two planes
 
