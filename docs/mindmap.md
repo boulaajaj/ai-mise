@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE - do not edit. Regenerate: python tools/generate_mindmap.py (ADR-0006) -->
 
-Nodes: 26 markdown files · Edges: 33 links · The link graph inside the files is the source of truth; this is only a rendered view.
+Nodes: 26 markdown files · Edges: 40 links · The link graph inside the files is the source of truth; this is only a rendered view.
 
 ```mermaid
 graph LR
@@ -41,6 +41,7 @@ graph LR
     skills_inspector_SKILL_md["SKILL"]
   end
   _github_copilot_instructions_md --> control_plane_threat_tests_scenarios_md
+  _github_copilot_instructions_md --> docs_GLOSSARY_md
   _github_copilot_instructions_md --> docs_dependencies_md
   _github_copilot_instructions_md --> docs_meta_retro_log_md
   _github_instructions_docs_instructions_md --> docs_dependencies_md
@@ -65,6 +66,12 @@ graph LR
   README_md --> docs_architecture_md
   README_md --> docs_prior_art_md
   docs_GLOSSARY_md --> METHOD_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0001_control_plane_separation_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0002_evidence_claims_views_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0003_shadow_mode_self_improvement_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0005_builder_vs_workspace_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0007_challenge_before_compliance_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0009_domain_language_and_structure_md
   docs_architecture_md --> docs_history_blueprint_v1_md
   docs_decisions_ADR_0006_formats_over_tools_md --> docs_dependencies_md
   docs_decisions_ADR_0007_challenge_before_compliance_md --> _github_copilot_instructions_md
