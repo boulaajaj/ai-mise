@@ -4,6 +4,8 @@
 
 > Tell it what you do. It sets everything in place — and it can never quietly change the rules you gave it.
 
+**The kernel:** [METHOD.md](METHOD.md) — one page that stays true regardless of platform, model, or decade. Everything else is an adapter.
+
 ## Product boundary (one sentence)
 
 Given a folder of real project materials, AI-Mise inspects it, asks a small number of justified questions, proposes an agent workspace in plain language, builds the approved version through a controlled transaction, and can restore any prior state exactly.
