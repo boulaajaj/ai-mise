@@ -82,3 +82,22 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
   into our CI same-day. It is the manual baseline in living form (issue #1).
 - Proposals: make ci.yml a required status check once green on main;
   gitignore one-time scripts.
+
+
+## 2026-07-23 — Direction review 1 (triggered by Amine: "we are already failing at our own repository")
+
+- Mission check: persona-first assistant, any human, any profession; the
+  named persona is the only face; mechanics invisible unless curiosity asks.
+  Confirmed as the product's center (comments on #46, #20).
+- Misalignments found: (1) repo description spoke compiler jargon to humans —
+  fixed; (2) session reports used insider words ("canon") — voice rule now
+  applies to our own reporting; (3) retros redefined as daily-orientation
+  procedures (mission / constraints / opportunities), not only
+  correction-processing — this IS the mise en place.
+- What worked: the review loop closed its first full class-fix (stray
+  scripts → gitignore) with the reviewer enforcing the retro-log's own
+  proposal; five review rounds, zero unreviewed merges.
+- New standing artifact: docs/meta/direction.md — living executive summary,
+  refreshed each direction review (new issue tracks recurrence).
+- Do not re-propose: modes; per-merge human approval (delegated with
+  re-review rule); calendar retrospectives.
