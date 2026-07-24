@@ -5,3 +5,5 @@ updates:
     schedule:
       interval: "weekly"
     labels: ["meta-harness"]
+    cooldown:
+      default-days: 7
