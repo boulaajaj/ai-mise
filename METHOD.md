@@ -29,7 +29,7 @@ Grounding and full credits for every borrowed idea: [[foundations]].
 - Learn: update what we know, how we work, or how we judge — deliberately,
   with a record. Lessons are earned by evidence, not grabbed from one incident.
 
-Three tempos. The machine does and verifies in minutes — until done, where
+Three tempos. The machine does and verifies at its own speed — until done, where
 "done" is the agreed goal within the agreed scope, never the machine's own
 expansion of either. The
 machine watches steadily — for drift, cost, and the shape of the whole.

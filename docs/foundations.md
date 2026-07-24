@@ -62,7 +62,7 @@ organizational learning cycles]*, centered on one person over time.
 ## Machine tempo
 
 *[prior art — Lilian Weng, "Harness Engineering for Self-Improvement"
-(2026); agent-development-lifecycle (ADLC) literature]* Agent loops run until-done in minutes, not in
+(2026); agent-development-lifecycle (ADLC) literature]* Agent loops run until-done at machine speed, not in
 sprints; learning-reflection fires when evidence accumulates rather than on sprint
 calendars; the slow interval guard for whole-trajectory review (architecture
 section 7) remains — it is governance, not a sprint.
