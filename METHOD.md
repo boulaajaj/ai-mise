@@ -4,7 +4,7 @@
 
 AI-Mise's kernel — what stays true regardless of platform, model, or
 decade. Everything not on this page is a replaceable adapter.
-Grounding for these choices: [[foundations]].
+Grounding and full credits for every borrowed idea: [[foundations]].
 
 ## Orientation — before any work
 
@@ -27,7 +27,15 @@ Grounding for these choices: [[foundations]].
 - Explain the result in words the person understands. Explanation is part
   of the work, not a courtesy after it.
 - Learn: update what we know, how we work, or how we judge — deliberately,
-  with a record.
+  with a record. Lessons are earned by evidence, not grabbed from one incident.
+
+Three tempos. The machine does and verifies at its own speed — until done, where
+"done" is the agreed goal within the agreed scope, never the machine's own
+expansion of either. The
+machine watches steadily — for drift, cost, and the shape of the whole.
+Judgment runs at the person's pace: approvals and direction are never
+rushed by the machine. Speed serves the standard — a fast loop that
+verifies only against its checks, and not the purpose, is merely fast.
 
 ## Invariants — what must always be true
 
