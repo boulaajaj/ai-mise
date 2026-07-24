@@ -5,6 +5,10 @@ title: Foundations — where the Method comes from
 
 # Foundations
 
+**Standing rule:** every idea adopted from someone else is named and linked
+here or in [[prior-art]]. Borrowing without credit is a defect, reviewable
+like any other.
+
 Scholarly grounding for [[METHOD]]. All of this is *[prior art]* — a
 synthesis contributed through Amine (July 2026) from classical philosophy
 and cognitive science, adapted here. The kernel uses plain words (truth,
@@ -73,6 +77,20 @@ the human clock by design — the human is the metronome for judgment, not
 latency to remove. And the fast loop inherits the kernel's purpose test:
 verification against checks alone lets speed mass-produce work that
 passes and misses the point.
+
+
+## Credits and sources
+
+- **Lilian Weng** — *Harness Engineering for Self-Improvement* (Jul 2026): until-done loops, evidence-paired edits with checked predictions, read-only judges, held-in/held-out acceptance, failure clustering, durable file state. https://lilianweng.github.io/posts/2026-07-04-harness/
+- **Andrej Karpathy** — Software 3.0 framing and the LLM-wiki pattern our knowledge views descend from. https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
+- **Amine's reviewing friend** (credited anonymously by choice) — the governed-compiler restructuring review (ADRs 0001–0004 lineage) and the truth/craft/judgment synthesis this page adapts.
+- **Aristotle** — *Nicomachean Ethics*, Book VI: epistēmē, technē, phronēsis.
+- **Eric Evans** — *Domain-Driven Design*: ubiquitous language (ADR-0009).
+- **Anthropic** — Agent Skills guidance, memory/hooks documentation, skill-creator: the placement limits and eval-first authoring our adapter follows.
+- **Google Cloud** — Open Knowledge Format: the minimal frontmatter conventions our files use.
+- **Atlan** — ADLC-vs-SDLC: continuous calibration, eval distributions, inner/outer loops. https://atlan.com/know/ai-agent/adlc-vs-sdlc/
+- **Open-source authors** whose implementations we deliberately reuse — BerriAI (self-improving-agent), Terence Bristol (claude-improve), Tigerless Labs (autoharness), Kayba (autoharness), aiming-lab (AutoHarness), ruvnet (metaharness), HKUDS (OpenHarness), revfactory (harness) — each with specifics and links in [[prior-art]].
+- **Bolt (StackBlitz)** and **Abstract** — the hide-the-version-control UX lineage behind "Save Version / Restore".
 
 ## The center, in one sentence
 

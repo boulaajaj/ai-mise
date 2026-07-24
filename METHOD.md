@@ -4,7 +4,7 @@
 
 AI-Mise's kernel — what stays true regardless of platform, model, or
 decade. Everything not on this page is a replaceable adapter.
-Grounding for these choices: [[foundations]].
+Grounding and full credits for every borrowed idea: [[foundations]].
 
 ## Orientation — before any work
 
