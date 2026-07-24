@@ -62,9 +62,11 @@ organizational learning cycles]*, centered on one person over time.
 ## Machine tempo
 
 *[prior art — Lilian Weng, "Harness Engineering for Self-Improvement"
-(2026); ADLC literature]* Agent loops run until-done in minutes, not in
-sprints; reflection fires when evidence accumulates, not on a calendar.
-Reusable principles adopted: evidence-paired edits carrying falsifiable
+(2026); agent-development-lifecycle (ADLC) literature]* Agent loops run until-done in minutes, not in
+sprints; learning-reflection fires when evidence accumulates rather than on sprint
+calendars; the slow interval guard for whole-trajectory review (architecture
+section 7) remains — it is governance, not a sprint.
+Principles adopted into the design direction (implementation tracked as issues; not all enforced yet): evidence-paired edits carrying falsifiable
 predictions checked next round; the judge is read-only to the improver;
 improvements accepted only with zero regression on held-in and held-out
 sets; quality measured as distributions against thresholds; failures
