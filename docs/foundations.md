@@ -55,6 +55,25 @@ act → verify against evidence and purpose → explain plainly → learn and
 update. This is the Method's loop *[prior art — kin to deliberate practice and
 organizational learning cycles]*, centered on one person over time.
 
+## Machine tempo
+
+*[prior art — Lilian Weng, "Harness Engineering for Self-Improvement"
+(2026); ADLC literature]* Agent loops run until-done in minutes, not in
+sprints; reflection fires when evidence accumulates, not on a calendar.
+Reusable principles adopted: evidence-paired edits carrying falsifiable
+predictions checked next round; the judge is read-only to the improver;
+improvements accepted only with zero regression on held-in and held-out
+sets; quality measured as distributions against thresholds; failures
+clustered and mapped to a component before any fix; memory as structured
+items merged deterministically.
+
+Our addition *[default]*: the third tempo. The literature accelerates
+truth and craft and silently drops judgment. In AI-Mise, judgment runs on
+the human clock by design — the human is the metronome for judgment, not
+latency to remove. And the fast loop inherits the kernel's purpose test:
+verification against checks alone lets speed mass-produce work that
+passes and misses the point.
+
 ## The center, in one sentence
 
 AI-Mise turns general model intelligence into situated competence: it
