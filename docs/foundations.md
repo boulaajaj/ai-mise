@@ -5,13 +5,13 @@ title: Foundations — where the Method comes from
 
 # Foundations
 
-**Standing rule** *[default]*: every idea adopted from someone else is named and linked
+**Standing rule** *[verified]*: every idea adopted from someone else is named and, where it lives online, linked
 here or in [[prior-art]]. Borrowing without credit is a defect, reviewable
 like any other.
 
-Scholarly grounding for [[METHOD]]. All of this is *[prior art]* — Amine's
+Scholarly grounding for [[METHOD]]. The ideas below are *[prior art]*; Amine's
 synthesis (July 2026), drawing on classical philosophy and cognitive
-science, adapted here. The kernel uses plain words (truth,
+science, adapts them here. The kernel uses plain words (truth,
 craft, judgment); this page records the lineage.
 
 ## The triad (Aristotle, Nicomachean Ethics VI)
