@@ -101,3 +101,21 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
   including session reports.
 - Rejected previously, do not re-propose: modes; per-merge human approval
   (standing delegation + re-review rule); calendar retrospectives.
+
+## 2026-07-24 — self-attribution, and the wrong fix for it
+
+- Correction: the credits register named the repo owner. Removed. Authorship in
+  your own repo is the default — a credit line for the owner is labeling every
+  room of your own house with your name.
+- Second correction, same day: the first fix was worse than the defect. It wrote
+  the absurdity down as a rule — a clause in the standing rule, a reviewer check
+  — so this exact case would be caught forever. Amine: "If something goes
+  without saying, that means we don't encode it." A repo that adds a line per
+  obvious thing ends at millions of lines and still misses the next one. Both
+  additions were reverted; only the deletion stands.
+- Class: rules substituting for judgment. First as literal compliance against
+  obvious context, then as encoding obvious context. Same root — treating the
+  kernel as where understanding is stored, when it holds only what must be true.
+- No rule was added. This entry is evidence, not policy: material for failure
+  clustering and the judge/eval work, where a judgment miss belongs — measured
+  as whether general judgment improved, not patched case by case.
