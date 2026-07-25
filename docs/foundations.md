@@ -7,9 +7,7 @@ title: Foundations — where the Method comes from
 
 **Standing rule** *[verified]*: every idea adopted from someone else is named and, where it lives online, linked
 here or in [[prior-art]]. Borrowing without credit is a defect, reviewable
-like any other. The reverse also holds: the owner needs no credit line —
-unattributed work in this repo is the owner's by default, and naming the owner
-in their own credits register is decoration, not provenance.
+like any other.
 
 Scholarly grounding for [[METHOD]]. The ideas below are *[prior art]*, adapted
 here (July 2026) from classical philosophy and cognitive

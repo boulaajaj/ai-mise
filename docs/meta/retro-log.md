@@ -102,20 +102,20 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
 - Rejected previously, do not re-propose: modes; per-merge human approval
   (standing delegation + re-review rule); calendar retrospectives.
 
-## 2026-07-24 — self-attribution defect (correction from Amine)
+## 2026-07-24 — self-attribution, and the wrong fix for it
 
-- Correction received: the credits register named the repo owner. In your own
-  repo, authorship is the default — a credit line for the owner is like
-  labeling every room of your house with your name. The instruction "make
-  those ideas mine" meant *remove the entry*, not *write me one*.
-- Diagnosis: literal instruction-following that contradicted the artifact's
-  own convention (credits registers name external sources only). The
-  challenge-before-compliance rule existed but lived in agent judgment, and
-  judgment missed it. Defect class: compliance that is locally faithful to
-  the words and globally absurd in context.
-- Fix shipped with this entry: owner-default clause added to the standing
-  rule in [[foundations]]; mechanical reviewer check added to the docs
-  review instructions (flag self-attribution of the owner).
-- Wake-up mechanism, generalized: when a correction reveals a judgment miss,
-  the lesson is encoded where judgment is not needed — a rule the reviewer
-  enforces on every future PR, not a memory the agent must recall.
+- Correction: the credits register named the repo owner. Removed. Authorship in
+  your own repo is the default — a credit line for the owner is labeling every
+  room of your own house with your name.
+- Second correction, same day: the first fix was worse than the defect. It wrote
+  the absurdity down as a rule — a clause in the standing rule, a reviewer check
+  — so this exact case would be caught forever. Amine: "If something goes
+  without saying, that means we don't encode it." A repo that adds a line per
+  obvious thing ends at millions of lines and still misses the next one. Both
+  additions were reverted; only the deletion stands.
+- Class: rules substituting for judgment. First as literal compliance against
+  obvious context, then as encoding obvious context. Same root — treating the
+  kernel as where understanding is stored, when it holds only what must be true.
+- No rule was added. This entry is evidence, not policy: material for failure
+  clustering and the judge/eval work, where a judgment miss belongs — measured
+  as whether general judgment improved, not patched case by case.
