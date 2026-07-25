@@ -18,3 +18,6 @@ applyTo: "docs/**/*.md"
 - Watch for scope drift: docs describing enforcement the code does not implement
   yet must say so plainly (the "discipline vs machinery" honesty rule) — flag
   aspirational text presented as current fact.
+- Flag any credit, attribution, or byline that names the repository owner:
+  the owner is the default author of everything unattributed here, and
+  credit registers exist only for external sources (retro-log 2026-07-24).

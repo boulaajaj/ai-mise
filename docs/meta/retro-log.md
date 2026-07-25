@@ -101,3 +101,21 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
   including session reports.
 - Rejected previously, do not re-propose: modes; per-merge human approval
   (standing delegation + re-review rule); calendar retrospectives.
+
+## 2026-07-24 — self-attribution defect (correction from Amine)
+
+- Correction received: the credits register named the repo owner. In your own
+  repo, authorship is the default — a credit line for the owner is like
+  labeling every room of your house with your name. The instruction "make
+  those ideas mine" meant *remove the entry*, not *write me one*.
+- Diagnosis: literal instruction-following that contradicted the artifact's
+  own convention (credits registers name external sources only). The
+  challenge-before-compliance rule existed but lived in agent judgment, and
+  judgment missed it. Defect class: compliance that is locally faithful to
+  the words and globally absurd in context.
+- Fix shipped with this entry: owner-default clause added to the standing
+  rule in [[foundations]]; mechanical reviewer check added to the docs
+  review instructions (flag self-attribution of the owner).
+- Wake-up mechanism, generalized: when a correction reveals a judgment miss,
+  the lesson is encoded where judgment is not needed — a rule the reviewer
+  enforces on every future PR, not a memory the agent must recall.

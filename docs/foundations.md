@@ -7,11 +7,13 @@ title: Foundations — where the Method comes from
 
 **Standing rule** *[verified]*: every idea adopted from someone else is named and, where it lives online, linked
 here or in [[prior-art]]. Borrowing without credit is a defect, reviewable
-like any other.
+like any other. The reverse also holds: the owner needs no credit line —
+unattributed work in this repo is the owner's by default, and naming the owner
+in their own credits register is decoration, not provenance.
 
-Scholarly grounding for [[METHOD]]. The ideas below are *[prior art]*; Amine's
-synthesis (July 2026), drawing on classical philosophy and cognitive
-science, adapts them here. The kernel uses plain words (truth,
+Scholarly grounding for [[METHOD]]. The ideas below are *[prior art]*, adapted
+here (July 2026) from classical philosophy and cognitive
+science. The kernel uses plain words (truth,
 craft, judgment); this page records the lineage.
 
 ## The triad (Aristotle, Nicomachean Ethics VI)
@@ -85,7 +87,6 @@ passes and misses the point.
 
 - **Lilian Weng** — *Harness Engineering for Self-Improvement* (Jul 2026): until-done loops, evidence-paired edits with checked predictions, read-only judges, held-in/held-out acceptance, failure clustering, durable file state. https://lilianweng.github.io/posts/2026-07-04-harness/
 - **Andrej Karpathy** — Software 3.0 framing and the LLM-wiki pattern our knowledge views descend from. https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
-- **Amine Boulaajaj** — the governed-compiler restructuring review (ADRs 0001–0004 lineage) and the truth/craft/judgment synthesis this page adapts.
 - **Aristotle** — *Nicomachean Ethics*, Book VI: epistēmē, technē, phronēsis.
 - **Eric Evans** — *Domain-Driven Design*: ubiquitous language (ADR-0009).
 - **Anthropic** — Agent Skills guidance, memory/hooks documentation, skill-creator: the placement limits and eval-first authoring our adapter follows.
