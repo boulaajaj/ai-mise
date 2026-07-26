@@ -1,6 +1,6 @@
 # Where your work lives
 
-*This page is written for anyone, with no technical background assumed. The reasoning behind it is in [[ADR-0010-where-workspaces-live|ADR-0010]].*
+*This page is written for anyone, with no technical background assumed. It describes how this is meant to work. It is still being built — today only the reading part of it exists — and it is written down first so that what gets built has something to be held to. The reasoning behind it is in [[ADR-0010-where-workspaces-live|ADR-0010]].*
 
 ## It's a folder on your computer
 
