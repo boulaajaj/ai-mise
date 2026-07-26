@@ -13,6 +13,8 @@ The split that resolves this is not between the three options; it runs *through*
 
 ## Decision
 
+All decisions below are [default] — chosen product behavior, not derived from research.
+
 **Vendor the format. Install the machinery.** This is [[METHOD|the kernel-and-adapter discipline]] applied to deployment rather than to documents.
 
 1. **A workspace is a local git repository**, initialized quietly at creation. Git is how "restore any prior state exactly" (#11) is actually delivered, and per [[ADR-0008-no-modes-tiered-application|ADR-0008]] the person never sees it. **No remote is created and none is required** — a remote means an account and an upload, which are the person's decisions, not preconditions for first value (#47).
@@ -25,7 +27,7 @@ The split that resolves this is not between the three options; it runs *through*
 
 5. **Beside a new project, inside an existing one.** With nothing to preserve, the workspace *is* the project folder, visibly named by the person. Where a project folder already exists, everything lands in a single `.ai-mise/` directory inside it — one thing to inspect, one thing to delete, zero residue (#48). Nothing outside that directory is written without an approved transaction that shows the person exactly what would change.
 
-6. **Committing is the person's choice, asked once, at the moment it matters** — never as setup configuration. The default is not committed. When they choose to commit, the **governed** material goes in (constitution, schemas, claims, sources index, views, receipts) and the **personal** layer stays out by ignore rule (memory and preferences). A receipt is what makes a change reversible and auditable, so it belongs with the work rather than with the person. A team can share a governed workspace without sharing one person's memory of themselves.
+6. **Whether the workspace joins the surrounding project's repository is the person's choice, asked once, at the moment it matters** — never as setup configuration, and never to be confused with the quiet local history of decision 1, which is always kept. The default is out. When they choose to include it, the **governed** material goes in (constitution, schemas, claims, sources index, views, receipts) and the **personal** layer stays out by ignore rule (memory and preferences). A receipt is what makes a change reversible and auditable, so it belongs with the work rather than with the person. A team can share a governed workspace without sharing one person's memory of themselves.
 
 ## The three workflows
 

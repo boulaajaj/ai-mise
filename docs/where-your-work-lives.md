@@ -28,7 +28,7 @@ If you already have instructions or notes set up for an AI assistant, those are 
 
 No account is required. Nothing is uploaded anywhere. There is no server holding your work.
 
-If you want your work on another computer, copy the folder across. If you want to share it with someone, hand them the folder. It will work for them the same way it works for you.
+If you want your work on another computer, copy the folder across. If you want to share it with someone, hand them the folder — they can read all of it straight away with nothing installed, and once they have the assistant installed too, it works for them as it works for you.
 
 ## If you work with other people
 
