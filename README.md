@@ -23,7 +23,7 @@ a good moment. Nobody is asked to switch modes, and words like "builder" or
 
 ---
 
-*Everything below this line is the mechanic's manual — how it works inside.
+*Everything below this line is how it works inside.
 The person using AI-Mise never needs any of it.* Internally, the machinery
 that changes the setup is separate from the machinery that does the work
 ([[ADR-0005-builder-vs-workspace|ADR-0005]], [[ADR-0008-no-modes-tiered-application|ADR-0008]]) — separation the user benefits from

@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE - do not edit. Regenerate: python tools/generate_mindmap.py (ADR-0006) -->
 
-Nodes: 31 markdown files · Edges: 70 links · The link graph inside the files is the source of truth; this is only a rendered view.
+Nodes: 32 markdown files · Edges: 72 links · The link graph inside the files is the source of truth; this is only a rendered view.
 
 ```mermaid
 graph LR
@@ -12,6 +12,7 @@ graph LR
     _github_instructions_validators_instructions_md["validators.instructions"]
   end
   subgraph control_plane_g[control-plane]
+    control_plane_approval_examples_README_md["examples/README"]
     control_plane_evaluation_baselines_README_md["baselines/README"]
     control_plane_threat_tests_scenarios_md["scenarios"]
   end
@@ -77,6 +78,7 @@ graph LR
   README_md --> docs_decisions_ADR_0005_builder_vs_workspace_md
   README_md --> docs_decisions_ADR_0008_no_modes_tiered_application_md
   README_md --> docs_prior_art_md
+  control_plane_approval_examples_README_md --> docs_architecture_md
   docs_GLOSSARY_md --> METHOD_md
   docs_GLOSSARY_md --> docs_decisions_ADR_0001_control_plane_separation_md
   docs_GLOSSARY_md --> docs_decisions_ADR_0002_evidence_claims_views_md
@@ -106,6 +108,7 @@ graph LR
   docs_deployment_md --> docs_decisions_ADR_0010_where_workspaces_live_md
   docs_deployment_md --> docs_where_your_work_lives_md
   docs_foundations_md --> METHOD_md
+  docs_foundations_md --> docs_architecture_md
   docs_foundations_md --> docs_decisions_ADR_0002_evidence_claims_views_md
   docs_foundations_md --> docs_decisions_ADR_0007_challenge_before_compliance_md
   docs_foundations_md --> docs_prior_art_md
