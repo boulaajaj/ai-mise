@@ -13,11 +13,11 @@ The split that resolves this is not between the three options; it runs *through*
 
 ## Decision
 
-All decisions below are [default] — chosen product behavior, not derived from research.
+All decisions below are *[default]* — chosen product behavior, not derived from research.
 
 **Vendor the format. Install the machinery.** This is [[METHOD|the kernel-and-adapter discipline]] applied to deployment rather than to documents.
 
-1. **A workspace is a local git repository**, initialized quietly at creation. Git is how "restore any prior state exactly" (#11) is actually delivered, and per [[ADR-0008-no-modes-tiered-application|ADR-0008]] the person never sees it. **No remote is created and none is required** — a remote means an account and an upload, which are the person's decisions, not preconditions for first value (#47).
+1. **A workspace is a local git repository**, initialized quietly at creation. Git is how "restore any prior state exactly" (#11) is actually delivered, and per [[ADR-0008-no-modes-tiered-application|ADR-0008]] the person never sees it. **No remote is created and none is required** — a remote means an account and an upload, which are the person's decisions, not preconditions for first value (#47). Where the workspace lands inside a project that already has a repository (decision 5), that history lives beside the project in the control plane rather than nested inside it — git records a nested repository as a link, never as files, so the outer project could not commit it anyway **[verified]**. History is machinery, and machinery is installed.
 
 2. **The workspace carries everything that means something and nothing that executes.** It carries the constitution that governs it and the schemas its files are written against — **as projections, never as sources**: the authoritative policy and schemas stay in the control plane, outside the agent-writable tree, and changing them stays a deliberate act there ([[ADR-0001-control-plane-separation|ADR-0001]]). Alongside them it carries claims, sources, memory, views, receipts, and a version marker naming the Builder version that wrote it. Validators, hooks, adapters and the mutation gateway are installed once per machine and are referenced, never copied. **What travels is the record of what governed the work, not the authority to govern it**: a folder must be readable without us, and a workspace must never be able to rewrite its own rules. Meaning must survive us; code is replaceable, and N copies of code is N upgrade problems.
 
