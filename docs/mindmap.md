@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE - do not edit. Regenerate: python tools/generate_mindmap.py (ADR-0006) -->
 
-Nodes: 31 markdown files · Edges: 69 links · The link graph inside the files is the source of truth; this is only a rendered view.
+Nodes: 31 markdown files · Edges: 70 links · The link graph inside the files is the source of truth; this is only a rendered view.
 
 ```mermaid
 graph LR
@@ -47,6 +47,7 @@ graph LR
   end
   _github_copilot_instructions_md --> control_plane_threat_tests_scenarios_md
   _github_copilot_instructions_md --> docs_GLOSSARY_md
+  _github_copilot_instructions_md --> docs_architecture_md
   _github_copilot_instructions_md --> docs_decisions_ADR_0009_domain_language_and_structure_md
   _github_copilot_instructions_md --> docs_dependencies_md
   _github_copilot_instructions_md --> docs_meta_retro_log_md

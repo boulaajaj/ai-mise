@@ -20,8 +20,9 @@ issue #19). Review PRs against that governance first, code style second.
 
 ## 2. Claim hygiene (ADR-0004)
 
-- Design assertions in docs must carry a label: [verified], [prior art], or [default].
-  Flag unlabeled factual claims about platform behavior or research findings.
+- Design assertions in docs must carry a claim label, in the vocabulary and exact
+  written form defined once in `docs/architecture.md` §1. Flag unlabeled factual
+  claims about platform behavior or research findings.
 - Flag hardcoded product-choice numbers (thresholds, line limits, cadences) in prose,
   code, or docs — they belong in `control-plane/constitution/policy.yaml`.
 - **Exemption — plain-language surfaces.** The surfaces named in §7 (README, skill
