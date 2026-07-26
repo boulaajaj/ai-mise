@@ -5,7 +5,7 @@
 
 ## Context
 
-The fog was ours. [[deployment]] sketched three pieces and was honest about being a working doc; meanwhile #12 (adapter output location), #27 (v0 preview), #47 (install), #48 (isolation) and #22 (vault) each proceeded on a private assumption about the answer. Assumptions held privately by four issues are how a project acquires a decision it never made.
+The fog was ours. [[deployment]] sketched three pieces and was honest about being a working doc; meanwhile #12 (adapter output location), #27 (v0 preview), #47 (install), #48 (isolation) and #22 (vault) each proceeded on a private assumption about the answer. Assumptions held privately by five issues are how a project acquires a decision it never made.
 
 Three positions were weighed in #69, plus two later ones. The self-contained workspace (everything vendored) is the most literal reading of [[ADR-0006-formats-over-tools|ADR-0006]] and gives maximum portability, at the cost of N copies of code to upgrade. The installed tool with a thin workspace matches how developer tooling is usually distributed and upgrades in one place, but the folder is then not self-describing: hand it to someone else and it cannot be reconstructed. The template-plus-pull-requests model makes upgrades reviewable, which is attractive, but it requires the person to have a git remote before they have any value, and we expect drift once people edit generated files *[default]*.
 
@@ -41,7 +41,7 @@ The split that resolves this is not between the three options; it runs *through*
 - [[deployment]] remains a working doc and keeps what it is good at — the platform target order (Claude Code now, Codex later, OpenHarness later) and the v0 slice. The lifecycle questions it used to sketch are decided here, and it now points here for them.
 - **New binding constraints on generated content:** no absolute paths, no credentials, and a version marker in every workspace. These need a validator (#9) — a workspace that cannot move is a bug, not a preference.
 - The Builder must read formats older than itself. This is a real cost and it is the price of never changing someone's workspace without asking.
-- #12, #27, #47, #48 and #22 now share one written answer instead of four private ones.
+- #12, #27, #47, #48 and #22 now share one written answer instead of five private ones.
 - One plain-language companion ships with this decision: [[where-your-work-lives]].
 
 ## Alternatives not taken
