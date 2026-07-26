@@ -6,13 +6,9 @@ applyTo: "docs/**/*.md"
 
 - Verify claim labels ([verified] / [prior art] / [default]) on factual assertions
   about platform behavior, research findings, or third-party projects (ADR-0004).
-  Exemption: a page under `docs/` that says under its title that it is written for a
-  non-specialist carries no inline labels; its authority lives in the decisions it
-  links to, so flag a missing link, not a missing label. (The full list of exempt
-  surfaces, including those outside `docs/`, is in `.github/copilot-instructions.md`
-  §2 — it is kept in one place so the two cannot drift apart.) **The exemption is per
-  page, never per paragraph:** a design document does not become exempt by containing
-  a friendly section, and ADR-0004 continues to govern it in full.
+  The plain-language exemption in `.github/copilot-instructions.md` §2 applies here in
+  full. It is defined there once and deliberately not restated here, because a rule
+  written in two places is a rule that will eventually disagree with itself.
 - Cross-references: prefer `[[wikilinks]]` or standard markdown links over bare
   prose mentions so the generated mind map stays connected (ADR-0006). If links
   changed, `docs/mindmap.md` must be regenerated in this PR.
