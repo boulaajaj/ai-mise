@@ -25,7 +25,7 @@ issue #19). Review PRs against that governance first, code style second.
 - Flag hardcoded product-choice numbers (thresholds, line limits, cadences) in prose,
   code, or docs — they belong in `control-plane/constitution/policy.yaml`.
 - **Exemption — plain-language surfaces.** The surfaces named in §7 (README, skill
-  outputs, proposal templates) and any page that states in its opening line that it is
+  outputs, proposal templates) and any page that says under its title that it is
   written for a non-specialist carry no inline labels: a label is jargon to the reader
   it is written for. ADR-0004 makes labeling mandatory in *design documents*; these are
   not design documents. Their authority lives in the decisions and design docs they
