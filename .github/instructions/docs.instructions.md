@@ -6,6 +6,9 @@ applyTo: "docs/**/*.md"
 
 - Verify claim labels ([verified] / [prior art] / [default]) on factual assertions
   about platform behavior, research findings, or third-party projects (ADR-0004).
+  The plain-language exemption in `.github/copilot-instructions.md` §2 applies here in
+  full. It is defined there once and deliberately not restated here, because a rule
+  written in two places is a rule that will eventually disagree with itself.
 - Cross-references: prefer `[[wikilinks]]` or standard markdown links over bare
   prose mentions so the generated mind map stays connected (ADR-0006). If links
   changed, `docs/mindmap.md` must be regenerated in this PR.
