@@ -25,7 +25,7 @@ The split that resolves this is not between the three options; it runs *through*
 
 5. **Beside a new project, inside an existing one.** With nothing to preserve, the workspace *is* the project folder, visibly named by the person. Where a project folder already exists, everything lands in a single `.ai-mise/` directory inside it — one thing to inspect, one thing to delete, zero residue (#48). Nothing outside that directory is written without an approved transaction that shows the person exactly what would change.
 
-6. **Committing is the person's choice, asked once, at the moment it matters** — never as setup configuration. The default is not committed. When they choose to commit, the **governed** material goes in (constitution, schemas, claims, sources index, views) and the **personal** layer stays out by ignore rule (memory, preferences, their own approval receipts). A team can share a governed workspace without sharing one person's memory of themselves.
+6. **Committing is the person's choice, asked once, at the moment it matters** — never as setup configuration. The default is not committed. When they choose to commit, the **governed** material goes in (constitution, schemas, claims, sources index, views, receipts) and the **personal** layer stays out by ignore rule (memory and preferences). A receipt is what makes a change reversible and auditable, so it belongs with the work rather than with the person. A team can share a governed workspace without sharing one person's memory of themselves.
 
 ## The three workflows
 
@@ -38,7 +38,7 @@ The split that resolves this is not between the three options; it runs *through*
 ## Consequences
 
 - [[ADR-0001-control-plane-separation|ADR-0001]] is refined, not superseded, and it is the reason decision 2 says *projections, never sources*: a workspace holding its own authority would be exactly the circular defense ADR-0001 exists to prevent.
-- [[deployment]] is promoted from working doc to decision and now points here; its target order (Claude Code now, Codex later, OpenHarness later) is unaffected.
+- [[deployment]] remains a working doc and keeps what it is good at — the platform target order (Claude Code now, Codex later, OpenHarness later) and the v0 slice. The lifecycle questions it used to sketch are decided here, and it now points here for them.
 - **New binding constraints on generated content:** no absolute paths, no credentials, and a version marker in every workspace. These need a validator (#9) — a workspace that cannot move is a bug, not a preference.
 - The Builder must read formats older than itself. This is a real cost and it is the price of never changing someone's workspace without asking.
 - #12, #27, #47, #48 and #22 now share one written answer instead of four private ones.
