@@ -20,7 +20,7 @@ Before anything is added or altered, you are shown what would change, in plain w
 
 Point the assistant at work you already have and the first thing it does is read, and only read. It tells you what it found and asks what you would like to do about it.
 
-Everything it adds goes in a single folder tucked inside your project. One folder to look at, one folder to delete if you ever want it gone — and when it's gone, your project is exactly as it was.
+Everything it adds goes in a single folder tucked inside your project. One folder to look at, one folder to delete if you ever want it gone — and when it's gone, there is nothing of ours left behind.
 
 If you already have instructions or notes set up for an AI assistant, those are kept. They are read and used, not replaced, unless you specifically ask for that — and even then the originals are kept so you can put them back.
 
