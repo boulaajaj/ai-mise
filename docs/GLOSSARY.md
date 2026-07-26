@@ -38,6 +38,8 @@ If you need a new term, add it here or reuse the existing one.
 - **Memory** — governed, growing domain knowledge behind an index; read on demand.
 - **Skill / Hook** — a reusable procedure / a deterministic lifecycle guard, per the placement rubric.
 - **Completeness** — the set of things that make a workspace ready (profile, mission, constraints…), each known / assumed / missing; gates construction.
+- **Vendored** — carried inside a workspace rather than referenced from the machine. Meaning is vendored; machinery is installed ([[ADR-0010-where-workspaces-live|ADR-0010]]).
+- **Version marker** — the record inside a workspace of which Builder version wrote it; makes an older-than-the-Builder workspace visible instead of surprising ([[ADR-0010-where-workspaces-live|ADR-0010]]).
 
 ## Meta context
 
