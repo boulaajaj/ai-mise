@@ -4,11 +4,12 @@ applyTo: "docs/**/*.md"
 
 # Review instructions: documentation and knowledge base
 
-- Verify claim labels ([verified] / [prior art] / [default]) on factual assertions
-  about platform behavior, research findings, or third-party projects (ADR-0004).
-  The plain-language exemption in `.github/copilot-instructions.md` §2 applies here in
-  full. It is defined there once and deliberately not restated here, because a rule
-  written in two places is a rule that will eventually disagree with itself.
+- Verify claim labels on factual assertions about platform behavior, research
+  findings, or third-party projects (ADR-0004). Two things this file deliberately
+  does not reproduce, because both apply here in full and a rule written twice is a
+  rule that will eventually disagree with itself: the label vocabulary and its exact
+  written form, defined in the opening paragraph of `docs/architecture.md`, and the
+  plain-language exemption, defined in `.github/copilot-instructions.md` §2.
 - Cross-references: prefer `[[wikilinks]]` or standard markdown links over bare
   prose mentions so the generated mind map stays connected (ADR-0006). If links
   changed, `docs/mindmap.md` must be regenerated in this PR.

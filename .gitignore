@@ -14,5 +14,7 @@ node_modules/
 control-plane/approval/approval-store/*
 !control-plane/approval/approval-store/.gitkeep
 
-# One-time session helper scripts (root level) - never commit (retro-log lesson, 3rd occurrence)
+# One-time session helper scripts (root level) - never commit (retro-log lesson, 4th
+# occurrence: the rule said .sh, so a .py walked straight past it)
 /*.sh
+/*.py
