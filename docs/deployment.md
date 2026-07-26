@@ -1,7 +1,13 @@
 # Deployment model
 
 How AI-Mise gets onto a person's machine, and which platforms we target when.
-Decision status: working doc; promote load-bearing choices to ADRs as they harden.
+
+Decision status: the load-bearing choices are now decided in
+[[ADR-0010-where-workspaces-live|ADR-0010]] — what a workspace carries, what is
+installed per machine, how improvements reach an existing workspace, what travels,
+where things land beside an existing project, and what gets committed. The plain-language
+companion is [[where-your-work-lives]]. This page keeps the platform target order and
+the v0 slice; it remains a working doc for those.
 
 ## Target order
 

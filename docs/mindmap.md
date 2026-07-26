@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE - do not edit. Regenerate: python tools/generate_mindmap.py (ADR-0006) -->
 
-Nodes: 29 markdown files · Edges: 53 links · The link graph inside the files is the source of truth; this is only a rendered view.
+Nodes: 31 markdown files · Edges: 65 links · The link graph inside the files is the source of truth; this is only a rendered view.
 
 ```mermaid
 graph LR
@@ -27,6 +27,7 @@ graph LR
     docs_decisions_ADR_0007_challenge_before_compliance_md["ADR-0007-challenge-before-compliance"]
     docs_decisions_ADR_0008_no_modes_tiered_application_md["ADR-0008-no-modes-tiered-application"]
     docs_decisions_ADR_0009_domain_language_and_structure_md["ADR-0009-domain-language-and-structure"]
+    docs_decisions_ADR_0010_where_workspaces_live_md["ADR-0010-where-workspaces-live"]
     docs_dependencies_md["dependencies"]
     docs_deployment_md["deployment"]
     docs_foundations_md["foundations"]
@@ -35,6 +36,7 @@ graph LR
     docs_meta_direction_md["direction"]
     docs_meta_retro_log_md["retro-log"]
     docs_prior_art_md["prior-art"]
+    docs_where_your_work_lives_md["where-your-work-lives"]
   end
   CLAUDE_md["CLAUDE"]
   HANDOFF_md["HANDOFF"]
@@ -80,6 +82,7 @@ graph LR
   docs_GLOSSARY_md --> docs_decisions_ADR_0007_challenge_before_compliance_md
   docs_GLOSSARY_md --> docs_decisions_ADR_0008_no_modes_tiered_application_md
   docs_GLOSSARY_md --> docs_decisions_ADR_0009_domain_language_and_structure_md
+  docs_GLOSSARY_md --> docs_decisions_ADR_0010_where_workspaces_live_md
   docs_architecture_md --> docs_history_blueprint_v1_md
   docs_decisions_ADR_0006_formats_over_tools_md --> docs_dependencies_md
   docs_decisions_ADR_0007_challenge_before_compliance_md --> _github_copilot_instructions_md
@@ -87,6 +90,16 @@ graph LR
   docs_decisions_ADR_0008_no_modes_tiered_application_md --> docs_decisions_ADR_0005_builder_vs_workspace_md
   docs_decisions_ADR_0008_no_modes_tiered_application_md --> docs_decisions_ADR_0007_challenge_before_compliance_md
   docs_decisions_ADR_0009_domain_language_and_structure_md --> docs_GLOSSARY_md
+  docs_decisions_ADR_0010_where_workspaces_live_md --> CLAUDE_md
+  docs_decisions_ADR_0010_where_workspaces_live_md --> METHOD_md
+  docs_decisions_ADR_0010_where_workspaces_live_md --> docs_decisions_ADR_0003_shadow_mode_self_improvement_md
+  docs_decisions_ADR_0010_where_workspaces_live_md --> docs_decisions_ADR_0005_builder_vs_workspace_md
+  docs_decisions_ADR_0010_where_workspaces_live_md --> docs_decisions_ADR_0006_formats_over_tools_md
+  docs_decisions_ADR_0010_where_workspaces_live_md --> docs_decisions_ADR_0008_no_modes_tiered_application_md
+  docs_decisions_ADR_0010_where_workspaces_live_md --> docs_deployment_md
+  docs_decisions_ADR_0010_where_workspaces_live_md --> docs_where_your_work_lives_md
+  docs_deployment_md --> docs_decisions_ADR_0010_where_workspaces_live_md
+  docs_deployment_md --> docs_where_your_work_lives_md
   docs_foundations_md --> METHOD_md
   docs_foundations_md --> docs_decisions_ADR_0002_evidence_claims_views_md
   docs_foundations_md --> docs_decisions_ADR_0007_challenge_before_compliance_md
@@ -96,4 +109,5 @@ graph LR
   docs_meta_dev_harness_md --> docs_meta_retro_log_md
   docs_meta_direction_md --> METHOD_md
   docs_meta_retro_log_md --> docs_meta_dev_harness_md
+  docs_where_your_work_lives_md --> docs_decisions_ADR_0010_where_workspaces_live_md
 ```
