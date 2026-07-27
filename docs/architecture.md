@@ -1,6 +1,6 @@
 # AI-Mise Architecture (v2)
 
-This is the working architecture, superseding `docs/history/blueprint-v1.md` after external review. The review's corrections and the responses to it are recorded in `docs/decisions/` (ADR-0001..0004). Research grounding and sources live in blueprint-v1's source list; claims below are labeled **[verified]** (survived adversarial verification against primary sources), *[prior art]* (fetched and extracted, not adversarially verified), or *[default]* (a configurable product choice, not a research finding).
+This is the working architecture, superseding `docs/history/blueprint-v1.md` after external review. The review's corrections and the responses to it are recorded in `docs/decisions/` (ADR-0001..0004). Research grounding and sources live in blueprint-v1's source list. A claim below that rests on research, or that names a configurable choice, carries a label: **[verified]** (survived adversarial verification against primary sources), *[prior art]* (fetched and extracted, not adversarially verified), or *[default]* (a configurable product choice, not a research finding). Design decisions, plans, and definitions carry none; an unlabeled line is not an unverified claim.
 
 ## 1. Framing
 
