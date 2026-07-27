@@ -28,7 +28,7 @@ declare -a MS=(
   "Phase 3 — Claude Code Adapter|Compile policy into CLAUDE.md/rules/settings/hooks; auto-memory redirect. Exit: a generated workspace beats plain /init on the same materials, without protected-path violations (ADR-0011)."
   "Phase 4 — Evidence-Backed Knowledge|Source manifests, claims with provenance, OKF views, citation validation. Exit: every important claim traces to source, user decision, or explicit inference."
   "Phase 5 — Retrospective Shadow Mode|Correction collection, proposals, rejection learning, predicted eval impact, no auto-apply. Exit: accepted proposals improve metrics; rejected ones stop recurring."
-  "Phase 6 — Controlled Self-Improvement & Second Pilot|Executable diffs behind transaction approval; community-website pilot as the true generality test."
+  "Phase 6 — Controlled Self-Improvement & Second Pilot|Executable diffs behind transaction approval; a second pilot in a domain unlike the first, as the generality test (ADR-0011)."
 )
 existing_ms=$(gh api "repos/$FULL/milestones?state=all" -q '.[].title')
 for entry in "${MS[@]}"; do
@@ -69,7 +69,7 @@ M5="Phase 5 — Retrospective Shadow Mode"
 M6="Phase 6 — Controlled Self-Improvement & Second Pilot"
 
 make_issue "Capture a plain /init baseline for the first case" "$M0" \
-"Where a case provides a folder, run /init on the same materials the bootstrapper is given and snapshot the output. Store under control-plane/evaluation/baselines/<case>/ (or record locations if too large). CLAUDE_CODE_NEW_INIT=1 is a different flow and so a different baseline. See control-plane/evaluation/baselines/README.md.
+"Where a case provides a folder, run /init on the same materials the bootstrapper is given and snapshot the output. Store under \`control-plane/evaluation/baselines/<case>/\` (or record locations if too large). CLAUDE_CODE_NEW_INIT=1 is a different flow and so a different baseline. See control-plane/evaluation/baselines/README.md.
 
 Exit: one baseline stored per case and referenced from the evaluation README. A baseline compares like with like (ADR-0011)." golden-thread
 
