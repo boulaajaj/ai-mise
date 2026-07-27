@@ -70,6 +70,7 @@ a single reviewable change you can undo."
 
 ## Output contract
 
-`<out-dir>/` contains exactly: `manifest.json`, `findings.md`, `questions.md`
-(may be empty if nothing met the contract), `assumptions.md`, `proposal.md`.
-Nothing else, nowhere else.
+You write exactly these files into `<out-dir>/`: `manifest.json`,
+`findings.md`, `questions.md` (may be empty if nothing met the contract),
+`assumptions.md`, `proposal.md`. Nothing else, nowhere else, and you remove
+nothing already there.

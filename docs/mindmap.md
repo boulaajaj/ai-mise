@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE - do not edit. Regenerate: python tools/generate_mindmap.py (ADR-0006) -->
 
-Nodes: 33 markdown files · Edges: 79 links · The link graph inside the files is the source of truth; this is only a rendered view.
+Nodes: 34 markdown files · Edges: 80 links · The link graph inside the files is the source of truth; this is only a rendered view.
 
 ```mermaid
 graph LR
@@ -45,7 +45,8 @@ graph LR
   METHOD_md["METHOD"]
   README_md["repo/README"]
   subgraph skills_g[skills]
-    skills_inspector_SKILL_md["SKILL"]
+    skills_blank_slate_SKILL_md["blank-slate/SKILL"]
+    skills_inspector_SKILL_md["inspector/SKILL"]
   end
   _github_copilot_instructions_md --> control_plane_threat_tests_scenarios_md
   _github_copilot_instructions_md --> docs_GLOSSARY_md
@@ -71,6 +72,7 @@ graph LR
   HANDOFF_md --> docs_history_blueprint_v1_md
   HANDOFF_md --> docs_meta_dev_harness_md
   HANDOFF_md --> docs_meta_retro_log_md
+  HANDOFF_md --> skills_blank_slate_SKILL_md
   HANDOFF_md --> skills_inspector_SKILL_md
   METHOD_md --> docs_foundations_md
   README_md --> CLAUDE_md

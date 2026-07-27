@@ -29,9 +29,15 @@ def node_id(rel: str) -> str:
     return re.sub(r"[^a-zA-Z0-9_]", "_", rel)
 
 
-def label(rel: str) -> str:
+def label(rel: str, ambiguous: frozenset = frozenset()) -> str:
+    """Bare stem, qualified by folder for READMEs and for any stem that
+    names more than one file."""
     p = Path(rel)
-    return p.stem if p.stem.lower() != "readme" else (p.parent.name or "repo") + "/README"
+    if p.stem.lower() == "readme":
+        return (p.parent.name or "repo") + "/README"
+    if p.stem.lower() in ambiguous:
+        return (p.parent.name or "repo") + "/" + p.stem
+    return p.stem
 
 
 def main() -> int:
@@ -45,8 +51,12 @@ def main() -> int:
         md_files[rel] = p
 
     by_stem = {}
+    counts = {}
     for rel in md_files:
-        by_stem.setdefault(Path(rel).stem.lower(), rel)
+        stem = Path(rel).stem.lower()
+        by_stem.setdefault(stem, rel)
+        counts[stem] = counts.get(stem, 0) + 1
+    ambiguous = frozenset(s for s, n in counts.items() if n > 1)
 
     edges = set()
     for rel, p in md_files.items():
@@ -94,11 +104,11 @@ def main() -> int:
     for top in sorted(groups):
         if top == "root":
             for rel in sorted(groups[top]):
-                lines.append(f'  {node_id(rel)}["{label(rel)}"]')
+                lines.append(f'  {node_id(rel)}["{label(rel, ambiguous)}"]')
         else:
             lines.append(f"  subgraph {node_id(top)}_g[{top}]")
             for rel in sorted(groups[top]):
-                lines.append(f'    {node_id(rel)}["{label(rel)}"]')
+                lines.append(f'    {node_id(rel)}["{label(rel, ambiguous)}"]')
             lines.append("  end")
     for a, b in sorted(edges):
         lines.append(f"  {node_id(a)} --> {node_id(b)}")
