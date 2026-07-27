@@ -141,7 +141,7 @@ Claude Code auto-memory note: native auto-memory lives outside the repo under `~
 | Placement | Cost-weighted precision & recall, including "ambiguous — ask" |
 | Interview | Every question demonstrably changes a construction decision |
 | Skill routing | Separate TP / FP / FN measurement (no single trigger-rate number) |
-| Utility | Better completion / fewer corrections than both plain `/init` and the manual Arduino baseline |
+| Utility | Better completion / fewer corrections than plain `/init` on the same materials |
 | Improvement | Accepted retrospective changes improve their predicted eval without breaking regressions |
 | Portability | Core workspace fully understandable with no Claude-specific tooling |
 
@@ -149,12 +149,12 @@ Two eval tiers throughout: capability evals (improvement frontier) and regressio
 
 ## 9. Build sequence
 
-- **Phase 0 — Contract + threat model** (this repo): product boundary, canonical schemas, protected-asset list, ≥30 bypass scenarios, baselines (plain `/init` run + the manual Arduino workspace). Exit: you can state exactly what is authoritative, what is generated, and which process may change each item.
-- **Phase 1 — Read-only bootstrapper**: source inventory, inspector subagent, unknowns ledger, decision-aware questions, workspace proposal. No writes, no wiki, no SQLite, no self-improvement. Exit: it examines the Arduino materials and produces a proposal you would seriously consider approving.
+- **Phase 0 — Contract + threat model** (this repo): product boundary, canonical schemas, protected-asset list, ≥30 bypass scenarios, baselines (a plain `/init` run on whatever materials the case provides). Exit: you can state exactly what is authoritative, what is generated, and which process may change each item.
+- **Phase 1 — Read-only bootstrapper**: source inventory, inspector subagent, unknowns ledger, decision-aware questions, workspace proposal. No writes, no wiki, no SQLite, no self-improvement. Exit (ADR-0011): from nothing — no folder, no domain — it reaches a proposal you would seriously consider approving, showing no lean toward any profession. Run against existing materials, the same flow produces a proposal that cites them.
 - **Phase 2 — Governed construction**: transaction format, receipts, scaffold scripts, validators, git commit/restore, protected-path enforcement. Exit: unauthorized writes fail, approved writes succeed, restore reproduces exact hashes.
-- **Phase 3 — Claude Code adapter**: minimal CLAUDE.md, path-scoped rules, 1–2 useful skills, hooks + permissions, auto-memory redirect. Pin and wrap upstream skill-creator; fork only when composition can't deliver a required change. Exit: the Arduino workspace performs a useful task better than plain `/init`, without violating protected paths.
+- **Phase 3 — Claude Code adapter**: minimal CLAUDE.md, path-scoped rules, 1–2 useful skills, hooks + permissions, auto-memory redirect. Pin and wrap upstream skill-creator; fork only when composition can't deliver a required change. Exit: a generated workspace performs a useful task better than plain `/init` on the same materials, without violating protected paths.
 - **Phase 4 — Evidence-backed knowledge**: source manifests, claims with provenance, OKF-compatible concepts/views, citation-coverage validation, local contradiction checks. Exit: every important factual/safety claim traces to a source, user decision, or explicit inference.
 - **Phase 5 — Retrospective shadow mode**: correction collection, proposal generation, rejection learning, predicted eval impact, no automatic application. Exit: accepted proposals improve measured performance; rejected proposals stop recurring.
-- **Phase 6 — Controlled self-improvement + second pilot**: executable diffs behind transaction approval; then a very different domain (community-website management) as the true generality test.
+- **Phase 6 — Controlled self-improvement + second pilot**: executable diffs behind transaction approval; then a second pilot in a domain unlike the first, as the generality test.
 
-The **Arduino golden thread** runs through every phase: the same end-to-end scenario must get better each week, so the platform never becomes sophisticated scaffolding around an empty lot.
+One **end-to-end scenario** runs through every phase and must be better at the end of each than it was at the start, so the platform never becomes sophisticated scaffolding around an empty lot. The scenario is a development fixture, not an exit test (ADR-0011); which project supplies it may change as pilots arrive.

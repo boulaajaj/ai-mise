@@ -14,9 +14,11 @@ the v0 slice; it remains a working doc for those.
 1. **Claude Code — now.** The richest file-based harness primitives (skills,
    CLAUDE.md, hooks, permissions, plugins) and the runtime Amine uses daily.
    Everything in Phases 0–6 targets it via `control-plane/adapters/claude-code/`.
-2. **Codex CLI / AGENTS.md — later.** Second adapter once the Arduino pilot
-   passes; the neutral workspace format (ADR-0001/0002) makes this an adapter
-   task, not a rewrite.
+2. **Codex CLI / AGENTS.md — later.** Second adapter once the Claude Code
+   adapter passes its Phase 3 exit test; the neutral workspace format
+   ([[ADR-0001-control-plane-separation|ADR-0001]],
+   [[ADR-0002-evidence-claims-views|ADR-0002]]) makes this an adapter task, not
+   a rewrite.
 3. **OpenHarness — later.** Third target candidate (prior-art.md); proves
    portability against a non-Anthropic runtime.
 4. **ChatGPT — not now.** Workspace Agents are enterprise-tied and not

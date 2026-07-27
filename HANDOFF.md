@@ -47,7 +47,7 @@ retro-log entry. Every gap we hit in our own process is product intelligence.
 
 ## 3. Phase 0 — remaining items (do these first)
 
-1. **Baselines** (needs Amine's machine): run plain `/init` (try `CLAUDE_CODE_NEW_INIT=1`) on the Arduino Digger repo; snapshot the output. Snapshot the manually built Arduino workspace as the second baseline. Store both under `control-plane/evaluation/baselines/` (or record paths if too large).
+1. **Baselines** (needs Amine's machine): where a case provides a folder, run plain `/init` (try `CLAUDE_CODE_NEW_INIT=1`) on the same materials the bootstrapper is given, and snapshot the output. Store under `control-plane/evaluation/baselines/<case>/` (or record paths if too large). The blank-slate case has no folder and so has no `/init` baseline — `control-plane/evaluation/baselines/README.md` says why. A baseline exists to compare like with like (ADR-0011).
 2. **Validate the schemas**: write 3 example proposals (routine / structural / safety) and 2 receipts; check them against the schemas with a JSON-schema validator; fix schema friction now, not in Phase 2.
 3. **Policy schema**: write `control-plane/constitution/policy.schema.json` and validate policy.yaml against it.
 
@@ -56,8 +56,8 @@ Phase 0 exit: you can state exactly what is authoritative, what is generated, an
 ## 4. Phase 1 — read-only bootstrapper (next build work)
 
 Build order:
-1. Run the inspector skill against the real Arduino Digger materials (golden thread starts here — week one, per the review).
-2. Iterate on findings quality: every finding must cite manifest paths; safety-critical constraints (ESC temperatures, current limits, mechanical stops) must surface prominently.
+1. Run the flow from nothing — no folder, no domain — and see what it reaches with nothing to read (#58). This is Phase 1's exit test (ADR-0011).
+2. Then run the inspector against a real folder of materials and iterate on findings quality: every finding must cite manifest paths; safety-critical constraints must surface prominently and never be buried.
 3. Implement the unknowns ledger → four-part question contract → assumptions ledger flow exactly as `skills/inspector/SKILL.md` specifies; enforce the round cap from policy.yaml.
 4. Produce `proposal.md` and show it to Amine.
 
