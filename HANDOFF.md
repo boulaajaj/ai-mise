@@ -47,7 +47,7 @@ retro-log entry. Every gap we hit in our own process is product intelligence.
 
 ## 3. Phase 0 — remaining items (do these first)
 
-1. **Baselines** (needs Amine's machine): where a case provides a folder, run plain `/init` (try `CLAUDE_CODE_NEW_INIT=1`) on the same materials the bootstrapper is given, and snapshot the output. Store under `control-plane/evaluation/baselines/` (or record paths if too large). The blank-slate case has no folder and so has no `/init` baseline — `control-plane/evaluation/baselines/README.md` says why. A baseline exists to compare like with like (ADR-0011).
+1. **Baselines** (needs Amine's machine): where a case provides a folder, run plain `/init` (try `CLAUDE_CODE_NEW_INIT=1`) on the same materials the bootstrapper is given, and snapshot the output. Store under `control-plane/evaluation/baselines/<case>/` (or record paths if too large). The blank-slate case has no folder and so has no `/init` baseline — `control-plane/evaluation/baselines/README.md` says why. A baseline exists to compare like with like (ADR-0011).
 2. **Validate the schemas**: write 3 example proposals (routine / structural / safety) and 2 receipts; check them against the schemas with a JSON-schema validator; fix schema friction now, not in Phase 2.
 3. **Policy schema**: write `control-plane/constitution/policy.schema.json` and validate policy.yaml against it.
 

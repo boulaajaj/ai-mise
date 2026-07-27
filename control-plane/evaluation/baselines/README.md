@@ -1,9 +1,10 @@
 # Baselines (issue #1)
 
 The utility row of the scorecard compares a generated workspace against plain
-`/init` **on the same materials** — whatever those materials are (ADR-0011). A
-baseline that exists for exactly one project measures that project, so baselines
-are captured per case, beside the case they belong to.
+`/init` **on the same materials**, whatever those materials are *[default]*
+(ADR-0011). A baseline that exists for exactly one project measures that
+project, so baselines are captured per case, beside the case they belong to.
+Everything on this page is that one chosen behavior, applied.
 
 ## Capturing a baseline
 
@@ -34,8 +35,9 @@ the proposal itself.
 The manually built workspace from the development project is a fixture, not a
 bar (ADR-0011). Months of hand work is worth measuring against once there is
 something worth measuring — snapshot it under
-`control-plane/evaluation/fixtures/` when the comparison in #58 comes due. It
-does not set the scorecard.
+`control-plane/evaluation/fixtures/` when the comparison in #58 comes due,
+creating that directory then; nothing lives there yet. It does not set the
+scorecard.
 
 ## Status
 
