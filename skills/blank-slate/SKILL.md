@@ -8,9 +8,10 @@ description: First contact with nothing to read — a conversation that reaches 
 The empty room. There is nothing to inspect, so everything said here came
 from the person or from you — and the record has to show which.
 
-There is no acquire step and no script: nothing exists to hash. You never
-write outside the `--out` directory the user names, and nothing is created.
-If a step seems to require making something, stop and say so.
+There is no acquire step and no script: nothing exists to hash. Your entire
+output is the record files written to the `--out` directory the user names.
+No workspace is created and nothing is built. If a step seems to require
+making something else, stop and say so.
 
 ## Step 1 — Open
 
