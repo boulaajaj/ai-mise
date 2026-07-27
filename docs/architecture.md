@@ -157,4 +157,4 @@ Two eval tiers throughout: capability evals (improvement frontier) and regressio
 - **Phase 5 — Retrospective shadow mode**: correction collection, proposal generation, rejection learning, predicted eval impact, no automatic application. Exit: accepted proposals improve measured performance; rejected proposals stop recurring.
 - **Phase 6 — Controlled self-improvement + second pilot**: executable diffs behind transaction approval; then a second pilot in a domain unlike the first, as the generality test.
 
-One **end-to-end scenario** runs through every phase and must get better each week, so the platform never becomes sophisticated scaffolding around an empty lot. The scenario is a development fixture, not an exit test (ADR-0011); which project supplies it may change as pilots arrive.
+One **end-to-end scenario** runs through every phase and must be better at the end of each than it was at the start, so the platform never becomes sophisticated scaffolding around an empty lot. The scenario is a development fixture, not an exit test (ADR-0011); which project supplies it may change as pilots arrive.

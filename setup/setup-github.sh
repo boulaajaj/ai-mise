@@ -23,9 +23,9 @@ echo "==> Pushed main"
 # --- 2. Milestones ----------------------------------------------------------
 declare -a MS=(
   "Phase 0 — Contract & Threat Model|Product boundary, schemas, protected assets, 34 bypass scenarios, baselines. Exit: what is authoritative vs generated, and which process may change each item, is stated and testable."
-  "Phase 1 — Read-Only Bootstrapper|Inventory, inspector, unknowns ledger, decision-aware questions, proposal. No writes. Exit: an Arduino proposal Amine would seriously consider approving."
+  "Phase 1 — Read-Only Bootstrapper|Inventory, inspector, unknowns ledger, decision-aware questions, proposal. No writes. Exit: from nothing — no folder, no domain — a proposal Amine would seriously consider approving, showing no lean toward any profession (ADR-0011)."
   "Phase 2 — Governed Construction|Mutation gateway, receipts, validators, restore. Exit: unauthorized writes fail, approved writes succeed, restore reproduces exact hashes."
-  "Phase 3 — Claude Code Adapter|Compile policy into CLAUDE.md/rules/settings/hooks; auto-memory redirect. Exit: Arduino workspace beats plain /init without protected-path violations."
+  "Phase 3 — Claude Code Adapter|Compile policy into CLAUDE.md/rules/settings/hooks; auto-memory redirect. Exit: a generated workspace beats plain /init on the same materials, without protected-path violations (ADR-0011)."
   "Phase 4 — Evidence-Backed Knowledge|Source manifests, claims with provenance, OKF views, citation validation. Exit: every important claim traces to source, user decision, or explicit inference."
   "Phase 5 — Retrospective Shadow Mode|Correction collection, proposals, rejection learning, predicted eval impact, no auto-apply. Exit: accepted proposals improve metrics; rejected ones stop recurring."
   "Phase 6 — Controlled Self-Improvement & Second Pilot|Executable diffs behind transaction approval; community-website pilot as the true generality test."
@@ -43,7 +43,7 @@ done
 
 # --- 3. Labels --------------------------------------------------------------
 gh label create meta-harness -R "$FULL" --description "The repo's own evolving dev harness (dogfooding)" --color 5319e7 2>/dev/null || true
-gh label create golden-thread -R "$FULL" --description "Arduino end-to-end fixture" --color 0e8a16 2>/dev/null || true
+gh label create golden-thread -R "$FULL" --description "end-to-end development fixture (ADR-0011)" --color 0e8a16 2>/dev/null || true
 
 # --- 4. Issues --------------------------------------------------------------
 existing_issues=$(gh issue list -R "$FULL" --state all --limit 200 --json title -q '.[].title')
@@ -68,10 +68,10 @@ M4="Phase 4 — Evidence-Backed Knowledge"
 M5="Phase 5 — Retrospective Shadow Mode"
 M6="Phase 6 — Controlled Self-Improvement & Second Pilot"
 
-make_issue "Capture baselines: plain /init run + manual Arduino workspace snapshot" "$M0" \
-"Run /init (also try CLAUDE_CODE_NEW_INIT=1) on the Arduino Digger repo and snapshot the output. Snapshot the manually built Arduino workspace as the second baseline. Store under control-plane/evaluation/baselines/ (or record locations if too large).
+make_issue "Capture a plain /init baseline for the first case" "$M0" \
+"Where a case provides a folder, run /init on the same materials the bootstrapper is given and snapshot the output. Store under control-plane/evaluation/baselines/<case>/ (or record locations if too large). CLAUDE_CODE_NEW_INIT=1 is a different flow and so a different baseline. See control-plane/evaluation/baselines/README.md.
 
-Exit: both baselines stored and referenced from the evaluation README. These are the comparison targets for the Phase 3 utility scorecard row." golden-thread
+Exit: one baseline stored per case and referenced from the evaluation README. A baseline compares like with like (ADR-0011)." golden-thread
 
 make_issue "Write policy.schema.json and validate policy.yaml against it" "$M0" \
 "Author control-plane/constitution/policy.schema.json covering every key currently in policy.yaml. Add a validation script (stdlib-first; pattern: protected_path_validator.py).
@@ -101,7 +101,7 @@ Exit: every asked question demonstrably changes a construction decision (scoreca
 make_issue "First full workspace proposal for review" "$M1" \
 "Produce proposal.md per the inspector SKILL.md output contract: plain language, placement per rubric, enforced items, assumptions ledger, deliberate non-goals.
 
-Exit (Phase 1 gate): Amine would seriously consider approving it. No writes happen." golden-thread
+Exit: Amine would seriously consider approving it. No writes happen. (The Phase 1 gate itself is stated without a project — ADR-0011.)" golden-thread
 
 make_issue "Build mutation gateway: stage / validate / apply / restore" "$M2" \
 "Implement control-plane/mutation/: stage into an isolated worktree, run validators, apply on receipt, tag restore point. Approval covers the transaction; receipts follow receipt.schema.json; approved_scope_hash checked at apply time.
