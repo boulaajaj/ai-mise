@@ -90,9 +90,9 @@ a single reviewable change you can undo."
 
 ## Output contract
 
-`<out-dir>/` receives exactly these files: `notes.md`, `questions.md` (may be
-empty if nothing met the contract), `assumptions.md`, `proposal.md`. You write
-nothing else, nowhere else, and you remove nothing already there.
+You write exactly these files into `<out-dir>/`: `notes.md`, `questions.md`
+(may be empty if nothing met the contract), `assumptions.md`, `proposal.md`.
+Nothing else, nowhere else, and you remove nothing already there.
 
 There is no manifest. Nothing existed to hash, and saying so is part of the
 record.
