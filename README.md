@@ -72,6 +72,6 @@ The person using an AI-Mise workspace never sees git, YAML, schemas, or hashes. 
 
 Phase 0 (contract + threat model) — **this repository is the Phase 0 deliverable**, plus the Phase 1 read-only inspector skeleton. See `HANDOFF.md` for next actions, `docs/architecture.md` for the design, `docs/prior-art.md` for what we deliberately reuse from other projects, and `docs/decisions/` for why the architecture is shaped this way.
 
-## The golden thread
+## The end-to-end scenario
 
-The Arduino Digger project is the end-to-end test fixture from the first working week: every phase must improve the same run — inspect → constrain → ask → propose → build → perform a real task → absorb a correction → restore safely. The clean *generalization* test is the second pilot (a community-website domain), since Arduino doubles as the development fixture.
+One project runs end to end as the development fixture: every phase must improve the same run — inspect → constrain → ask → propose → build → perform a real task → absorb a correction → restore safely. The fixture is not the bar: what the product must clear is written without naming a profession ([[ADR-0011-exit-tests-name-capabilities|ADR-0011]]), and the generality test is a second pilot in a domain unlike the first.
