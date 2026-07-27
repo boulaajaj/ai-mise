@@ -41,7 +41,8 @@ retro-log entry. Every gap we hit in our own process is product intelligence.
 | Transaction schemas | `control-plane/approval/*.schema.json` |
 | Threat suite | 34 scenarios defined, 0 automated (`control-plane/threat-tests/scenarios.md`) |
 | First validator | `protected_path_validator.py` — working; self-tested against traversal, protected paths, symlinks, tier smuggling |
-| Inspector skill (Phase 1) | `skills/inspector/` — SKILL.md + working `inventory.py` (hashing, symlink-refusing) |
+| First contact — materials (Phase 1) | `skills/inspector/` — SKILL.md + working `inventory.py` (hashing, symlink-refusing) |
+| First contact — empty room (Phase 1) | `skills/blank-slate/` — SKILL.md; no script, because nothing exists to hash |
 | Dev harness (self-hosting) | `CLAUDE.md`, `docs/meta/dev-harness.md`, `docs/meta/retro-log.md` |
 | Mutation gateway, adapters, evals | Directories exist; not implemented (Phase 2–3) |
 
@@ -56,9 +57,9 @@ Phase 0 exit: you can state exactly what is authoritative, what is generated, an
 ## 4. Phase 1 — read-only bootstrapper (next build work)
 
 Build order:
-1. Run the flow from nothing — no folder, no domain — and see what it reaches with nothing to read (#58). This is Phase 1's exit test (ADR-0011).
+1. Run `skills/blank-slate/` from nothing — no folder, no domain — and see what it reaches with nothing to read (#58). This is Phase 1's exit test (ADR-0011).
 2. Then run the inspector against a real folder of materials and iterate on findings quality: every finding must cite manifest paths; safety-critical constraints must surface prominently and never be buried.
-3. Implement the unknowns ledger → four-part question contract → assumptions ledger flow exactly as `skills/inspector/SKILL.md` specifies; enforce the round cap from policy.yaml.
+3. Implement the unknowns ledger → four-part question contract → assumptions ledger flow exactly as `skills/inspector/SKILL.md` and `skills/blank-slate/SKILL.md` specify; enforce the round cap from policy.yaml.
 4. Produce `proposal.md` and show it to Amine.
 
 Phase 1 exit: the proposal is good enough that Amine would seriously consider approving it. No writes, no wiki, no SQLite, no self-improvement.
