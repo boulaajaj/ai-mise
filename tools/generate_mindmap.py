@@ -30,7 +30,8 @@ def node_id(rel: str) -> str:
 
 
 def label(rel: str, ambiguous: frozenset = frozenset()) -> str:
-    """Bare stem, qualified by folder when the stem alone names more than one file."""
+    """Bare stem, qualified by folder for READMEs and for any stem that
+    names more than one file."""
     p = Path(rel)
     if p.stem.lower() == "readme":
         return (p.parent.name or "repo") + "/README"
