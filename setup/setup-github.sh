@@ -23,7 +23,7 @@ echo "==> Pushed main"
 # --- 2. Milestones ----------------------------------------------------------
 declare -a MS=(
   "Phase 0 — Contract & Threat Model|Product boundary, schemas, protected assets, 34 bypass scenarios, baselines. Exit: what is authoritative vs generated, and which process may change each item, is stated and testable."
-  "Phase 1 — Read-Only Bootstrapper|Inventory, first contact from an empty room or from materials, unknowns ledger, decision-aware questions, proposal. No writes. Exit: from nothing — no folder, no domain — a proposal Amine would seriously consider approving, showing no lean toward any profession (ADR-0011)."
+  "Phase 1 — Read-Only Bootstrapper|First contact from an empty room or from materials, inventory where there are materials, unknowns ledger, decision-aware questions, proposal. No writes. Exit: from nothing — no folder, no domain — a proposal Amine would seriously consider approving, showing no lean toward any profession (ADR-0011)."
   "Phase 2 — Governed Construction|Mutation gateway, receipts, validators, restore. Exit: unauthorized writes fail, approved writes succeed, restore reproduces exact hashes."
   "Phase 3 — Claude Code Adapter|Compile policy into CLAUDE.md/rules/settings/hooks; auto-memory redirect. Exit: a generated workspace beats plain /init on the same materials, without protected-path violations (ADR-0011)."
   "Phase 4 — Evidence-Backed Knowledge|Source manifests, claims with provenance, OKF views, citation validation. Exit: every important claim traces to source, user decision, or explicit inference."
