@@ -36,6 +36,9 @@ were pointed at. Both answers are ordinary, and neither is the lesser start.
 python3 scripts/inventory.py --sources <target-folder> --out <out-dir>/manifest.json
 ```
 
+`scripts/` sits beside this file rather than in their project, so resolve it
+against this skill's own directory, not the folder you are working in.
+
 That produces a hashed manifest — path, SHA-256, size, mtime, type. Then read
 broadly (use a subagent for a large tree) and write `findings.md`:
 
