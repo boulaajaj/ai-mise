@@ -7,7 +7,7 @@
 
 [[ADR-0010-where-workspaces-live|ADR-0010]] already made the workspace a local git repository with no remote required. What it did not settle is whether the person has to *know* that, or how a remote gets chosen when someone wants one.
 
-The repository answered both by accident. `setup/setup-github.sh` is 168 lines — the largest executable file here — and it creates a GitHub repository. Whatever the documents said, GitHub was the default path by construction.
+The repository answered both by accident. `setup/setup-github.sh` is the largest executable file in this repository, and it creates a GitHub repository. Whatever the documents said, GitHub was the default path by construction.
 
 The README already promises that the person never sees git. Storage is the half of that promise that had not been kept: a person keeping notes about a house renovation does not have a GitHub account, and asking them to make one is the moment they stop.
 
