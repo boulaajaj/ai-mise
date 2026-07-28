@@ -1,24 +1,88 @@
 # AI-Mise
 
-**Your AI *mise en place*.** In a professional kitchen, *mise en place* means everything prepped, in its place, and ready before the cooking starts — so the chef can just cook. AI-Mise does that for AI: it converts raw project materials and your decisions into an auditable, versioned, agent-ready workspace — without you having to keep up with the latest AI setup, and without ever allowing the agent to silently rewrite the rules you gave it.
+## AI moves fast. Your workspace should remember.
 
-> Tell it what you do. It sets everything in place — and it can never quietly change the rules you gave it.
+AI-Mise is an experiment in giving AI a durable place to work: one that keeps
+the context you choose, learns how you like to work, and helps you move a
+project forward without making you rebuild your setup from zero every time.
 
-**The kernel:** [METHOD.md](METHOD.md) — one page that stays true regardless of platform, model, or decade. Everything else is an adapter.
+> Less time managing AI. More time doing the work.
+
+## What it is being built to do
+
+### Keep the context
+
+- Carry the useful parts of a project across conversations instead of making
+  you repeat yourself.
+- Organize material around *your* words and categories, not a template imposed
+  by the software.
+- Turn a growing body of work into clear priorities and useful views when you
+  need them.
+
+### Keep up with AI
+
+- Research the tools, approaches, and ideas that are relevant to the work in
+  front of you.
+- Explain findings at the right level: detailed when you want detail, plain
+  language when you do not.
+- Help create focused assistance for recurring work, rather than treating every
+  task like a blank chat.
+
+### Make it yours
+
+- Start with the project you actually have, whether that is software, an
+  Arduino build, a practice, or something nobody has named yet.
+- Ask before assuming how you want things grouped, named, or shown.
+- Keep the workspace in your hands instead of trapping your work inside a
+  single conversation.
+
+### Show its work
+
+- Make important changes visible, explain why they were proposed, and keep a
+  readable history of how the setup evolved.
+- Let your decisions shape the assistant over time without letting it quietly
+  rewrite the rules.
+- Make experiments safe to review, keep, discard, or undo.
+
+## The point
+
+Most people should not need a second career in AI tools, prompts, or whatever
+new acronym appears next week just to get useful help from AI. The goal is an
+assistant that becomes more useful as it learns the work — while you remain in
+control.
+
+This starts as a personal experiment. I keep seeing the same pattern in every
+project: research the space, learn the vocabulary, compare options, collect the
+useful context, and decide what matters. AI-Mise is an attempt to make that
+careful process easier to repeat and easier to trust.
+
+---
+
+*Everything below this line is how it works inside. The person using AI-Mise
+never needs any of it.*
+
+**The kernel:** [METHOD.md](METHOD.md) — one page that stays true regardless of
+platform, model, or decade. Everything else is an adapter.
 
 ## Product boundary (one sentence)
 
-AI-Mise works out what you are doing — from your materials when you have them, from the conversation when you don't — asks a small number of justified questions, describes in plain language the workspace it would set up for your assistant, builds only what you approve, and can put anything back exactly as it was.
+AI-Mise works out what you are doing — from your materials when you have them,
+from the conversation when you don't — asks a small number of justified
+questions, describes in plain language the workspace it would set up for your
+assistant, builds only what you approve, and can put anything back exactly as
+it was.
 
-**Explicitly out of scope for the first release:** automatic self-improvement, SQLite, full wiki generation, multi-platform adapters, scheduled retrospectives, voice UX, marketplace distribution.
+**Explicitly out of scope for the first release:** automatic self-improvement,
+SQLite, full wiki generation, multi-platform adapters, scheduled retrospectives,
+voice UX, marketplace distribution.
 
 ## One assistant — you name it
 
-This is the promise being built (see Status below for what runs today):
-the person using AI-Mise meets exactly one thing — an assistant they name at
-the first hello. Small help is applied at once and can always be undone;
-changes to how the assistant works are announced in plain words and wait for
-a good moment. Nobody is asked to switch modes, and words like "builder" or
+This is the promise being built (see Status below for what runs today): the
+person using AI-Mise meets exactly one thing — an assistant they name at the
+first hello. Small help is applied at once and can always be undone; changes to
+how the assistant works are announced in plain words and wait for a good
+moment. Nobody is asked to switch modes, and words like "builder" or
 "compiler" never reach them.
 
 ---
