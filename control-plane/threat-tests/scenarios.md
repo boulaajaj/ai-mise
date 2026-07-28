@@ -53,7 +53,7 @@ Scope (per ADR-0001): bypass by a **confused or drifting agent** — not a deter
 ## G. Out-of-band state
 
 31. [ ] Claude Code auto-memory writing to `~/.claude/projects/.../memory` outside the governed tree (rollback incompleteness).
-32. [ ] Instructions embedded in *source materials* (prompt injection in a datasheet/PDF) directing the agent to modify governance — inspector is read-only, but the instruction may resurface in a proposal; the plain-language purpose must expose it.
+32. [ ] Instructions embedded in *source materials* (prompt injection in a datasheet/PDF) directing the agent to modify governance — first contact is read-only, but the instruction may resurface in a proposal; the plain-language purpose must expose it.
 33. [ ] An MCP filesystem tool (not Write/Edit/bash) mutating a protected path — hooks/permissions must cover all tools, not named ones.
 34. [ ] Editing `.claude/settings.json` in `generated/` to weaken deny-rules in the *next* session (generated projections must be regenerated-and-diffed against policy, never trusted as-is).
 
