@@ -1,25 +1,74 @@
-# AI-Mise
+# A second brain that works with you — not one more thing to learn
 
-**Your AI *mise en place*.** In a professional kitchen, *mise en place* means everything prepped, in its place, and ready before the cooking starts — so the chef can just cook. AI-Mise does that for AI: it converts raw project materials and your decisions into an auditable, versioned, agent-ready workspace — without you having to keep up with the latest AI setup, and without ever allowing the agent to silently rewrite the rules you gave it.
+Before any real work I kept running the same loop by hand: find the current
+research, find whoever already solved this, learn which methods actually
+hold, then search the same idea under four different names because the good
+answer was filed under the fourth. Then I noticed I was running it
+identically every time. If I go looking for *how to research*, there's a
+pattern in there — empirically proven, repeatable, obeying the same laws
+everything else obeys. A pattern like that can be written down once. And
+once it's written down, I shouldn't be the one running it by hand.
 
-> Tell it what you do. It sets everything in place — and it can never quietly change the rules you gave it.
+That's all this is: a process that runs in my head as me, Amine Boulaajaj,
+that I'd rather stop re-running manually.
 
-**The kernel:** [METHOD.md](METHOD.md) — one page that stays true regardless of platform, model, or decade. Everything else is an adapter.
+> Tell it what you do. It sets everything in place — and it can never quietly
+> change the rules you gave it.
 
-## Product boundary (one sentence)
+## Who it's for
 
-AI-Mise works out what you are doing — from your materials when you have them, from the conversation when you don't — asks a small number of justified questions, describes in plain language the workspace it would set up for your assistant, builds only what you approve, and can put anything back exactly as it was.
+People with one brain and a lot on it — a family, a job, real work — who
+want to use AI seriously and have no interest in becoming an AI engineer to
+do it. You shouldn't need to know what an MCP server is, how model memory is
+layered, or what an Agent Skill does. That's a profession. It isn't yours.
 
-**Explicitly out of scope for the first release:** automatic self-improvement, SQLite, full wiki generation, multi-platform adapters, scheduled retrospectives, voice UX, marketplace distribution.
+Using AI well takes separate contexts that don't bleed into each other, and
+skills that do things your way rather than the average way. Building that is
+a job — the harness engineer, the information organizer, the researcher, the
+PhD in whatever you need this week. This does that job, and none of them
+need managing.
 
-## One assistant — you name it
+## The tools keep moving
 
-This is the promise being built (see Status below for what runs today):
-the person using AI-Mise meets exactly one thing — an assistant they name at
-the first hello. Small help is applied at once and can always be undone;
-changes to how the assistant works are announced in plain words and wait for
-a good moment. Nobody is asked to switch modes, and words like "builder" or
-"compiler" never reach them.
+Prompting. Then MCP servers, so you stop pasting API documentation at a model
+that would rather be told once. Then Agent Skills, which at my day job went
+from a curiosity to something we can't work without — next to hooks, prompts,
+decisions recorded as issues, architecture written down where an agent will
+find it. That is what keeps our agents organized and the application running.
+
+They'll keep moving, fast. The pattern underneath doesn't: know what's true,
+learn from whoever did it before you, write down the minimum that makes the
+work repeatable, treat every correction as evidence. That pattern is one
+page — [METHOD.md](METHOD.md). Everything else, including whichever platform
+wins this year, is an adapter.
+
+## What it does
+
+Works out what you're doing — from your materials when you have them, from
+the conversation when you don't — asks the few questions whose answers change
+the outcome, describes in plain language the setup it would build, builds
+only what you approve, and can put anything back exactly as it was.
+
+You meet one assistant, named by you at the first hello. Small help lands
+immediately and is always undoable; anything that changes how the assistant
+itself works is announced in plain words and waits for a good moment. No
+modes to switch between, and no vocabulary to learn.
+
+*That is the promise being built — [Status](#status) is what runs today.*
+
+**Not in the first release:** self-improvement, SQLite, wiki generation,
+multi-platform adapters, scheduled retrospectives, voice, marketplace
+distribution.
+
+## Guardrails, honestly
+
+Your rules are written down, versioned, and can't be edited by the thing they
+govern. Anything it changes, you can put back exactly as it was.
+
+Will that contain something smarter than every human combined? No. Nothing
+will, and anyone promising otherwise is selling. What guardrails do is
+smaller and far more useful: nothing changes without being written down, and
+nothing written down can't be undone.
 
 ---
 
