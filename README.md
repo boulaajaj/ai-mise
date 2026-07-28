@@ -8,7 +8,7 @@
 
 ## Product boundary (one sentence)
 
-Given a folder of real project materials, AI-Mise inspects it, asks a small number of justified questions, proposes an agent workspace in plain language, builds the approved version through a controlled transaction, and can restore any prior state exactly.
+AI-Mise works out what you are doing — from your materials when you have them, from the conversation when you don't — asks a small number of justified questions, proposes an agent workspace in plain language, builds the approved version through a controlled transaction, and can restore any prior state exactly.
 
 **Explicitly out of scope for the first release:** automatic self-improvement, SQLite, full wiki generation, multi-platform adapters, scheduled retrospectives, voice UX, marketplace distribution.
 
