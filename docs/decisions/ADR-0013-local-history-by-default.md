@@ -33,7 +33,7 @@ All decisions below are *[default]* — chosen product behavior, not derived fro
 
 ## Alternatives not taken
 
-**Require a remote so history is durable** — rejected: durability that costs an account costs it from the people least able to absorb the friction, and a local repository plus whatever backup the person already runs is how every other file they own is protected.
+**Require a remote so history is durable** — rejected: durability that costs an account costs it from the people least able to absorb the friction, and a local repository inherits whatever protection the person already gives the rest of their files. Where that is nothing, a remote they never chose would not have been running either.
 
 **Bless one remote and support it properly** — rejected: a blessed remote becomes a dependency by habit even when the documents call it optional, which is precisely how GitHub became the default here without anyone deciding it.
 

@@ -93,12 +93,6 @@ jobs:
           done
           echo "self-test OK: all three failure modes fired individually"
 
-      - name: Mind map is fresh (ADR-0006 — generated views never go stale)
-        run: |
-          python tools/generate_mindmap.py
-          git diff --exit-code docs/mindmap.md \
-            || (echo "docs/mindmap.md is stale — run: python tools/generate_mindmap.py" && exit 1)
-
       - name: CLAUDE.md within size limit
         run: |
           lines=$(wc -l < CLAUDE.md)

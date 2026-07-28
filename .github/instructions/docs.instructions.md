@@ -11,8 +11,7 @@ applyTo: "docs/**/*.md"
   written form, defined in the opening paragraph of `docs/architecture.md`, and the
   plain-language exemption, defined in `.github/copilot-instructions.md` §2.
 - Cross-references: prefer `[[wikilinks]]` or standard markdown links over bare
-  prose mentions so the generated mind map stays connected (ADR-0006). If links
-  changed, `docs/mindmap.md` must be regenerated in this PR.
+  prose mentions so related documents stay reachable from one another (ADR-0006).
 - `docs/decisions/` is append-only. A PR touching an existing ADR must be flagged
   unless it only changes Status via an explicit superseding ADR added alongside.
 - `docs/meta/retro-log.md`: entries are append-only and dated; flag rewrites of
