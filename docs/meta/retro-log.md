@@ -119,3 +119,37 @@ Format: see `dev-harness.md`. Shadow mode: entries propose, never change.
 - No rule was added. This entry is evidence, not policy: material for failure
   clustering and the judge/eval work, where a judgment miss belongs — measured
   as whether general judgment improved, not patched case by case.
+
+## 2026-07-28 — one skill instead of two, and two reviewers being right differently
+
+- What shipped: PR #90 (claim labels); PR #95 — `skills/ai-mise` replaces
+  `skills/inspector` and `skills/blank-slate` (ADR-0012 decision 4), every live
+  pointer updated, `inventory.py` moved across unchanged; issue #96 filed for
+  what the review found in it.
+- Diagnosis worth keeping: the two skills were split on whether a folder
+  exists, which forced the model to choose a skill at the one moment it could
+  not know — before it had looked. The merge was not a concatenation: two rules
+  that existed twice became one that says more. Provenance stopped being a
+  property of the circumstance and became a property of every sentence, which
+  is what it always was; the injection guard stopped being about files and
+  became about instructions, which now also covers entry points neither
+  original anticipated.
+- Correction from review: CodeRabbit caught the skill restating "four-part"
+  from policy.yaml in the same sentence that told the reader not to work from
+  memory. Same class as the 07-24 entry from the other direction — not encoding
+  the obvious, but keeping a second copy of the kernel and calling it a
+  pointer. A pointer that repeats the value is a copy.
+- Copilot caught a script path that could not resolve, and proposed a fix that
+  would have hardcoded a repo layout the skill stops living in the moment
+  anyone installs it. The observation was right and the direction was wrong;
+  taking the whole comment would have shipped a defect that only appears in the
+  deployment we have not tested yet.
+- Friction, recorded not solved: CodeRabbit's per-developer limit turned two of
+  five review cycles into no-ops, and three of its four findings failed to post
+  as threads — the review existed only inside a summary body. A finding with no
+  thread has no disposition unless someone writes one by hand, and nothing in
+  the flow notices that it is missing.
+- Proposals: pause CodeRabbit's automatic incremental review so the allowance
+  goes to substantive pushes rather than three-line doc corrections; consider
+  whether a review whose comments failed to post should block a merge, given
+  that today it merely looks like a quiet review.
