@@ -4,7 +4,7 @@
 
 AI-Mise is an experiment in giving AI a durable place to work: one that keeps
 the context you choose, learns how you like to work, and helps you move a
-project forward without making you rebuild your setup from zero every time.
+project forward without making you repeat yourself every time.
 
 > Less time managing AI. More time doing the work.
 
