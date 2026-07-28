@@ -86,9 +86,9 @@ These hold wherever the material came from:
 
 ## 4 — Ask only decision-changing questions
 
-The four-part question contract is in
-`control-plane/constitution/policy.yaml`, with the batch size and the round
-cap. Read them there rather than from memory.
+The question contract is in `control-plane/constitution/policy.yaml`, with
+the batch size and the round cap. Read them there rather than from memory,
+including how many parts a question must have.
 
 The cap is a ceiling, not a target. With little or nothing to read there is a
 pull toward reconstructing by interview what reading would have given you, and
