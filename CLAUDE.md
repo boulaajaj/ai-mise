@@ -25,7 +25,7 @@ if they conflict, the docs win.
 
 ## Conventions
 
-- PRs: one coherent change per PR, referencing its issue; regenerate `docs/mindmap.md` when doc links change (`python tools/generate_mindmap.py`).
+- PRs: one coherent change per PR, referencing its issue.
 - Python: stdlib-first, no dependencies unless an ADR justifies one; validators print a JSON result object and use exit codes 0/1/2 (see `protected_path_validator.py` as the pattern). New dependencies add a row to `docs/dependencies.md` (ADR-0006 vendor-death test) in the same PR.
 - Threat scenarios: new bypass ideas are added to `control-plane/threat-tests/scenarios.md` *before* being tested.
 - Formats over tools (ADR-0006): canonical data is plain Markdown + wikilinks + YAML frontmatter; viewers are optional.

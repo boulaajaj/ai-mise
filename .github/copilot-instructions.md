@@ -45,9 +45,6 @@ issue #19). Review PRs against that governance first, code style second.
 
 ## 4. Knowledge-base maintenance
 
-- If a PR adds, removes, or renames markdown files or changes links between them,
-  `docs/mindmap.md` must be regenerated in the same PR (`python tools/generate_mindmap.py`).
-  Flag stale mind maps. Never accept hand edits to `docs/mindmap.md` — it is generated.
 - `docs/meta/retro-log.md` is append-only: new entries at the end, existing entries
   untouched.
 - CLAUDE.md must stay under 200 lines; any SKILL.md under 500 lines; skill reference
