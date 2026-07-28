@@ -84,12 +84,12 @@ make_issue "Exercise proposal/receipt schemas with worked examples" "$M0" \
 Exit: examples committed under control-plane/approval/examples/ and validating clean."
 
 make_issue "Run inspector on Arduino Digger materials (golden thread kickoff)" "$M1" \
-"Point skills/inspector at the real Arduino materials (raw materials only — NOT the hand-built harness). Produce manifest.json, findings.md, unknowns ledger.
+"Point skills/ai-mise at the real Arduino materials (raw materials only — NOT the hand-built harness). Produce manifest.json, findings.md, unknowns ledger.
 
 Exit: findings cite manifest paths; the unknowns ledger is honest (includes what inspection could not determine)." golden-thread
 
 make_issue "Findings quality: manifest-cited provenance + safety-critical surfacing" "$M1" \
-"Iterate on inspector output: every finding cites manifest entries; safety-critical constraints (ESC temperatures, current limits, mechanical stops) surface prominently and are never buried.
+"Iterate on first-contact output: every finding cites manifest entries; safety-critical constraints (ESC temperatures, current limits, mechanical stops) surface prominently and are never buried.
 
 Exit: Amine reviews findings.md and confirms nothing safety-critical is missing or diluted." golden-thread
 
@@ -99,7 +99,7 @@ make_issue "Implement question contract + assumptions ledger flow" "$M1" \
 Exit: every asked question demonstrably changes a construction decision (scorecard row: Interview)."
 
 make_issue "First full workspace proposal for review" "$M1" \
-"Produce proposal.md per the inspector SKILL.md output contract: plain language, placement per rubric, enforced items, assumptions ledger, deliberate non-goals.
+"Produce proposal.md per the skills/ai-mise SKILL.md output contract: plain language, placement per rubric, enforced items, assumptions ledger, deliberate non-goals.
 
 Exit: Amine would seriously consider approving it. No writes happen. (The Phase 1 gate itself is stated without a project — ADR-0011.)" golden-thread
 
