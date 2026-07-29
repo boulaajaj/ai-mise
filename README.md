@@ -10,12 +10,14 @@ somebody's job, and it shouldn't have to be yours.
 ## Installing it
 
 AI-Mise is an [Agent Skill](https://agentskills.io) in the open `SKILL.md`
-format, so the same folder works in more than one tool. There is nothing to set
-up first. Keep `scripts/` next to `SKILL.md` — the first pass uses it where the
-machine has a `python3` to run it, and does the same job another way where it
-doesn't. That first pass is all there is today, and it runs in all three tools
-below. The deeper platform work, once there is a workspace to project into a
-tool, starts with Claude Code — [deployment](docs/deployment.md) has the order.
+format, so the same folder works in more than one tool. Installing it is the
+few lines below and nothing else — there is no runtime to go and fetch first.
+Keep `scripts/` next to `SKILL.md`: where there is a folder to read and a
+`python3` to run the script with, the first pass uses it; where there isn't, it
+reaches the same result another way. That first pass is all there is today, and
+it runs in all three tools below. The deeper platform work, once there is a
+workspace to project into a tool, starts with Claude Code —
+[deployment](docs/deployment.md) has the order.
 
 **Claude Code**
 
