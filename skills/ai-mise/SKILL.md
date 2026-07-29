@@ -30,7 +30,8 @@ Whether there are materials is something you find out here, not something
 decided before you arrived. Ask where the work lives, or read the folder you
 were pointed at. Both answers are ordinary, and neither is the lesser start.
 
-**Where there is a folder**, inventory it deterministically — never by hand:
+**Where there is a folder**, inventory it deterministically — never by hand.
+Where the machine has a `python3`:
 
 ```bash
 python3 scripts/inventory.py --sources <target-folder> --out <out-dir>/manifest.json
@@ -39,8 +40,17 @@ python3 scripts/inventory.py --sources <target-folder> --out <out-dir>/manifest.
 `scripts/` sits beside this file rather than in their project, so resolve it
 against this skill's own directory, not the folder you are working in.
 
-That produces a hashed manifest — path, SHA-256, size, mtime, type. Then read
-broadly (use a subagent for a large tree) and write `findings.md`:
+Where there is no `python3`, do not ask them to install one. Use whatever the
+machine already has (`sha256sum`, `certutil -hashfile <file> SHA256`,
+`Get-FileHash -Algorithm SHA256`, or `node`) and write the same JSON the
+script would have written. Read `inventory.py` for the shape rather than
+guessing at it — reading it needs no runtime, and it stays the single
+definition. Record in `notes.md` which route you took. Never write a hash you
+did not compute.
+
+That produces a hashed manifest — `path`, `sha256`, `bytes`, `mtime_utc` and
+`mimetype` for each file, plus totals. Then read broadly (use a subagent for a
+large tree) and write `findings.md`:
 
 1. **Detected purpose** — what this is, and for whom.
 2. **Stakeholders** — who is affected by or involved in the work.
