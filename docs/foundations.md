@@ -87,6 +87,7 @@ passes and misses the point.
 - **Andrej Karpathy** — Software 3.0 framing and the LLM-wiki pattern our knowledge views descend from. https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
 - **Aristotle** — *Nicomachean Ethics*, Book VI: epistēmē, technē, phronēsis.
 - **Eric Evans** — *Domain-Driven Design*: ubiquitous language (ADR-0009).
+- **Tiago Forte** — *Building a Second Brain*: the second-brain framing the README borrows to place AI-Mise for a new reader. We depart from it deliberately — this workspace exists to get a project done, not to keep notes. https://www.buildingasecondbrain.com/book
 - **Anthropic** — Agent Skills guidance, memory/hooks documentation, skill-creator: the placement limits and eval-first authoring our adapter follows.
 - **Google Cloud** — Open Knowledge Format: the minimal frontmatter conventions our files use.
 - **Atlan** — ADLC-vs-SDLC: continuous calibration, eval distributions, inner/outer loops. https://atlan.com/know/ai-agent/adlc-vs-sdlc/

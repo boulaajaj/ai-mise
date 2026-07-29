@@ -1,74 +1,109 @@
-# A second brain that works with you — not one more thing to learn
+# AI-Mise
 
-Before any real work I kept running the same loop by hand: find the current
-research, find whoever already solved this, learn which methods actually
-hold, then search the same idea under four different names because the good
-answer was filed under the fourth. Then I noticed I was running it
-identically every time. If I go looking for *how to research*, there's a
-pattern in there — empirically proven, repeatable, obeying the same laws
-everything else obeys. A pattern like that can be written down once. And
-once it's written down, I shouldn't be the one running it by hand.
+AI-Mise sets up the workspace an AI assistant works from. Not the assistant
+itself — the things around it: what is true about your project, what has
+already been decided, what good work looks like in your field, and which rules
+the assistant is not allowed to touch. That setup is most of the difference
+between an assistant that guesses and one that is useful. Building it well is
+somebody's job, and it shouldn't have to be yours.
 
-That's all this is: a process that runs in my head as me, Amine Boulaajaj,
-that I'd rather stop re-running manually.
+## Installing it
 
-> Tell it what you do. It sets everything in place — and it can never quietly
-> change the rules you gave it.
+AI-Mise is an [Agent Skill](https://agentskills.io) in the open `SKILL.md`
+format, so the same folder works in more than one tool. It needs `python3`, and
+`scripts/` has to stay next to `SKILL.md` — the first pass uses it.
 
-## Who it's for
+**Claude Code**
 
-People with one brain and a lot on it — a family, a job, real work — who
-want to use AI seriously and have no interest in becoming an AI engineer to
-do it. You shouldn't need to know what an MCP server is, how model memory is
-layered, or what an Agent Skill does. That's a profession. It isn't yours.
+```bash
+git clone https://github.com/boulaajaj/ai-mise.git
+mkdir -p ~/.claude/skills
+ln -s "$PWD/ai-mise/skills/ai-mise" ~/.claude/skills/ai-mise
+```
 
-Using AI well takes separate contexts that don't bleed into each other, and
-skills that do things your way rather than the average way. Building that is
-a job — the harness engineer, the information organizer, the researcher, the
-PhD in whatever you need this week. This does that job, and none of them
-need managing.
+Then, in any project, type `/ai-mise` — or just say it in your own words:
+*"have a look at this folder and tell me how you'd set it up."* Because it's a
+symlink, `git pull` updates it. On Windows without WSL, copy the folder instead.
 
-## The tools keep moving
+**Codex**
 
-Prompting. Then MCP servers, so you stop pasting API documentation at a model
-that would rather be told once. Then Agent Skills, which at my day job went
-from a curiosity to something we can't work without — next to hooks, prompts,
-decisions recorded as issues, architecture written down where an agent will
-find it. That is what keeps our agents organized and the application running.
+```bash
+git clone https://github.com/boulaajaj/ai-mise.git
+mkdir -p ~/.agents/skills
+cp -r ai-mise/skills/ai-mise ~/.agents/skills/
+```
 
-They'll keep moving, fast. The pattern underneath doesn't: know what's true,
-learn from whoever did it before you, write down the minimum that makes the
-work repeatable, treat every correction as evidence. That pattern is one
-page — [METHOD.md](METHOD.md). Everything else, including whichever platform
-wins this year, is an adapter.
+Start it with `$ai-mise`, or run `/skills` to see what's loaded. Codex also
+reads `.agents/skills/` from your working directory up to the repository root,
+so putting the folder there instead makes it available to everyone working on
+that project.
 
-## What it does
+**ChatGPT — web, desktop, or mobile**
 
-Works out what you're doing — from your materials when you have them, from
-the conversation when you don't — asks the few questions whose answers change
-the outcome, describes in plain language the setup it would build, builds
-only what you approve, and can put anything back exactly as it was.
+Skills → Create → *Upload from your computer*, and upload
+`skills/ai-mise/SKILL.md`. Then start it with `@ai-mise`. Two things to know:
+personal skills are added separately on desktop and on web/mobile and don't
+sync between them, and ChatGPT can't reach a folder on your disk — it works
+from what you upload, so the inventory step doesn't run there.
 
-You meet one assistant, named by you at the first hello. Small help lands
-immediately and is always undoable; anything that changes how the assistant
-itself works is announced in plain words and waits for a good moment. No
-modes to switch between, and no vocabulary to learn.
+## What it does when you start it
 
-*That is the promise being built — [Status](#status) is what runs today.*
+Understanding the situation comes first: what the work actually is, what you
+are aiming at, what has already been decided, what counts as good here. Not
+through a long questionnaire, though. It reads what is already there, asks only
+the questions whose answers change what it does next, and otherwise stays out
+of the way — a quiet observer rather than a form to fill in.
 
-**Not in the first release:** self-improvement, SQLite, wiki generation,
-multi-platform adapters, scheduled retrospectives, voice, marketplace
-distribution.
+Then it builds: the scaffolding, the starting structure, the connections
+between things that were sitting in separate places, shaped for that situation
+rather than to a template chosen in advance. And it isn't tied to one kind of
+work. The first step of the method is always to find out how a field works and
+what its practitioners hold themselves to, so what comes out the other end can
+carry whatever expertise the situation calls for.
 
-## Guardrails, honestly
+It also has to stay current. What people know about working well with AI keeps
+moving, and tracking it is the sort of work I would rather do once than repeat
+on every project. [Prior art](docs/prior-art.md) is where that reading gets
+recorded, along with exactly what was taken from each source.
 
-Your rules are written down, versioned, and can't be edited by the thing they
-govern. Anything it changes, you can put back exactly as it was.
+The workspace is plain files. Markdown for anything you would read yourself,
+plus whatever configuration a particular tool needs to pick it up. So it
+travels, and it outlives the tool that made it. Its own evolution is logged, so
+you can see how the setup arrived where it is. And you can go back, to any
+change, at any point in that history.
 
-Will that contain something smarter than every human combined? No. Nothing
-will, and anyone promising otherwise is selling. What guardrails do is
-smaller and far more useful: nothing changes without being written down, and
-nothing written down can't be undone.
+The closest comparison is a second brain — Tiago Forte's term, credited in
+[foundations](docs/foundations.md) — except this one isn't for keeping notes.
+It is for getting real projects done, with models that are already capable
+enough.
+
+## About guardrails
+
+The rules you set live outside anything the assistant can write to, so it can't
+quietly edit them. That is the whole of it, and I would rather not claim more.
+Guardrails aren't containment — if something turns out smarter than all of us
+put together, a file of my preferences is not what stops it. What this does is
+duller: it keeps the rules out of reach, records what changed, and lets you
+undo it.
+
+## Where it actually is today
+
+Installing it gets you the first pass, and only that. AI-Mise reads the
+materials you point it at, records what it understood, asks the few questions
+whose answers would change the outcome, and hands back a plain-language
+proposal for the workspace it would build — along with a list of everything it
+assumed and what each assumption costs if it turns out wrong. Then it stops.
+The last thing it tells you is that nothing has been created yet.
+
+The building part isn't written. The rules are, and this repository already
+runs on them: every change reviewed before it lands, every decision recorded,
+everything undoable. For now that is all AI-Mise proves — the rules, on itself.
+[METHOD.md](METHOD.md) is the page the rest is built on.
+
+I haven't used it on a real project yet. I'll know much more when I have.
+
+*(The name is from* mise en place *— everything prepped and in its place before
+the work starts.)*
 
 ---
 
@@ -77,6 +112,23 @@ The person using AI-Mise never needs any of it.* Internally, the machinery
 that changes the setup is separate from the machinery that does the work
 ([[ADR-0005-builder-vs-workspace|ADR-0005]], [[ADR-0008-no-modes-tiered-application|ADR-0008]]) — separation the user benefits from
 without ever seeing.
+
+**The kernel:** [METHOD.md](METHOD.md) — one page that stays true regardless of platform, model, or decade. Everything else is an adapter.
+
+## Product boundary (one sentence)
+
+AI-Mise works out what you are doing — from your materials when you have them, from the conversation when you don't — asks a small number of justified questions, describes in plain language the workspace it would set up for your assistant, builds only what you approve, and can put anything back exactly as it was.
+
+**Explicitly out of scope for the first release:** automatic self-improvement, SQLite, full wiki generation, multi-platform adapters, scheduled retrospectives, voice UX, marketplace distribution.
+
+## One assistant — you name it
+
+This is the promise being built (see Status below for what runs today):
+the person using AI-Mise meets exactly one thing — an assistant they name at
+the first hello. Small help is applied at once and can always be undone;
+changes to how the assistant works are announced in plain words and wait for
+a good moment. Nobody is asked to switch modes, and words like "builder" or
+"compiler" never reach them.
 
 ## The two planes
 
