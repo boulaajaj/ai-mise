@@ -11,14 +11,18 @@ somebody's job, and it shouldn't have to be yours.
 
 AI-Mise is an [Agent Skill](https://agentskills.io) in the open `SKILL.md`
 format, so the same folder works in more than one tool. It needs `python3`, and
-`scripts/` has to stay next to `SKILL.md` — the first pass uses it.
+`scripts/` has to stay next to `SKILL.md` — the first pass uses it. That first
+pass is all there is to install today, and it runs in all three tools below.
+The deeper platform work, once there is a workspace to project into a tool,
+starts with Claude Code — [deployment](docs/deployment.md) has the order.
 
 **Claude Code**
 
 ```bash
 git clone https://github.com/boulaajaj/ai-mise.git
+cd ai-mise
 mkdir -p ~/.claude/skills
-ln -s "$PWD/ai-mise/skills/ai-mise" ~/.claude/skills/ai-mise
+ln -s "$PWD/skills/ai-mise" ~/.claude/skills/ai-mise
 ```
 
 Then, in any project, type `/ai-mise` — or just say it in your own words:
@@ -29,8 +33,9 @@ symlink, `git pull` updates it. On Windows without WSL, copy the folder instead.
 
 ```bash
 git clone https://github.com/boulaajaj/ai-mise.git
+cd ai-mise
 mkdir -p ~/.agents/skills
-cp -r ai-mise/skills/ai-mise ~/.agents/skills/
+cp -r skills/ai-mise ~/.agents/skills/
 ```
 
 Start it with `$ai-mise`, or run `/skills` to see what's loaded. Codex also
@@ -46,7 +51,7 @@ personal skills are added separately on desktop and on web/mobile and don't
 sync between them, and ChatGPT can't reach a folder on your disk — it works
 from what you upload, so the inventory step doesn't run there.
 
-## What it does when you start it
+## What it sets out to do
 
 Understanding the situation comes first: what the work actually is, what you
 are aiming at, what has already been decided, what counts as good here. Not
@@ -54,12 +59,13 @@ through a long questionnaire, though. It reads what is already there, asks only
 the questions whose answers change what it does next, and otherwise stays out
 of the way — a quiet observer rather than a form to fill in.
 
-Then it builds: the scaffolding, the starting structure, the connections
-between things that were sitting in separate places, shaped for that situation
-rather than to a template chosen in advance. And it isn't tied to one kind of
-work. The first step of the method is always to find out how a field works and
-what its practitioners hold themselves to, so what comes out the other end can
-carry whatever expertise the situation calls for.
+The building comes next, and that part isn't written yet — what follows is the
+shape it is meant to take. The scaffolding, the starting structure, the
+connections between things that were sitting in separate places, shaped for
+that situation rather than to a template chosen in advance. And it isn't tied
+to one kind of work. The first step of the method is always to find out how a
+field works and what its practitioners hold themselves to, so what comes out
+the other end can carry whatever expertise the situation calls for.
 
 It also has to stay current. What people know about working well with AI keeps
 moving, and tracking it is the sort of work I would rather do once than repeat
@@ -69,8 +75,8 @@ recorded, along with exactly what was taken from each source.
 The workspace is plain files. Markdown for anything you would read yourself,
 plus whatever configuration a particular tool needs to pick it up. So it
 travels, and it outlives the tool that made it. Its own evolution is logged, so
-you can see how the setup arrived where it is. And you can go back, to any
-change, at any point in that history.
+you can see how the setup arrived where it is. And you can go back to any
+change it made, at any point in that history.
 
 The closest comparison is a second brain — Tiago Forte's term, credited in
 [foundations](docs/foundations.md) — except this one isn't for keeping notes.
@@ -83,8 +89,8 @@ The rules you set live outside anything the assistant can write to, so it can't
 quietly edit them. That is the whole of it, and I would rather not claim more.
 Guardrails aren't containment — if something turns out smarter than all of us
 put together, a file of my preferences is not what stops it. What this does is
-duller: it keeps the rules out of reach, records what changed, and lets you
-undo it.
+duller: it keeps the rules out of reach, records what it changed, and lets you
+undo that.
 
 ## Where it actually is today
 
@@ -92,13 +98,15 @@ Installing it gets you the first pass, and only that. AI-Mise reads the
 materials you point it at, records what it understood, asks the few questions
 whose answers would change the outcome, and hands back a plain-language
 proposal for the workspace it would build — along with a list of everything it
-assumed and what each assumption costs if it turns out wrong. Then it stops.
-The last thing it tells you is that nothing has been created yet.
+assumed and what each assumption costs if it turns out wrong. All of that goes
+to a folder you name, and nothing else on your disk is touched. Then it stops,
+and the last thing it tells you is that no workspace has been created yet.
 
 The building part isn't written. The rules are, and this repository already
 runs on them: every change reviewed before it lands, every decision recorded,
-everything undoable. For now that is all AI-Mise proves — the rules, on itself.
-[METHOD.md](METHOD.md) is the page the rest is built on.
+every change reversible afterwards. So far the only thing AI-Mise has proved
+is that the rules work on itself. [METHOD.md](METHOD.md) is the page the rest
+is built on.
 
 I haven't used it on a real project yet. I'll know much more when I have.
 
