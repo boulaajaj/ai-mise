@@ -25,6 +25,9 @@ the v0 slice; it remains a working doc for those.
    file-based; there is no clean projection target today. Revisit when their
    surface can consume file-defined instructions/skills. The claims/views/
    memory layers are plain markdown, so nothing is lost by waiting.
+   Partly met since: ChatGPT Skills accept an uploaded `SKILL.md`, so the
+   first-contact skill loads there. A built workspace still has no file-based
+   projection, so the target order above is unchanged.
 
 ## What "installed" means (three pieces)
 
