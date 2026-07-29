@@ -41,11 +41,12 @@ python3 scripts/inventory.py --sources <target-folder> --out <out-dir>/manifest.
 against this skill's own directory, not the folder you are working in.
 
 Where there is no `python3`, do not ask them to install one. Use whatever the
-machine already has (`sha256sum`, `certutil -hashfile`, `Get-FileHash`, `node`)
-and write the same JSON the script would have written. Read `inventory.py` for
-the shape rather than guessing at it — reading it needs no runtime, and it
-stays the single definition. Record in `notes.md` which route you took. Never
-write a hash you did not compute.
+machine already has (`sha256sum`, `certutil -hashfile <file> SHA256`,
+`Get-FileHash -Algorithm SHA256`, or `node`) and write the same JSON the
+script would have written. Read `inventory.py` for the shape rather than
+guessing at it — reading it needs no runtime, and it stays the single
+definition. Record in `notes.md` which route you took. Never write a hash you
+did not compute.
 
 That produces a hashed manifest — `path`, `sha256`, `bytes`, `mtime_utc` and
 `mimetype` for each file, plus totals. Then read broadly (use a subagent for a
