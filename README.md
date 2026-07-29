@@ -10,11 +10,12 @@ somebody's job, and it shouldn't have to be yours.
 ## Installing it
 
 AI-Mise is an [Agent Skill](https://agentskills.io) in the open `SKILL.md`
-format, so the same folder works in more than one tool. It needs `python3`, and
-`scripts/` has to stay next to `SKILL.md` — the first pass uses it. That first
-pass is all there is to install today, and it runs in all three tools below.
-The deeper platform work, once there is a workspace to project into a tool,
-starts with Claude Code — [deployment](docs/deployment.md) has the order.
+format, so the same folder works in more than one tool. There is nothing to set
+up first. Keep `scripts/` next to `SKILL.md` — the first pass uses it where the
+machine has a `python3` to run it, and does the same job another way where it
+doesn't. That first pass is all there is today, and it runs in all three tools
+below. The deeper platform work, once there is a workspace to project into a
+tool, starts with Claude Code — [deployment](docs/deployment.md) has the order.
 
 **Claude Code**
 
@@ -67,10 +68,21 @@ to one kind of work. The first step of the method is always to find out how a
 field works and what its practitioners hold themselves to, so what comes out
 the other end can carry whatever expertise the situation calls for.
 
+Part of that judgement is whether an assistant is wanted at all. Some work
+doesn't need one, and saying so is a real answer. Where one would help, the
+question is which one and what it should be good at — a careful reader of
+research and a careful drafter are not the same thing, and neither is the same
+as a second pair of eyes on a decision. Working that out, then setting up the
+one that fits, is the part I most want to get right.
+
 It also has to stay current. What people know about working well with AI keeps
 moving, and tracking it is the sort of work I would rather do once than repeat
 on every project. [Prior art](docs/prior-art.md) is where that reading gets
-recorded, along with exactly what was taken from each source.
+recorded, along with exactly what was taken from each source. Doing that by
+hand doesn't scale past me, so the intent is for AI-Mise to watch on its own —
+on whatever schedule the tool it is running in can offer, and only if you have
+said yes to it. It would weigh work from places with a reputation to lose above
+the rest, and bring you what it found rather than act on it.
 
 The workspace is plain files. Markdown for anything you would read yourself,
 plus whatever configuration a particular tool needs to pick it up. So it
