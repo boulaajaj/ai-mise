@@ -19,7 +19,7 @@ The durable form of the rule is much older than any of that *[prior art]*, and i
 
 All decisions below are *[default]* — chosen product behavior. The prior art they draw on is *[prior art]*, named and linked in [[foundations]]; none of it settles the choice on its own.
 
-1. **The kernel carries the restraint.** [[METHOD]]'s orientation step 5 gains it, in the same breath as codifying the minimum: *divide it as little as the work allows: a division earns itself by different knowledge, different authority, or a judgment that cannot review itself, and stands only while it beats the undivided version on real work. Having a name is not a reason to be separate.*
+1. **The kernel carries the restraint.** [[METHOD]]'s orientation step 5 gains it, in the same breath as codifying the minimum: *divide the work as little as it allows: a division earns itself by different knowledge, different authority, or a judgment that cannot review itself, and stands only while it beats the undivided version on real work. Having a name is not a reason to be separate.*
 
 2. **Three grounds, and they are the whole list.** *Different knowledge* — the part knows something the whole cannot act correctly without. *Different authority* — the part may do what the whole may not, or may not do what the whole may. *A judgment that cannot review itself* — the work and the check on it cannot be the same act. Anything else is not a reason, however sensible it sounds: not tidiness, not that a step has a name, not that the diagram reads better with another box in it.
 
@@ -51,4 +51,4 @@ All five are *[default]* — product-choice reasoning, not research findings.
 
 **Require a measured comparison before any division may be proposed** — rejected: Phase 1 reaches a proposal from nothing, before there is real work to measure on, so the requirement would make the rule unusable exactly where it first applies. The instinct behind it, that a claim of improvement must be earned rather than asserted, is kept by decision 3 — the comparison keeps a division rather than permitting it — and by the kernel's existing rule that every important claim carries its condition.
 
-**Split step 5 into two steps, one for how much and one for how divided** — rejected: the split does not pass its own test. Deciding how much to codify and deciding how to divide it are one act of restraint at one moment, and separating them would be a division made because two things had names.
+**Split step 5 into two steps, one for how much and one for how divided** — rejected: the split does not pass its own test. Deciding how much to codify and deciding how to divide the work are one act of restraint at one moment, and separating them would be a division made because two things had names.

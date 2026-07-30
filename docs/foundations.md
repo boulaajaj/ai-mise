@@ -53,9 +53,9 @@ generation bar for every skill AI-Mise produces (issue #14).
 
 ## Dividing the work
 
-*[prior art]* The kernel's rule — divide as little as the work allows, and
-let a division earn itself — is older than the field now arguing about it,
-and that field currently disagrees with itself.
+*[prior art]* The kernel's rule — divide the work as little as it allows,
+and let a division earn itself — is older than the field now arguing
+about it, and that field currently disagrees with itself.
 
 **Where seams belong, not how many.** Parnas (1972) is the source, and he
 is routinely read backwards. His argument is about *where* a boundary

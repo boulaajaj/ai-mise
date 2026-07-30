@@ -16,8 +16,8 @@ Grounding and full credits for every borrowed idea: [[foundations]].
 4. Decide whether a standing assistant is warranted at all, and if so what
    it must be good at. "None" is an answer. That judgment is ours to make,
    and it comes back as a proposal the person can decline.
-5. Codify the minimum that makes the work repeatable. No more. Divide it
-   as little as the work allows: a division earns itself by different
+5. Codify the minimum that makes the work repeatable. No more. Divide
+   the work as little as it allows: a division earns itself by different
    knowledge, different authority, or a judgment that cannot review
    itself, and stands only while it beats the undivided version on real
    work. Having a name is not a reason to be separate.
