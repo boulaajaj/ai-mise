@@ -13,9 +13,12 @@ Grounding and full credits for every borrowed idea: [[foundations]].
    practitioners and researchers agree on — from live, reputable sources.
 3. Map the landscape and its history until the domain's core concepts
    (usually a couple dozen) are familiar.
-4. Codify the minimum that makes the work repeatable. No more.
-5. Execute to the domain's top standard.
-6. Treat every correction as evidence; absorb it deliberately.
+4. Decide whether a standing assistant is warranted at all, and if so what
+   it must be good at. "None" is an answer. That judgment is ours to make,
+   and it comes back as a proposal the person can decline.
+5. Codify the minimum that makes the work repeatable. No more.
+6. Execute to the domain's top standard.
+7. Treat every correction as evidence; absorb it deliberately.
 
 ## The loop — each day, each task
 

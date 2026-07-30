@@ -70,7 +70,7 @@ to one kind of work. The first step of the method is always to find out how a
 field works and what its practitioners hold themselves to, so what comes out
 the other end can carry whatever expertise the situation calls for.
 
-Part of that judgement is whether an assistant is wanted at all. Some work
+Part of that judgment is whether an assistant is wanted at all. Some work
 doesn't need one, and saying so is a real answer. Where one would help, the
 question is which one and what it should be good at — a careful reader of
 research and a careful drafter are not the same thing, and neither is the same
