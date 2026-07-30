@@ -102,14 +102,17 @@ and he describes where seams *already lie* in evolved systems rather than
 licensing their invention. His own caveat is the load-bearing part — the
 interactions between subsystems are "weak, but not negligible."
 
-**Today, and the disagreement.** Anthropic, OpenAI and Microsoft each
-default to one worker and add on evidence. Google's ADK guidance says
-reliability comes from decentralization and specialization. Google
-Research then measured it — 260 configurations, six benchmarks — and found
-the effect swinging from +80.8% to -70.0% with how well the architecture
-fits the task, sequential-reasoning tasks worse under every multi-agent
-variant tried. That spread is why the kernel carries a test rather than a
-number, and why it borrows none of their vocabulary.
+**Today, and the disagreement.** Anthropic says start with the simplest
+approach and add complexity only when evidence supports it. OpenAI says
+start with one and add specialists only when they materially improve
+isolation, clarity or legibility. Microsoft says not to assume role
+separation requires separate agents. Google's ADK guidance says the
+opposite — reliability comes from decentralization and specialization.
+Google Research then measured it — 260 configurations, six benchmarks —
+and found the effect swinging from +80.8% to -70.0% with how well the
+architecture fits the task, sequential-reasoning tasks worse under every
+multi-agent variant tried. That spread is why the kernel carries a test
+rather than a number, and why it borrows none of their vocabulary.
 
 ## The loop's lineage
 
@@ -154,18 +157,20 @@ passes and misses the point.
 - **Open-source authors** whose implementations we deliberately reuse — BerriAI (self-improving-agent), Terence Bristol (claude-improve), Tigerless Labs (autoharness), Kayba (autoharness), aiming-lab (AutoHarness), ruvnet (metaharness), HKUDS (OpenHarness), revfactory (harness) — each with specifics and links in [[prior-art]].
 - **Bolt (StackBlitz)** and **Abstract** — the hide-the-version-control UX lineage behind "Save Version / Restore".
 - **David Parnas** — *On the Criteria To Be Used in Decomposing Systems into Modules* (1972): information hiding, and the argument that decomposition is about where seams fall rather than how many there are. https://dl.acm.org/doi/10.1145/361598.361623
-- **Wayne Stevens, Glenford Myers and Larry Constantine** — *Structured Design* (1974): coincidental binding — the name, since 1974, for a split made because something had a name.
+- **Wayne Stevens, Glenford Myers and Larry Constantine** — *Structured Design* (1974): coincidental binding — the name, since 1974, for a split made because something had a name. https://doi.org/10.1147/sj.132.0115
 - **W. Ross Ashby** — *Requisite Variety and its Implications for the Control of Complex Systems* (1958): the floor under "as little as the work allows." https://pespmc1.vub.ac.be/books/AshbyReqVar.pdf
 - **Jerome Saltzer, David Reed and David Clark** — *End-to-End Arguments in System Design* (1984): the different-knowledge ground — a function belongs where the knowledge to do it correctly is. https://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf
 - **Jerome Saltzer and Michael Schroeder** — *The Protection of Information in Computer Systems* (1975): least privilege, the different-authority ground; and economy of mechanism, whose stated rationale is verifiability. https://web.mit.edu/Saltzer/www/publications/protection/
 - **U.S. Government Accountability Office** — *Government Auditing Standards* (GAO-21-368G), the self-review threat: the audited name for a judgment that cannot review itself. https://www.gao.gov/products/gao-21-368g
-- **Michael Fagan** — *Design and Code Inspections to Reduce Errors in Program Development* (1976): the measured case for a reviewer from outside the work.
+- **Michael Fagan** — *Design and Code Inspections to Reduce Errors in Program Development* (1976): the measured case for a reviewer from outside the work. https://doi.org/10.1147/sj.153.0182
 - **Geoffrey Boothroyd and Peter Dewhurst** — *Design for Assembly: A Designer's Handbook* (1983): three criteria and elimination — the shape the kernel's three grounds take.
 - **Herbert Simon** — *The Architecture of Complexity* (1962): the strongest case against the rule, kept and answered rather than left out.
-- **Ronald Kohavi, Roger Longbotham, Dan Sommerfield and Randal Henne** — *Controlled Experiments on the Web* (2009): the control is the existing version — the undivided baseline the divided one has to beat.
-- **Anthropic** — *Building Effective Agents* (2024) and *When to Use Multi-Agent Systems (and When Not To)* (2026): start with the simplest approach and add complexity only when evidence supports it. https://www.anthropic.com/engineering/building-effective-agents
+- **Ronald Kohavi, Roger Longbotham, Dan Sommerfield and Randal Henne** — *Controlled Experiments on the Web* (2009): the control is the existing version — the undivided baseline the divided one has to beat. https://doi.org/10.1007/s10618-008-0114-1
+- **Anthropic** — *Building effective agents* (2024): start with the simplest approach and add complexity only when evidence supports it. https://www.anthropic.com/engineering/building-effective-agents
+- **Anthropic** — *Building multi-agent systems: When and how to use them* (2026): the same advice restated for the multi-agent case — multi-agent systems are often applied where a single agent would do better. https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them
 - **OpenAI** — orchestration guidance: start with one, add specialists only when they materially improve capability isolation, policy isolation, prompt clarity or trace legibility; and the manager pattern — one assistant owns the conversation and calls on the rest — whose content the kernel keeps without its name. https://developers.openai.com/api/docs/guides/agents/orchestration
 - **Microsoft** — Cloud Adoption Framework guidance on one agent versus several: do not assume role separation requires separate agents. https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai-agents/single-agent-multiple-agents
+- **Google (Agent Development Kit)** — *Developer's guide to multi-agent patterns in ADK* (2025): the clearest statement of the opposing view — reliability comes from decentralization and specialization. Credited because the disagreement is real and the kernel has to survive it. https://developers.googleblog.com/developers-guide-to-multi-agent-patterns-in-adk/
 - **Google Research** — *Towards a Science of Scaling Agent Systems* (2025): 260 configurations across six benchmarks, +80.8% to -70.0% depending on task-architecture alignment — the measurement behind carrying a test instead of a number. https://arxiv.org/abs/2512.08296
 
 ## The center, in one sentence
