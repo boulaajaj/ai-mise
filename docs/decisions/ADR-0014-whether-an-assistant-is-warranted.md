@@ -17,7 +17,7 @@ The gap is not academic. [[ADR-0011-exit-tests-name-capabilities|ADR-0011]] exis
 
 All decisions below are *[default]* — chosen product behavior, not derived from research.
 
-1. **The kernel carries the judgement.** [[METHOD]]'s orientation list gains a step, placed before anything is codified: *decide whether a standing assistant is warranted at all, and if so what it must be good at. "None" is an answer. Work that judgement out rather than handing it back as a question.*
+1. **The kernel carries the judgment.** [[METHOD]]'s orientation list gains a step, placed before anything is codified: *decide whether a standing assistant is warranted at all, and if so what it must be good at. "None" is an answer. That judgment is ours to make, and it comes back as a proposal the person can decline.*
 
 2. **It names a capability, never a product.** What the assistant must be *good at* — a careful reader of research and a careful drafter are different jobs — is the whole of the answer. Which vendor, model or feature provides it is an adapter's problem. This is [[ADR-0012-philosophy-is-the-product|ADR-0012]] decision 5 applied to the decision most likely to attract a product name.
 
@@ -25,16 +25,18 @@ All decisions below are *[default]* — chosen product behavior, not derived fro
 
 ## Consequences
 
-- [[METHOD]] goes from 69 lines to 72, against the under-40 budget in #44. The page has been over since it was written and this does not fix it. #44 is where the kernel gets cut; this step is one of the things that should survive the cut.
+- [[METHOD]] goes from 69 lines to 72. The under-40 figure is #44's acceptance criterion for this repository's own page, not a product threshold — [[ADR-0004-claim-hygiene|ADR-0004]] sends those to `policy.yaml`, whose `limits:` block governs generated artifacts that validators check, and nothing checks the length of this page. It has been over budget since it was written and this does not fix that. #44 is where the kernel gets cut; this step is one of the things that should survive the cut.
 - [[ADR-0011-exit-tests-name-capabilities|ADR-0011]] decision 2 asks Phase 1 to reach "a proposal the person would seriously consider approving." A proposal of "nothing standing yet, here is what to do instead" satisfies it — a phase that can only exit by building could not test this decision. Nothing in ADR-0011 changes.
 - [[ADR-0005-builder-vs-workspace|ADR-0005]] gives the Builder and the assistant distinct identities and assumes both exist. Where none is warranted there is no second identity to name and no handoff to style. That ADR is not wrong; its scope is now stated.
-- #46 has the person name their assistant. That step now sits behind this judgement rather than at the start of every setup.
+- #46 has the person name their assistant. That step now sits behind this judgment rather than at the start of every setup.
 - The README needs no change. #103 already says this, and the effect here is that the product page becomes a projection of the kernel rather than a claim the kernel does not carry.
 
 ## Alternatives not taken
 
+All three are *[default]* — product-choice reasoning, not research findings.
+
 **Leave it on the README** — rejected: the README says what the product does now, and is rewritten whenever that changes. The kernel is what an adapter gets checked against. A claim this central, living only on the most frequently rewritten page, has nothing holding it.
 
-**Use the directive's own words, "which assistant with which skills"** — rejected: "which assistant" invites a vendor's name, which [[ADR-0012-philosophy-is-the-product|ADR-0012]] decision 5 rules out of all instruction. "What it must be good at" is the same judgement, expressed so that next month's launches do not date it.
+**Use the directive's own words, "which assistant with which skills"** — rejected: "which assistant" invites a vendor's name, which [[ADR-0012-philosophy-is-the-product|ADR-0012]] decision 5 rules out of all instruction. "What it must be good at" is the same judgment, expressed so that next month's launches do not date it.
 
-**Ask the person which assistant they want** — rejected: it hands the hardest judgement to the person least equipped to make it, which is the premise the product exists to deny. The instinct behind it, that the person stays the authority, is kept by decision 3: they approve the proposal, they do not have to author it.
+**Ask the person which assistant they want** — rejected: it hands the hardest judgment to the person least equipped to make it, which is the premise the product exists to deny. The instinct behind it, that the person stays the authority, is kept by decision 3: they approve the proposal, they do not have to author it.
