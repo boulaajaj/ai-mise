@@ -16,7 +16,11 @@ Grounding and full credits for every borrowed idea: [[foundations]].
 4. Decide whether a standing assistant is warranted at all, and if so what
    it must be good at. "None" is an answer. That judgment is ours to make,
    and it comes back as a proposal the person can decline.
-5. Codify the minimum that makes the work repeatable. No more.
+5. Codify the minimum that makes the work repeatable. No more. Divide it
+   as little as the work allows: a division earns itself by different
+   knowledge, different authority, or a judgment that cannot review
+   itself, and stands only while it beats the undivided version on real
+   work. Having a name is not a reason to be separate.
 6. Execute to the domain's top standard.
 7. Treat every correction as evidence; absorb it deliberately.
 
@@ -52,6 +56,8 @@ verifies only against its checks, and not the purpose, is merely fast.
   assumption — and carries its condition: how confident, how current,
   what would change it. Synthesis is never its own evidence.
 - Plain language everywhere the user looks; tooling jargon stays inside.
+- However the work is divided, the user deals with one whole that
+  answers for all of it.
 - Canonical knowledge lives in plain files that outlive every vendor.
 - Nothing gets in the user's way. Help applies when asked; serious
   changes wait for a natural moment.
