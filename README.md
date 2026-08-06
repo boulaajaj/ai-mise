@@ -20,8 +20,9 @@ workspace to project into a tool, starts with Claude Code —
 [deployment](docs/deployment.md) has the order.
 
 Or hand the job over: point your assistant at this repository and say
-install. It follows [INSTALL.md](INSTALL.md), which does the same placements
-on whichever tool you have, checks them, and tells you what it did.
+install. It follows [INSTALL.md](INSTALL.md), which knows where each tool
+keeps things, checks what it placed, and tells you what it did — including
+where a tool cannot hold all of it.
 
 The commands below make no such check. Run them where one of these folders
 already exists and they will quietly do the wrong thing, so let the
