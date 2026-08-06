@@ -75,10 +75,12 @@ this: take the hashing route `SKILL.md` already describes, produce the same
 JSON, check it the same way, and say in the report that the script itself did
 not run. Nothing of theirs is touched either way.
 
-The third is that `constitution/policy.yaml` opens from inside the control
-plane you placed — `~/ai-mise/control-plane/constitution/policy.yaml` on
-the paths above — because the skill reads its question limits there
-rather than from memory.
+The third is that the skill's question limits are actually readable from
+inside the control plane you placed — the batch size and round cap in
+`~/ai-mise/control-plane/constitution/policy.yaml` on the paths above. That
+the file opens is not enough: the skill reads those numbers there rather
+than from memory, so a policy that opens without them in it leaves it
+inventing them.
 
 If any of the three fails the install is not finished. Say which one, and what
 you would do about it.
