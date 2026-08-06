@@ -101,13 +101,17 @@ the batch size and the round cap. Read them there rather than from memory,
 including how many parts a question must have.
 
 The control plane is not inside this skill. Read the installed copy's policy
-at `~/ai-mise/control-plane/constitution/policy.yaml` whenever it is
-readable; that one governs this machine. Only where it is not readable fall
-back to `control-plane/constitution/policy.yaml` in a clone's root, which is
-a source checkout and may have drifted. A directory with no readable policy
-in it is not a control plane, so keep looking. Where neither has one the
-install did not finish: say so, point at `INSTALL.md`, and do not supply the
-numbers from memory.
+at `~/ai-mise/control-plane/constitution/policy.yaml` whenever it is usable;
+that one governs this machine. Only where it is not usable fall back to
+`control-plane/constitution/policy.yaml` in a clone's root, which is a source
+checkout and may have drifted. Usable means the limits are actually in it,
+not merely that the file opened: run `validation/validate_policy.py` from the
+same control plane where you can, and read the values yourself where you
+cannot. A policy that is present but broken is the case most likely to end
+with you inventing the numbers. A directory with no usable policy in it is
+not a control plane, so keep looking. Where neither has one the install did
+not finish: say so, point at `INSTALL.md`, and do not supply the numbers from
+memory.
 
 The cap is a ceiling, not a target. With little or nothing to read there is a
 pull toward reconstructing by interview what reading would have given you, and

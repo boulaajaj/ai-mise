@@ -14,10 +14,11 @@ format, so the same folder works in more than one tool. Installing it is the
 few lines below and nothing else — there is no runtime to go and fetch first.
 Keep `scripts/` next to `SKILL.md`: where there is a folder to read and a
 `python3` to run the script with, the first pass uses it; where there isn't, it
-reaches the same result another way. That first pass is all there is today, and
-it runs in all three tools below. The deeper platform work, once there is a
-workspace to project into a tool, starts with Claude Code —
-[deployment](docs/deployment.md) has the order.
+reaches the same result another way. That first pass is all there is today. It
+runs whole in the first two tools below; ChatGPT has no disk, so it gets a
+smaller version and the note there says what is missing. The deeper platform
+work, once there is a workspace to project into a tool, starts with Claude
+Code — [deployment](docs/deployment.md) has the order.
 
 Or hand the job over: point your assistant at this repository and say
 install. It follows [INSTALL.md](INSTALL.md), which knows where each tool
