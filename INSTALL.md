@@ -68,7 +68,7 @@ that folder, and write the manifest to a temporary path outside that
 folder — the script refuses to write inside the folder it is reading:
 
 ```bash
-python3 scripts/inventory.py --sources . --out ~/aimise-check.json
+python3 scripts/inventory.py --sources . --out ~/ai-mise-check.json
 ```
 
 Read the JSON back, then delete it. Where there is no `python3`, do not skip

@@ -26,8 +26,8 @@ keeps things, checks what it placed, and tells you what it did — including
 where a tool cannot hold all of it.
 
 The commands below make no such check. Run them where one of these folders
-already exists and they will quietly do the wrong thing, so let the
-assistant handle that case or move what is there aside first.
+already exists and they will either fail or quietly do the wrong thing, so
+let the assistant handle that case or move what is there aside first.
 
 **Claude Code**
 
