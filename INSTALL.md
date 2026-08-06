@@ -64,8 +64,9 @@ Three checks. The first is that the skill loads, so they can start it by name.
 
 The second is that the inventory step really runs. `--help` only proves the
 script imports, so point it at the installed skill folder itself, from inside
-that folder, and write the manifest to a temporary path outside that
-folder — the script refuses to write inside the folder it is reading:
+that folder, and write the manifest outside that folder — the script refuses
+to write inside the folder it is reading. Use a name that is not already
+taken; nothing of theirs may be overwritten, including by a check:
 
 ```bash
 python3 scripts/inventory.py --sources . --out ~/ai-mise-check.json
