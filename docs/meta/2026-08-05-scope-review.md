@@ -42,15 +42,17 @@ broken — applies to the reviewer as readily as to the reviewed.
 
 ## What was decided
 
-ADR-0016 carries the decision itself: the product starts from the
-environment rather than from a folder, is summoned rather than ambient,
-promises something falsifiable rather than "best possible", remembers what it
-has built across workspaces, and permits recurring work only where a person
+ADR-0016 carries the decision itself. All five are *[default]* — product
+choices, not research findings. The product starts from the environment
+rather than from a folder, is summoned rather than ambient, promises
+something falsifiable rather than "best possible", remembers what it has
+built across workspaces, and permits recurring work only where a person
 declared it and the environment was first shown to allow it.
 
 Four things were found genuinely unowned, all four asked for by name:
 a capability record, a build log across workspaces, a research ledger, and a
-job contract. Each is small, and all four are now tracked as work items.
+job contract. Each is small. None is built, and the work items that would
+track them are drafted but not filed as of this note.
 
 Four work items narrowed rather than changed: #23, #27, #28, #85.
 
@@ -63,22 +65,22 @@ no milestone were assigned to the existing ones instead.
 
 *A heavy formal model of how things relate.* The instinct was right and is
 kept — being explicit beats inferring from surface plausibility. The size was
-not. The measured picture is that small vocabularies carry almost all the
-value: in the largest natural experiment available — published usage analysis
-of schema.org — roughly a dozen types and about thirty predicates account for
-nearly all real-world use, while most of the vocabulary's several thousand
-terms appear on fewer than a thousand domains each; corpus study of published
-models (PARSE, EMNLP 2025) finds validation rules present in a fraction of a
-percent of them, against structure in a majority; and published comparisons
-of graph-structured retrieval show it measurably *losing* to plain reranked
-retrieval on simple lookups, at a large token premium, while winning on
-multi-hop questions. So: a small typed vocabulary that grows only when a named
-case demands it, and no formal axioms until something has failed for want of
-one.
+not. Three bodies of work point the same way: published usage analysis of
+schema.org, where a small head of types and predicates carries most real use
+while a very long tail is largely unused; corpus study of published models
+(PARSE, EMNLP 2025), where formal validation rules are far rarer than
+structure; and published comparisons of graph-structured retrieval, which
+lose to plain reranked retrieval on simple lookups at a token premium and win
+on multi-hop questions. So: a small typed vocabulary that grows only when a
+named case demands it, and no formal axioms until something has failed
+without one.
 
-Those three figures are named here but not yet sourced to a line. The debt is
-real and this note is not the place to pay it — the sourced version belongs in
-a findings note under `sources/`, which does not exist yet.
+Those three are named, not sourced. An earlier draft of this note carried
+precise figures from them; the figures came out, because a repository that
+sets `factual_traceability_min: 0.95` should not state numbers it cannot
+point at. The shape survives their removal and the decision rests on the
+shape. The sourced version belongs in a findings note under `sources/`,
+which does not exist yet.
 
 *The word for that model.* Accurate, and alienating on any surface a person
 reads. The kernel's plain-language rule decides it.
@@ -111,7 +113,7 @@ and what a recurring run is called on the surface the person sees.
 ## For whoever picks this up next
 
 Nothing about a session survives it. What survives is what lands in files —
-which is what METHOD.md says and what ADR-0006 decided. This note, ADR-0016,
+which is what [[METHOD]] says and what ADR-0006 decided. This note, ADR-0016,
 and the issue bodies are the whole of what carries forward. The issue bodies
 are, as they have been from the start, where this project's working memory
 actually lives.

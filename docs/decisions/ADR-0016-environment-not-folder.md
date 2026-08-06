@@ -32,10 +32,10 @@ All decisions below are *[default]* — chosen product behavior, not derived fro
 ## Consequences
 
 - `control-plane/constitution/policy.yaml`'s `identity.boundary` no longer describes the product. This ADR does not change it and cannot: the control plane is a protected asset and that sentence is the person's to write. Until it is rewritten by hand, the repository's own law and its decisions disagree, and the law wins wherever anything compiles from it.
-- `docs/meta/direction.md` says AI-Mise *"quietly sets everything in place… and then gets out of your way"* **[verified]**. Decision 2 contradicts it directly. That page is not protected and is corrected by pull request.
+- `docs/meta/direction.md` says AI-Mise *"quietly sets everything in place… and then gets out of your way"* **[verified]**. Decision 2 contradicts it directly. That page is not protected, so unlike the boundary sentence it can be corrected — by a separate pull request, not this one.
 - #47's north-star sentence gains nothing and loses nothing; its qualifier *"through visible, reversible changes"* was already the right one **[verified]**.
 - [[ADR-0011-exit-tests-name-capabilities|ADR-0011]] decision 5 gains a product-level twin, the same way [[ADR-0015-division-earns-its-place|ADR-0015]] decision 3 did. Three layers now compare against a like baseline: AI-Mise's own phases, the divisions AI-Mise proposes, and now the product's claim about itself.
-- Four work items are owed and none exists today: the capability record, the build log, the research ledger, and the job contract. All four were asked for by name. None is large.
+- Four things are owed and none is built today: the capability record, the build log, the research ledger, and the job contract. All four were asked for by name. None is large.
 - Nothing here requires a new phase scheme. The existing milestones already order this work; what they lacked was assignments, not structure.
 - The word for decision 1's underlying model is deliberately absent from every surface a person sees. The model may be typed and explicit internally; the vocabulary for it belongs in [[architecture]], and [[METHOD]]'s rule about plain language everywhere the user looks governs the rest.
 
