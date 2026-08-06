@@ -67,9 +67,10 @@ that folder, and write the manifest somewhere temporary:
 python3 scripts/inventory.py --sources . --out <temp>/check.json
 ```
 
-Read the JSON back, then delete it. Where there is no `python3`, do the same
-with whatever hashing the machine already has. Nothing of theirs is touched
-either way.
+Read the JSON back, then delete it. Where there is no `python3`, do not skip
+this: take the hashing route `SKILL.md` already describes, produce the same
+JSON, check it the same way, and say in the report that the script itself did
+not run. Nothing of theirs is touched either way.
 
 The third is that `control-plane/constitution/policy.yaml` opens from where
 you put it, because the skill reads its question limits there rather than

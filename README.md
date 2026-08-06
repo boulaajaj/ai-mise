@@ -21,8 +21,8 @@ workspace to project into a tool, starts with Claude Code —
 
 Or hand the job over: point your assistant at this repository and say
 install. It follows [INSTALL.md](INSTALL.md), which covers the same tools
-and also puts the control plane somewhere the skill can reach without the
-clone, then tells you what it did.
+and also puts the rules the skill reads its own limits from somewhere it
+can reach without the clone, then tells you what it did.
 
 **Claude Code**
 
