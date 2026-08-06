@@ -14,31 +14,44 @@ format, so the same folder works in more than one tool. Installing it is the
 few lines below and nothing else — there is no runtime to go and fetch first.
 Keep `scripts/` next to `SKILL.md`: where there is a folder to read and a
 `python3` to run the script with, the first pass uses it; where there isn't, it
-reaches the same result another way. That first pass is all there is today, and
-it runs in all three tools below. The deeper platform work, once there is a
-workspace to project into a tool, starts with Claude Code —
-[deployment](docs/deployment.md) has the order.
+reaches the same result another way. That first pass is all there is today. It
+runs whole in the first two tools below; ChatGPT has no disk, so it gets a
+smaller version and the note there says what is missing. The deeper platform
+work, once there is a workspace to project into a tool, starts with Claude
+Code — [deployment](docs/deployment.md) has the order.
+
+Or hand the job over: point your assistant at this repository and say
+install. It follows [INSTALL.md](INSTALL.md), which knows where each tool
+keeps things, checks what it placed, and tells you what it did — including
+where a tool cannot hold all of it.
+
+The commands below make no such check. Run them where one of these folders
+already exists and they will either fail or quietly do the wrong thing, so
+let the assistant handle that case or move what is there aside first.
 
 **Claude Code**
 
 ```bash
 git clone https://github.com/boulaajaj/ai-mise.git
 cd ai-mise
-mkdir -p ~/.claude/skills
+mkdir -p ~/.claude/skills ~/ai-mise
 ln -s "$PWD/skills/ai-mise" ~/.claude/skills/ai-mise
+ln -s "$PWD/control-plane" ~/ai-mise/control-plane
 ```
 
 Then, in any project, type `/ai-mise` — or just say it in your own words:
-*"have a look at this folder and tell me how you'd set it up."* Because it's a
-symlink, `git pull` updates it. On Windows without WSL, copy the folder instead.
+*"have a look at this folder and tell me how you'd set it up."* Because
+they're symlinks, `git pull` updates them. On Windows without WSL, copy the
+two folders instead.
 
 **Codex**
 
 ```bash
 git clone https://github.com/boulaajaj/ai-mise.git
 cd ai-mise
-mkdir -p ~/.agents/skills
+mkdir -p ~/.agents/skills ~/ai-mise
 cp -r skills/ai-mise ~/.agents/skills/
+cp -r control-plane ~/ai-mise/
 ```
 
 Start it with `$ai-mise`, or run `/skills` to see what's loaded. Codex also
@@ -52,7 +65,8 @@ Skills → Create → *Upload from your computer*, and upload
 `skills/ai-mise/SKILL.md`. Then start it with `@ai-mise`. Two things to know:
 personal skills are added separately on desktop and on web/mobile and don't
 sync between them, and ChatGPT can't reach a folder on your disk — it works
-from what you upload, so the inventory step doesn't run there.
+from what you upload, so neither the inventory step nor the rules it reads
+its own limits from are there.
 
 ## What it sets out to do
 
