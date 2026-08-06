@@ -2,21 +2,9 @@
 
 This repo is the Phase 0 deliverable (contract + threat model) plus the Phase 1
 read-only first-contact skill. This file tells a Claude Code session (or you)
-exactly how to push it and what to do next.
+exactly where it stands and what to do next.
 
-## 0. GitHub setup — one command (first action)
-
-```bash
-cd ai-mise
-bash setup/setup-github.sh
-```
-
-The script is idempotent: it creates the private repo (if missing), pushes
-main, and creates all 7 phase milestones, labels, and 19 tracking issues with
-full bodies and milestone assignments. Requires `gh` authenticated with repo
-scope. Re-running never duplicates milestones or issues.
-
-## 0.5 This repo governs itself
+## 0. This repo governs itself
 
 ai-mise is self-hosting: read `CLAUDE.md` (the dev-harness rules) and
 `docs/meta/dev-harness.md` (how this repo evolves under its own governance —
