@@ -20,30 +20,32 @@ workspace to project into a tool, starts with Claude Code —
 [deployment](docs/deployment.md) has the order.
 
 Or hand the job over: point your assistant at this repository and say
-install. It follows [INSTALL.md](INSTALL.md), which covers the same tools
-and also puts the rules the skill reads its own limits from somewhere it
-can reach without the clone, then tells you what it did.
+install. It follows [INSTALL.md](INSTALL.md), which does the same placements
+on whichever tool you have, checks them, and tells you what it did.
 
 **Claude Code**
 
 ```bash
 git clone https://github.com/boulaajaj/ai-mise.git
 cd ai-mise
-mkdir -p ~/.claude/skills
+mkdir -p ~/.claude/skills ~/ai-mise
 ln -s "$PWD/skills/ai-mise" ~/.claude/skills/ai-mise
+ln -s "$PWD/control-plane" ~/ai-mise/control-plane
 ```
 
 Then, in any project, type `/ai-mise` — or just say it in your own words:
-*"have a look at this folder and tell me how you'd set it up."* Because it's a
-symlink, `git pull` updates it. On Windows without WSL, copy the folder instead.
+*"have a look at this folder and tell me how you'd set it up."* Because
+they're symlinks, `git pull` updates them. On Windows without WSL, copy the
+two folders instead.
 
 **Codex**
 
 ```bash
 git clone https://github.com/boulaajaj/ai-mise.git
 cd ai-mise
-mkdir -p ~/.agents/skills
+mkdir -p ~/.agents/skills ~/ai-mise
 cp -r skills/ai-mise ~/.agents/skills/
+cp -r control-plane ~/ai-mise/
 ```
 
 Start it with `$ai-mise`, or run `/skills` to see what's loaded. Codex also
@@ -57,7 +59,8 @@ Skills → Create → *Upload from your computer*, and upload
 `skills/ai-mise/SKILL.md`. Then start it with `@ai-mise`. Two things to know:
 personal skills are added separately on desktop and on web/mobile and don't
 sync between them, and ChatGPT can't reach a folder on your disk — it works
-from what you upload, so the inventory step doesn't run there.
+from what you upload, so neither the inventory step nor the rules it reads
+its own limits from are there.
 
 ## What it sets out to do
 

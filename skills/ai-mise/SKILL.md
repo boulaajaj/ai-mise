@@ -100,13 +100,14 @@ The question contract is in `control-plane/constitution/policy.yaml`, with
 the batch size and the round cap. Read them there rather than from memory,
 including how many parts a question must have.
 
-The control plane is not inside this skill. The installed copy puts its
-policy at `~/ai-mise/control-plane/constitution/policy.yaml`; a clone has the
-same file under `control-plane/` in the repository root. Look for one of those
-two and check it is readable — a directory with no policy in it is not a
-control plane, so keep looking. Where neither has it the install did not
-finish: say so, point at `INSTALL.md`, and do not supply the numbers from
-memory.
+The control plane is not inside this skill. Read the installed copy's policy
+at `~/ai-mise/control-plane/constitution/policy.yaml` whenever it is
+readable; that one governs this machine. Only where it is not readable fall
+back to `control-plane/constitution/policy.yaml` in a clone's root, which is
+a source checkout and may have drifted. A directory with no readable policy
+in it is not a control plane, so keep looking. Where neither has one the
+install did not finish: say so, point at `INSTALL.md`, and do not supply the
+numbers from memory.
 
 The cap is a ceiling, not a target. With little or nothing to read there is a
 pull toward reconstructing by interview what reading would have given you, and
