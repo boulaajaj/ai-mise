@@ -19,6 +19,10 @@ it runs in all three tools below. The deeper platform work, once there is a
 workspace to project into a tool, starts with Claude Code —
 [deployment](docs/deployment.md) has the order.
 
+Or hand the job over: point your assistant at this repository and say
+install, and it follows [INSTALL.md](INSTALL.md) — the same placements as
+below, and it tells you afterwards what it did.
+
 **Claude Code**
 
 ```bash
