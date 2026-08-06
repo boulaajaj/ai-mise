@@ -105,13 +105,18 @@ at `~/ai-mise/control-plane/constitution/policy.yaml` whenever it is usable;
 that one governs this machine. Only where it is not usable fall back to
 `control-plane/constitution/policy.yaml` in a clone's root, which is a source
 checkout and may have drifted. Usable means the limits are actually in it,
-not merely that the file opened: run `validation/validate_policy.py` from the
-same control plane where you can, and read the values yourself where you
-cannot. A policy that is present but broken is the case most likely to end
-with you inventing the numbers. A directory with no usable policy in it is
-not a control plane, so keep looking. Where neither has one the install did
-not finish: say so, point at `INSTALL.md`, and do not supply the numbers from
-memory.
+not merely that the file opened. Where you can, check it:
+`validation/validate_policy.py` in the same control plane, with `--policy`
+pointing at that policy and `--schema` at `constitution/policy.schema.json`
+beside it. Exit 0 is usable and exit 1 is not. Exit 2 means the check itself
+could not run, not that the policy is bad — it may name a library it
+wants, and installing one is not yours to do; read the values yourself
+instead and say the check did not run. A policy that is present but broken
+is the case most likely to end with you inventing the numbers. A directory
+with no usable policy in it is not a control plane, so keep looking. Where
+neither has one the install did not finish: say so, point at `INSTALL.md` in
+the AI-Mise repository, which is not next to an installed skill, and do not
+supply the numbers from memory.
 
 The cap is a ceiling, not a target. With little or nothing to read there is a
 pull toward reconstructing by interview what reading would have given you, and
