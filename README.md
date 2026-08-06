@@ -23,6 +23,10 @@ Or hand the job over: point your assistant at this repository and say
 install. It follows [INSTALL.md](INSTALL.md), which does the same placements
 on whichever tool you have, checks them, and tells you what it did.
 
+The commands below make no such check. Run them where one of these folders
+already exists and they will quietly do the wrong thing, so let the
+assistant handle that case or move what is there aside first.
+
 **Claude Code**
 
 ```bash
