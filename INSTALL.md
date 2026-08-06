@@ -57,8 +57,9 @@ copying again.
 ## Check it worked
 
 Three checks. The skill loads, so they can start it by name. The inventory
-step runs — either `python3 scripts/inventory.py --help` answers, or you have
-confirmed some other hashing route the machine already has. And
+step runs — either `python3 scripts/inventory.py --help` answers from
+inside the installed skill folder, or you have confirmed some other
+hashing route the machine already has. And
 `control-plane/constitution/policy.yaml` opens from where you put it, because
 the skill reads its question limits there rather than from memory.
 

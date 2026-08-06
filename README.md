@@ -20,8 +20,9 @@ workspace to project into a tool, starts with Claude Code —
 [deployment](docs/deployment.md) has the order.
 
 Or hand the job over: point your assistant at this repository and say
-install, and it follows [INSTALL.md](INSTALL.md) — the same placements as
-below, and it tells you afterwards what it did.
+install. It follows [INSTALL.md](INSTALL.md), which covers the same tools
+and also puts the control plane somewhere the skill can reach without the
+clone, then tells you what it did.
 
 **Claude Code**
 
