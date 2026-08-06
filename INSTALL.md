@@ -11,8 +11,11 @@ holding `SKILL.md` and the scripts beside it.
 
 The **control plane** is the part the skill is not allowed to rewrite:
 `control-plane/`, holding the policy the skill reads its own limits from.
-Keeping it outside the skill is the point — the rules stay out of reach of
-the thing they govern ([ADR-0001](docs/decisions/ADR-0001-control-plane-separation.md)).
+Keeping it outside the skill is the point — a drifting assistant should not
+be able to quietly edit its own rules
+([ADR-0001](docs/decisions/ADR-0001-control-plane-separation.md)). That is
+separation by layout, though. Nothing here locks the folder down, and that
+step is not written yet.
 
 A workspace is not installed. It is built later, in the person's own project,
 and only with their approval.
@@ -64,7 +67,7 @@ script imports, so point it at the installed skill folder itself, from inside
 that folder, and write the manifest somewhere temporary:
 
 ```bash
-python3 scripts/inventory.py --sources . --out <temp>/check.json
+python3 scripts/inventory.py --sources . --out "<temp>/check.json"
 ```
 
 Read the JSON back, then delete it. Where there is no `python3`, do not skip

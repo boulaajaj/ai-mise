@@ -34,7 +34,7 @@ were pointed at. Both answers are ordinary, and neither is the lesser start.
 Where the machine has a `python3`:
 
 ```bash
-python3 scripts/inventory.py --sources <target-folder> --out <out-dir>/manifest.json
+python3 scripts/inventory.py --sources "<target-folder>" --out "<out-dir>/manifest.json"
 ```
 
 `scripts/` sits beside this file rather than in their project, so resolve it
