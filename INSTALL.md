@@ -64,7 +64,8 @@ Three checks. The first is that the skill loads, so they can start it by name.
 
 The second is that the inventory step really runs. `--help` only proves the
 script imports, so point it at the installed skill folder itself, from inside
-that folder, and write the manifest somewhere temporary:
+that folder, and write the manifest to a temporary path outside that
+folder — the script refuses to write inside the folder it is reading:
 
 ```bash
 python3 scripts/inventory.py --sources . --out "<temp>/check.json"
