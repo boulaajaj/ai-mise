@@ -1,7 +1,7 @@
 # ADR-0016: AI-Mise starts from the environment, not from a folder
 
 **Status:** Proposed · 2026-08-05 (merge = agreement)
-**Trigger:** Amine's message, 2026-08-05, relaying an extended design exchange with another assistant and narrowing the product's scope by hand: it generates the best supporting arrangement it can for the person's problem, it is triggered rather than ambient, and it keeps track of everything it has built. Review of a first draft found that draft deciding five things at once. This record keeps the two that are genuinely one decision and routes the rest to issues.
+**Trigger:** Amine's message, 2026-08-05, relaying an extended design exchange with another assistant and narrowing the product's scope by hand: it generates the best supporting arrangement it can for the person's problem, it is triggered rather than ambient, and it keeps track of everything it has built. Not all of that is decided here. Review of a first draft found it deciding five things at once; this record keeps the two that are genuinely one decision, and the rest is listed under *What this record does not decide* and settled elsewhere.
 
 ## Context
 
