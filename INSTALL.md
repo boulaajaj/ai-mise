@@ -41,9 +41,10 @@ You know which tool you are. Do not ask.
 project instead makes it available to everyone working on that project.
 
 **ChatGPT** — there is no disk to install onto. Upload
-`skills/ai-mise/SKILL.md` and say what that costs: the folder inventory does
-not run there, and the skill cannot reach the control plane, so it works from
-what is uploaded and nothing else ([deployment](docs/deployment.md)).
+`skills/ai-mise/SKILL.md`, and say plainly that this is the incomplete
+version: the folder inventory does not run there, and the skill cannot reach
+the control plane, so the question limits it is told to read are not there
+([deployment](docs/deployment.md)).
 
 **Anything else** — if the tool loads instructions from files, the same two
 placements apply; use its own skills directory in place of the ones above and
@@ -56,12 +57,23 @@ copying again.
 
 ## Check it worked
 
-Three checks. The skill loads, so they can start it by name. The inventory
-step runs — either `python3 scripts/inventory.py --help` answers from
-inside the installed skill folder, or you have confirmed some other
-hashing route the machine already has. And
-`control-plane/constitution/policy.yaml` opens from where you put it, because
-the skill reads its question limits there rather than from memory.
+Three checks. The first is that the skill loads, so they can start it by name.
+
+The second is that the inventory step really runs. `--help` only proves the
+script imports, so point it at the installed skill folder itself, from inside
+that folder, and write the manifest somewhere temporary:
+
+```bash
+python3 scripts/inventory.py --sources . --out <temp>/check.json
+```
+
+Read the JSON back, then delete it. Where there is no `python3`, do the same
+with whatever hashing the machine already has. Nothing of theirs is touched
+either way.
+
+The third is that `control-plane/constitution/policy.yaml` opens from where
+you put it, because the skill reads its question limits there rather than
+from memory.
 
 If any of the three fails the install is not finished. Say which one, and what
 you would do about it.
@@ -79,6 +91,11 @@ an ordinary start too.
 
 ## Removing it
 
-Delete the two folders you created, and nothing else. Their own configuration
-should be byte-for-byte what it was before. If you changed anything outside
-those two folders, saying so is better than leaving it.
+Remove the two things you created and nothing else, minding which kind each
+is. Where you linked, remove the link and do not follow it — following it
+deletes the clone it points at. Where you copied, delete the copy. The clone,
+if there is one, is theirs and stays.
+
+Their own configuration should be byte-for-byte what it was before. If you
+changed anything outside what you created, saying so is better than leaving
+it.

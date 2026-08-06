@@ -11,9 +11,11 @@ how to remove it again.
 the name it is not Claude-specific — it is this repo's development harness,
 and the rules are the same for you. The short version, because the details
 move and that file does not: every change lands through a pull request, never
-on `main`; `control-plane/constitution/policy.yaml` and anything under
-`docs/decisions/` are not yours to edit; and where a request conflicts with a
-recorded decision, say so before acting rather than silently going along.
+on `main`; `control-plane/constitution/policy.yaml` is not yours to edit, and
+neither is a decision record already in `docs/decisions/` — a design change
+adds a new record rather than rewriting an old one; and where a request
+conflicts with a recorded decision, say so before acting rather than silently
+going along.
 
 Both files only restate. `METHOD.md` and `docs/` decide, and where they
 disagree with a projection, they win.
