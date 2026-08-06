@@ -104,9 +104,12 @@ The control plane is not inside this skill. Read the installed copy's policy
 at `~/ai-mise/control-plane/constitution/policy.yaml` whenever it is usable;
 that one governs this machine. Only where it is not usable fall back to
 `control-plane/constitution/policy.yaml` in a clone's root, which is a source
-checkout and may have drifted. Usable means the limits are actually in it,
-not merely that the file opened. Read the batch size and the round cap out
-of it yourself; where they are missing it is not usable, whatever else is.
+checkout and may have drifted. Where the installed one was there and not
+usable, say so before you go on: that is a broken install, not a missing
+one, and the numbers you end up with are not the ones this machine was
+given. Usable means the limits are actually in it, not merely that the file
+opened. Read the batch size and the round cap out of it yourself; where they
+are missing it is not usable, whatever else is.
 Where `validation/validate_policy.py` in the same control plane will run —
 `--policy` that file, `--schema` the `policy.schema.json` beside it — run it
 and pass on what it printed, without translating it into a verdict of your
