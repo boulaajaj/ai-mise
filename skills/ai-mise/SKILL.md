@@ -34,7 +34,7 @@ were pointed at. Both answers are ordinary, and neither is the lesser start.
 Where the machine has a `python3`:
 
 ```bash
-python3 scripts/inventory.py --sources <target-folder> --out <out-dir>/manifest.json
+python3 scripts/inventory.py --sources "<target-folder>" --out "<out-dir>/manifest.json"
 ```
 
 `scripts/` sits beside this file rather than in their project, so resolve it
@@ -99,6 +99,26 @@ These hold wherever the material came from:
 The question contract is in `control-plane/constitution/policy.yaml`, with
 the batch size and the round cap. Read them there rather than from memory,
 including how many parts a question must have.
+
+The control plane is not inside this skill. Read the installed copy's policy
+at `~/ai-mise/control-plane/constitution/policy.yaml` whenever it is usable;
+that one governs this machine. Only where it is not usable fall back to
+`control-plane/constitution/policy.yaml` in a clone's root, which is a source
+checkout and may have drifted. Where the installed one was there and not
+usable, say so before you go on: that is a broken install, not a missing
+one, and the numbers you end up with are not the ones this machine was
+given. Usable means the limits are actually in it, not merely that the file
+opened. Read the batch size and the round cap out of it yourself; where they
+are missing it is not usable, whatever else is.
+Where `validation/validate_policy.py` in the same control plane will run —
+`--policy` that file, `--schema` the `policy.schema.json` beside it — run it
+and pass on what it printed, without translating it into a verdict of your
+own. Where it will not run, say that, and do not install anything to make it
+run. A policy that is present but broken is the case most likely to end with
+you inventing the numbers. A directory with no usable policy in it is not a
+control plane, so keep looking. Where neither has one the install did not
+finish: say so, point at `INSTALL.md` in the AI-Mise repository, which is
+not next to an installed skill, and do not supply the numbers from memory.
 
 The cap is a ceiling, not a target. With little or nothing to read there is a
 pull toward reconstructing by interview what reading would have given you, and
