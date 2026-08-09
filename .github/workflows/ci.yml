@@ -98,3 +98,37 @@ jobs:
           lines=$(wc -l < CLAUDE.md)
           echo "CLAUDE.md: $lines lines (limit 200)"
           [ "$lines" -le 200 ]
+      - name: Inventory manifest is reproducible and path-clean (self-test)
+        run: |
+          set -e
+          mkdir -p /tmp/inv/src/sub
+          printf 'alpha' > /tmp/inv/src/a.txt
+          printf 'beta' > /tmp/inv/src/sub/b.txt
+          ln -s a.txt /tmp/inv/src/link.txt
+          inv=skills/ai-mise/scripts/inventory.py
+          python "$inv" --sources /tmp/inv/src --out /tmp/inv/m1.json
+          python "$inv" --sources /tmp/inv/src --out /tmp/inv/m2.json
+          python - <<'PYEOF'
+          import json, pathlib
+          m1 = json.loads(pathlib.Path('/tmp/inv/m1.json').read_text())
+          m2 = json.loads(pathlib.Path('/tmp/inv/m2.json').read_text())
+          fails = []
+          if m1['content_digest'] != m2['content_digest']:
+              fails.append('content_digest differs over an unchanged tree')
+          a, b = dict(m1), dict(m2)
+          a.pop('run'); b.pop('run')
+          if a != b:
+              fails.append('manifests differ outside the run block')
+          if '/tmp/inv' in json.dumps(m1):
+              fails.append('manifest records an absolute source path')
+          if not any(s['path'] == 'link.txt' and s['reason'] == 'symlink'
+                     for s in m1['skipped']):
+              fails.append('symlink was not skipped')
+          if m1['file_count'] != 2:
+              fails.append('expected 2 files, got %s' % m1['file_count'])
+          for f in fails:
+              print('FAIL:', f)
+          if not fails:
+              print('self-test OK: reproducible, path-clean, symlink-refusing')
+          raise SystemExit(1 if fails else 0)
+          PYEOF
