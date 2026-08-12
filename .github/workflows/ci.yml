@@ -109,7 +109,7 @@ jobs:
           python "$inv" --sources /tmp/inv/src --out /tmp/inv/m1.json
           python "$inv" --sources /tmp/inv/src --out /tmp/inv/m2.json
           python - <<'PYEOF'
-          import json, pathlib
+          import json, pathlib, re
           m1 = json.loads(pathlib.Path('/tmp/inv/m1.json').read_text())
           m2 = json.loads(pathlib.Path('/tmp/inv/m2.json').read_text())
           fails = []
@@ -126,6 +126,13 @@ jobs:
               fails.append('symlink was not skipped')
           if m1['file_count'] != 2:
               fails.append('expected 2 files, got %s' % m1['file_count'])
+          stable = re.compile(r'^(symlink|not a regular file when opened'
+                              r'|changed while being read|unreadable'
+                              r'|[A-Z][A-Z0-9]+)$')
+          for s in m1['skipped']:
+              if not stable.match(s['reason']):
+                  fails.append('skip reason is not a stable token: '
+                               + repr(s['reason']))
           for f in fails:
               print('FAIL:', f)
           if not fails:

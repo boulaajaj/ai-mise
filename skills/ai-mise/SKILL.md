@@ -49,9 +49,11 @@ definition. Record in `notes.md` which route you took. Never write a hash you
 did not compute.
 
 That produces a hashed manifest — `path`, `sha256`, `bytes` and `mtime_utc`
-for each file, plus totals and a `content_digest` over the whole of it, which
-is the same on two runs over an unchanged folder. Then read broadly (use a
-subagent for a large tree) and write `findings.md`:
+for each file, plus totals, a `skipped` list saying what was not read and
+why, the folder's name in `source_label`, and a `content_digest` over the
+whole of it, which is the same on two runs over an unchanged folder. When
+the run happened sits in `run`, outside the digest. Then read broadly (use
+a subagent for a large tree) and write `findings.md`:
 
 1. **Detected purpose** — what this is, and for whom.
 2. **Stakeholders** — who is affected by or involved in the work.
