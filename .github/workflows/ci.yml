@@ -101,6 +101,7 @@ jobs:
       - name: Inventory manifest is reproducible and path-clean (self-test)
         run: |
           set -e
+          rm -rf /tmp/inv
           mkdir -p /tmp/inv/src/sub
           printf 'alpha' > /tmp/inv/src/a.txt
           printf 'beta' > /tmp/inv/src/sub/b.txt
