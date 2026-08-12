@@ -74,10 +74,14 @@ def open_no_follow(path: Path):
 def volatile(st) -> tuple:
     """What must hold still across a read for the read to mean anything.
 
-    ctime is in deliberately: where mtime has coarse resolution a write
-    inside one tick would otherwise pass unseen. The cost is a re-read
-    after a metadata-only change, which the retry limit bounds and which
-    fails towards skipping rather than towards recording the wrong thing.
+    ctime is in deliberately, and it is worth what it is worth. On POSIX
+    it moves on a write as well as on a metadata change, so a write
+    inside one coarse mtime tick does not pass unseen. On Windows it is
+    the creation time and moves for neither, so it adds nothing there
+    and size and mtime carry the check alone. The cost where it does
+    work is a re-read after a metadata-only change, which the retry
+    limit bounds and which fails towards skipping rather than towards
+    recording the wrong thing.
     """
     return (st.st_dev, st.st_ino, st.st_size, st.st_mtime_ns, st.st_ctime_ns)
 
