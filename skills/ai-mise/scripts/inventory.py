@@ -120,6 +120,27 @@ def entry_for(path: Path, rel: str) -> dict:
     raise Unstable("changed while being read")
 
 
+def classify(path: Path, rel: str, root: Path):
+    """Decide one path. Returns (entry, None), (None, reason) or (None, None).
+
+    Every test lives in here, inside the handling, so that a test added
+    later cannot be the one that is left outside it and takes the whole
+    run down with it.
+    """
+    try:
+        if path.is_symlink():
+            return None, "symlink"
+        if not path.is_file():
+            return None, None
+        if not path.resolve().is_relative_to(root):
+            return None, "outside the source folder"
+        return entry_for(path, rel), None
+    except Rejected as e:
+        return None, str(e)
+    except OSError as e:
+        return None, errno.errorcode.get(e.errno, "unreadable")
+
+
 def digest_body(entries: list, skipped: list, label: str) -> dict:
     """Exactly what content_digest is taken over. Note: no mtime, no run."""
     return {
@@ -150,21 +171,11 @@ def main() -> int:
     entries, skipped = [], []
     for p in root.rglob("*"):
         rel = p.relative_to(root).as_posix()
-        if p.is_symlink():
-            skipped.append({"path": rel, "reason": "symlink"})
-            continue
-        if not p.is_file():
-            continue
-        if not p.resolve().is_relative_to(root):
-            skipped.append({"path": rel, "reason": "outside the source folder"})
-            continue
-        try:
-            entries.append(entry_for(p, rel))
-        except Rejected as e:
-            skipped.append({"path": rel, "reason": str(e)})
-        except OSError as e:
-            skipped.append({"path": rel,
-                            "reason": errno.errorcode.get(e.errno, "unreadable")})
+        entry, reason = classify(p, rel, root)
+        if entry is not None:
+            entries.append(entry)
+        elif reason is not None:
+            skipped.append({"path": rel, "reason": reason})
     entries.sort(key=lambda e: e["path"])
     skipped.sort(key=lambda e: e["path"])
 
