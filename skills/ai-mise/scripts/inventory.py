@@ -125,14 +125,21 @@ def classify(path: Path, rel: str, root: Path):
 
     Every test lives in here, inside the handling, so that a test added
     later cannot be the one that is left outside it and takes the whole
-    run down with it.
+    run down with it. resolve() gets its own guard because on Python
+    before 3.11 a symlink loop leaves it as a RuntimeError rather than
+    an OSError, and that is the one exception the rest of this cannot
+    catch by kind.
     """
     try:
         if path.is_symlink():
             return None, "symlink"
         if not path.is_file():
             return None, None
-        if not path.resolve().is_relative_to(root):
+        try:
+            inside = path.resolve().is_relative_to(root)
+        except RuntimeError:
+            return None, "ELOOP"
+        if not inside:
             return None, "outside the source folder"
         return entry_for(path, rel), None
     except Rejected as e:

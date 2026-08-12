@@ -130,6 +130,9 @@ jobs:
               fails.append('symlink was not skipped')
           if 'secret' in json.dumps(m1):
               fails.append('read through a symlinked parent directory')
+          if not any(s['path'] == 'escape' and s['reason'] == 'symlink'
+                     for s in m1['skipped']):
+              fails.append('symlinked directory was not recorded as skipped')
           if m1['file_count'] != 2:
               fails.append('expected 2 files, got %s' % m1['file_count'])
           stable = re.compile(r'^(symlink|not a regular file when opened'
