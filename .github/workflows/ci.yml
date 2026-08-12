@@ -106,6 +106,9 @@ jobs:
           printf 'alpha' > /tmp/inv/src/a.txt
           printf 'beta' > /tmp/inv/src/sub/b.txt
           ln -s a.txt /tmp/inv/src/link.txt
+          mkdir -p /tmp/inv/outside
+          printf 'secret' > /tmp/inv/outside/secret.txt
+          ln -s ../outside /tmp/inv/src/escape
           inv=skills/ai-mise/scripts/inventory.py
           python "$inv" --sources /tmp/inv/src --out /tmp/inv/m1.json
           python "$inv" --sources /tmp/inv/src --out /tmp/inv/m2.json
@@ -125,10 +128,13 @@ jobs:
           if not any(s['path'] == 'link.txt' and s['reason'] == 'symlink'
                      for s in m1['skipped']):
               fails.append('symlink was not skipped')
+          if 'secret' in json.dumps(m1):
+              fails.append('read through a symlinked parent directory')
           if m1['file_count'] != 2:
               fails.append('expected 2 files, got %s' % m1['file_count'])
           stable = re.compile(r'^(symlink|not a regular file when opened'
                               r'|changed while being read|unreadable'
+                              r'|outside the source folder'
                               r'|[A-Z][A-Z0-9]+)$')
           for s in m1['skipped']:
               if not stable.match(s['reason']):

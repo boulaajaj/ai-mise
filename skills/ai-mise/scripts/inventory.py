@@ -25,9 +25,15 @@ Read-consistent. Each file is opened once and hashed and stated through
 that one descriptor, so `sha256`, `bytes` and `mtime_utc` describe one
 state of one file rather than three glimpses of a path. Where the file
 moves under the read it is re-read, and where it keeps moving it is
-skipped rather than recorded wrongly. On platforms with O_NOFOLLOW the
-final component is never followed; elsewhere a swap between walking and
-opening is still possible, so what is recorded is what was opened.
+skipped rather than recorded wrongly.
+
+Inside the folder it was given. Symlinks are refused, and so is any path
+that resolves outside the source folder, which is what a symlinked parent
+directory produces. On platforms with O_NOFOLLOW the final component is
+never followed either. What is left open is a parent directory replaced
+between the check and the open: closing that needs the walk to carry
+directory handles, which is not done here, so what is recorded is what
+was opened rather than what was named.
 
 Usage:
     inventory.py --sources <folder> --out <manifest.json>
@@ -66,7 +72,13 @@ def open_no_follow(path: Path):
 
 
 def volatile(st) -> tuple:
-    """What must hold still across a read for the read to mean anything."""
+    """What must hold still across a read for the read to mean anything.
+
+    ctime is in deliberately: where mtime has coarse resolution a write
+    inside one tick would otherwise pass unseen. The cost is a re-read
+    after a metadata-only change, which the retry limit bounds and which
+    fails towards skipping rather than towards recording the wrong thing.
+    """
     return (st.st_dev, st.st_ino, st.st_size, st.st_mtime_ns, st.st_ctime_ns)
 
 
@@ -138,6 +150,9 @@ def main() -> int:
             skipped.append({"path": rel, "reason": "symlink"})
             continue
         if not p.is_file():
+            continue
+        if not p.resolve().is_relative_to(root):
+            skipped.append({"path": rel, "reason": "outside the source folder"})
             continue
         try:
             entries.append(entry_for(p, rel))
