@@ -1,111 +1,132 @@
 # Installing AI-Mise
 
-Point your assistant at this repository and say install. What follows is the
-protocol it reads. You are welcome to read along — nothing here is hidden
-from you, and the last step is it telling you in plain words what it did.
+One command, or one sentence. Find the line for the thing you are using.
 
-## Two things get placed
+## If you have a terminal
 
-The **skill** is the part that does the work: one folder, `skills/ai-mise/`,
-holding `SKILL.md` and the scripts beside it.
+The single command that covers the most tools:
 
-The **control plane** is the part the skill is not allowed to rewrite:
-`control-plane/`, holding the policy the skill reads its own limits from.
-Keeping it outside the skill is the point — a drifting assistant should not
-be able to quietly edit its own rules
-([ADR-0001](docs/decisions/ADR-0001-control-plane-separation.md)). That is
-separation by layout, though. Nothing here locks the folder down, and that
-step is not written yet.
+```bash
+gh skill install boulaajaj/ai-mise ai-mise --scope user
+```
 
-A workspace is not installed. It is built later, in the person's own project,
-and only with their approval.
+That installs it for GitHub Copilot by default. Add `--agent claude-code`,
+`--agent codex`, `--agent gemini` or `--agent cursor` to put it where one of
+those looks instead.
 
-## Before placing anything
+If you would rather use the tool's own installer:
 
-Whatever is already on this machine stays exactly as it is. Never edit an
-existing `CLAUDE.md`, `AGENTS.md`, or skill. Never overwrite a folder you did
-not create. Keep everything under a name of our own so that removing it later
-is unambiguous. If something already sits at one of the paths below, stop and
-say what you found rather than deciding for them.
+**Claude Code**
 
-Do not ask them to install a runtime. Use what the machine already has; where
-you need something it does not have, reach the same result another way and
-say which route you took.
+```
+/plugin marketplace add boulaajaj/ai-mise
+/plugin install ai-mise@ai-mise
+```
 
-## Where things go
+**Codex**
 
-You know which tool you are. Do not ask.
+```bash
+codex plugin marketplace add boulaajaj/ai-mise
+codex plugin add
+```
 
-**Claude Code** — skill to `~/.claude/skills/ai-mise/`, control plane to
-`~/ai-mise/control-plane/`.
+**Grok Build**
 
-**Codex** — skill to `~/.agents/skills/ai-mise/`, control plane to
-`~/ai-mise/control-plane/`. Putting the skill in `.agents/skills/` inside a
-project instead makes it available to everyone working on that project.
+```bash
+grok plugin marketplace add boulaajaj/ai-mise
+grok plugin install ai-mise
+```
 
-**ChatGPT** — there is no disk to install onto. Upload
-`skills/ai-mise/SKILL.md`, and say plainly that this is the incomplete
-version: the folder inventory does not run there, and the skill cannot reach
-the control plane, so the question limits it is told to read are not there
-([deployment](docs/deployment.md)).
+**Gemini CLI**
 
-**Anything else** — if the tool loads instructions from files, the same two
-placements apply; use its own skills directory in place of the ones above and
-keep the `ai-mise` name. If it does not, say so rather than improvising.
+```bash
+gemini extensions install https://github.com/boulaajaj/ai-mise --auto-update
+```
 
-Where you already have a clone and the tool follows links, link to the two
-folders in place rather than copying, so `git pull` updates them. Where links
-are awkward — Windows without WSL — copy, and tell them that updating means
-copying again.
+**Cursor** — Dashboard, Plugins, Team Marketplaces, Add Marketplace, Import
+from Repo, then this repository.
+
+## If you do not have a terminal
+
+**Claude, on the web, on the desktop, or on your phone.** Customize in the
+sidebar, then Plugins, then the plus button, Add marketplace, Add from a
+repository, and paste `https://github.com/boulaajaj/ai-mise`. It syncs
+through your account, so it turns up on the phone as well.
+
+## If your assistant cannot install anything
+
+Then there is nothing to install, and one sentence does it. Paste this:
+
+```
+Read https://raw.githubusercontent.com/boulaajaj/ai-mise/main/skills/ai-mise/SKILL.md and follow it. Remember it for future conversations.
+```
+
+That works in ChatGPT, in Grok, and in Claude with web search switched on.
+The second sentence is the part that makes it stick: each of those can save
+it themselves when asked, and so can Microsoft Copilot.
+
+It does not work in the Gemini app, which searches the web rather than
+opening a link you hand it, or in Copilot's consumer chat, which reads Bing's
+index rather than the page itself. For those, and for Grok without a
+terminal:
+
+**Gemini** — Gems, New Gem, and paste the file in as the instructions. A Gem
+can then be shared by link, and whoever has that link can use it without
+signing in at all.
+
+**Grok** — grok.com/skills, and upload the file. Grok keeps a skill across
+every conversation.
+
+**Meta AI** — nothing reliable. There is no instructions field, and AI Studio
+stopped accepting new assistants in August 2026. You can tell it single
+things to remember in a one-to-one chat, in the US and Canada, and that is
+the whole of it.
+
+## Calling it something else
+
+Every installer above uses the folder name as the word you type, so you get
+`/ai-mise`. To call it something of your own, clone the repository and run
+`install.sh` or `install.ps1` instead. It asks for a name, installs under
+that name, and then that word is the trigger: `/celine` in Claude Code,
+`$celine` in Codex.
+
+## What is placed
+
+The skill folder, `ai-mise`, holding `SKILL.md` and the scripts beside it.
+
+The installers put it in two places, `~/.claude/skills/` and
+`~/.agents/skills/`, because different tools look in different ones, and
+that is what lets a single command cover all of them. They also write a zip
+next to you, which exists only for the claude.ai upload that carries the
+skill to a phone. Delete it once you have used it. Every path written is
+printed as it happens.
+
+Whatever is already on the machine stays exactly as it is. No existing
+`CLAUDE.md`, `AGENTS.md` or skill is edited, and no folder someone else made
+is overwritten. Where something already sits under that name, the install
+stops and says what it found rather than deciding for you.
+
+Nothing here needs a runtime you do not already have. Where a step wants one
+the machine lacks, the same result is reached another way, and which way is
+said out loud.
 
 ## Check it worked
 
-Three checks. The first is that the skill loads, so they can start it by name.
+Two checks.
 
-The second is that the inventory step really runs. `--help` only proves the
-script imports, so point it at the installed skill folder itself, from inside
-that folder, and write the manifest outside that folder — the script refuses
-to write inside the folder it is reading. Nothing of theirs may be
-overwritten, including by a check, so where the name below is taken, use
-one that is not:
+The first is that it loads, so you can start it by name.
 
-```bash
-python3 scripts/inventory.py --sources . --out ~/ai-mise-check.json
-```
-
-Read the JSON back, then delete it. Where there is no `python3`, do not skip
-this: take the hashing route `SKILL.md` already describes, produce the same
-JSON, check it the same way, and say in the report that the script itself did
-not run. Nothing of theirs is touched either way.
-
-The third is that the skill's question limits are actually readable from
-inside the control plane you placed — the batch size and round cap in
-`~/ai-mise/control-plane/constitution/policy.yaml` on the paths above. That
-the file opens is not enough: the skill reads those numbers there rather
-than from memory, so a policy that opens without them in it leaves it
-inventing them.
-
-If any of the three fails the install is not finished. Say which one, and what
-you would do about it.
-
-## Then say what happened
-
-In their words. What you placed and where, that nothing else was touched, and
-what it can do today: read a folder you point it at, or talk it through when
-there is no folder, and hand back a written proposal for the workspace it
-would set up. Then say what it cannot do, because that matters more — it
-builds nothing yet.
-
-If they gave you a folder, offer to look at it now. If they did not, that is
-an ordinary start too.
+The second is that it does something. Ask it to look at the setup you are
+already in, and to change nothing. What comes back should name things you
+recognise — what is switched on here, what is sitting there unused. If it
+describes a generic AI setup rather than yours, it did not orient, and that
+is worth knowing before you rely on it.
 
 ## Removing it
 
-Remove the two things you created and nothing else, minding which kind each
-is. Where you linked, remove the link and do not follow it — following it
-deletes the clone it points at. Where you copied, delete the copy. The clone,
-if there is one, is theirs and stays.
+Delete the folders the installer named when it ran, and nothing else. Where
+you linked to a clone rather than copying, remove the link and do not follow
+it — following it deletes the clone it points at. The clone, if there is one,
+is yours and stays.
 
-Their own configuration should be byte-for-byte what it was before. If you
-changed anything outside what you created, saying so is better than leaving
-it.
+Your own configuration should be byte-for-byte what it was before.

@@ -1,0 +1,5 @@
+{
+  "name": "ai-mise",
+  "version": "0.1.0",
+  "description": "Looks at the AI setup you already have, finds what is there and going unused, and recommends the lightest thing that would help."
+}

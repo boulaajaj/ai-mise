@@ -18,6 +18,9 @@ control-plane/approval/approval-store/*
 # occurrence: the rule said .sh, so a .py walked straight past it)
 /*.sh
 /*.py
+# install.sh is the exception. It is the product, not a session helper, and it
+# was silently skipped by the rule above until this line was added.
+!/install.sh
 
 # Mind map: generated on demand, not versioned (ADR-0012 decision 6 supersedes
 # ADR-0006 decision 3 - `python tools/generate_mindmap.py` still works locally)

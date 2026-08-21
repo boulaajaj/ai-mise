@@ -1,0 +1,13 @@
+{
+  "name": "ai-mise",
+  "interface": { "displayName": "AI-Mise" },
+  "plugins": [
+    {
+      "name": "ai-mise",
+      "source": { "source": "local", "path": "./" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity",
+      "description": "Looks at the AI setup you already have, finds what is there and going unused, and recommends the lightest thing that would help. It recommends and shows; it changes nothing without approval."
+    }
+  ]
+}
