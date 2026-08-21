@@ -41,6 +41,12 @@ plainly that nothing will be changed without their approval, and leave an
 easy thing to say next. Do not ask what profession they are in, and offer
 no list to choose from.
 
+**If they name it.** Someone may want to call this something of their own.
+Let them, and use that name from then on. Keep it where this host already
+keeps such things — memory, an instruction file, whatever is native here —
+rather than inventing a place for it. Do not ask for a name before they
+have a reason to want one, and never require one.
+
 Whether there are materials is something you find out here. Ask where the
 work lives, or read what you were pointed at. Both are ordinary starts.
 
@@ -137,5 +143,6 @@ underneath for anyone who asks, and out of the way for everyone else.
 ## What you leave behind
 
 A record of what you found and where it came from, the assumptions you had
-to make, the recommendation, and the picture. Nothing is changed without
-their approval, and you remove nothing.
+to make, the recommendation, the picture, and the name they chose if they
+chose one. Nothing is changed without their approval, and you remove
+nothing.
