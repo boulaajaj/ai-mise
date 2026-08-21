@@ -1,0 +1,10 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ai-mise",
+  "version": "0.1.0",
+  "description": "Looks at the AI setup you already have, finds what is there and going unused, and recommends the lightest thing that would help. It recommends and shows; it changes nothing without approval.",
+  "author": { "name": "Amine Boulaajaj" },
+  "homepage": "https://github.com/boulaajaj/ai-mise",
+  "repository": "https://github.com/boulaajaj/ai-mise",
+  "keywords": ["ai-setup", "concierge", "skills", "mcp", "audit"]
+}

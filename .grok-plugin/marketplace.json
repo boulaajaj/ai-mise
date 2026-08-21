@@ -1,0 +1,14 @@
+{
+  "name": "ai-mise",
+  "description": "AI-Mise: a concierge for the AI setup you already have.",
+  "owner": { "name": "Amine Boulaajaj" },
+  "plugins": [
+    {
+      "name": "ai-mise",
+      "source": "./",
+      "version": "0.1.0",
+      "category": "productivity",
+      "description": "Looks at the AI setup you already have, finds what is there and going unused, and recommends the lightest thing that would help. It recommends and shows; it changes nothing without approval."
+    }
+  ]
+}
