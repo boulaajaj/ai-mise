@@ -92,8 +92,14 @@ that name, and then that word is the trigger: `/celine` in Claude Code,
 
 ## What is placed
 
-One folder, `ai-mise`, holding `SKILL.md` and the scripts beside it. Nothing
-else, nowhere else.
+The skill folder, `ai-mise`, holding `SKILL.md` and the scripts beside it.
+
+The installers put it in two places, `~/.claude/skills/` and
+`~/.agents/skills/`, because different tools look in different ones, and
+that is what lets a single command cover all of them. They also write a zip
+next to you, which exists only for the claude.ai upload that carries the
+skill to a phone. Delete it once you have used it. Every path written is
+printed as it happens.
 
 Whatever is already on the machine stays exactly as it is. No existing
 `CLAUDE.md`, `AGENTS.md` or skill is edited, and no folder someone else made
@@ -118,9 +124,9 @@ is worth knowing before you rely on it.
 
 ## Removing it
 
-Delete the folder that was created, and nothing else. Where you linked to a
-clone rather than copying, remove the link and do not follow it — following
-it deletes the clone it points at. The clone, if there is one, is yours and
-stays.
+Delete the folders the installer named when it ran, and nothing else. Where
+you linked to a clone rather than copying, remove the link and do not follow
+it — following it deletes the clone it points at. The clone, if there is one,
+is yours and stays.
 
 Your own configuration should be byte-for-byte what it was before.
