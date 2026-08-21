@@ -18,10 +18,14 @@ If you would rather use the tool's own installer:
 
 **Claude Code**
 
+```bash
+claude plugin marketplace add boulaajaj/ai-mise
+claude plugin install ai-mise@ai-mise --scope user
 ```
-/plugin marketplace add boulaajaj/ai-mise
-/plugin install ai-mise@ai-mise
-```
+
+Inside a session already running, the same two steps are `/plugin marketplace
+add boulaajaj/ai-mise` and then `/plugin install ai-mise@ai-mise`. The scope
+picker appears there instead of the flag.
 
 **Codex**
 
