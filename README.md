@@ -1,72 +1,130 @@
 # AI-Mise
 
-AI-Mise sets up the workspace an AI assistant works from. Not the assistant
-itself — the things around it: what is true about your project, what has
-already been decided, what good work looks like in your field, and which rules
-the assistant is not allowed to touch. That setup is most of the difference
-between an assistant that guesses and one that is useful. Building it well is
-somebody's job, and it shouldn't have to be yours.
+Your AI already does more than you are using. AI-Mise looks at the setup you
+already have — which assistant you are on, what it offers, what is switched
+on and what is sitting there untouched — works out what you are actually
+trying to do, and recommends the lightest thing that would help. It prefers
+what is already there: a native capability first, an established tool second,
+something built for you last.
+
+It recommends, and it shows you. It changes nothing without your yes.
 
 ## Installing it
 
 AI-Mise is an [Agent Skill](https://agentskills.io) in the open `SKILL.md`
-format, so the same folder works in more than one tool. Installing it is the
-few lines below and nothing else — there is no runtime to go and fetch first.
-Keep `scripts/` next to `SKILL.md`: where there is a folder to read and a
-`python3` to run the script with, the first pass uses it; where there isn't, it
-reaches the same result another way. That first pass is all there is today. It
-runs whole in the first two tools below; ChatGPT has no disk, so it gets a
-smaller version and the note there says what is missing. The deeper platform
-work, once there is a workspace to project into a tool, starts with Claude
-Code — [deployment](docs/deployment.md) has the order.
-
-Or hand the job over: point your assistant at this repository and say
-install. It follows [INSTALL.md](INSTALL.md), which knows where each tool
-keeps things, checks what it placed, and tells you what it did — including
-where a tool cannot hold all of it.
-
-The commands below make no such check. Run them where one of these folders
-already exists and they will either fail or quietly do the wrong thing, so
-let the assistant handle that case or move what is there aside first.
+format, so one folder works in every tool below, and nothing here needs a
+runtime you do not already have.
 
 **Claude Code**
 
 ```bash
-git clone https://github.com/boulaajaj/ai-mise.git
-cd ai-mise
-mkdir -p ~/.claude/skills ~/ai-mise
-ln -s "$PWD/skills/ai-mise" ~/.claude/skills/ai-mise
-ln -s "$PWD/control-plane" ~/ai-mise/control-plane
+claude plugin marketplace add boulaajaj/ai-mise
+claude plugin install ai-mise@ai-mise --scope user
 ```
 
-Then, in any project, type `/ai-mise` — or just say it in your own words:
-*"have a look at this folder and tell me how you'd set it up."* Because
-they're symlinks, `git pull` updates them. On Windows without WSL, copy the
-two folders instead.
+Then type `/ai-mise`, or just say it in your own words.
+
+**Claude on the web, on the desktop, or on your phone**
+
+Customize in the sidebar, then Plugins, the plus button, Add marketplace, Add
+from a repository, and paste `https://github.com/boulaajaj/ai-mise`. It syncs
+through your account, so it turns up on the phone as well.
 
 **Codex**
 
 ```bash
-git clone https://github.com/boulaajaj/ai-mise.git
-cd ai-mise
-mkdir -p ~/.agents/skills ~/ai-mise
-cp -r skills/ai-mise ~/.agents/skills/
-cp -r control-plane ~/ai-mise/
+codex plugin marketplace add boulaajaj/ai-mise
+codex plugin add
 ```
 
-Start it with `$ai-mise`, or run `/skills` to see what's loaded. Codex also
-reads `.agents/skills/` from your working directory up to the repository root,
-so putting the folder there instead makes it available to everyone working on
-that project.
+Start it with `$ai-mise`, or run `/skills` to see what is loaded.
 
-**ChatGPT — web, desktop, or mobile**
+**Grok Build**
 
-Skills → Create → *Upload from your computer*, and upload
-`skills/ai-mise/SKILL.md`. Then start it with `@ai-mise`. Two things to know:
-personal skills are added separately on desktop and on web/mobile and don't
-sync between them, and ChatGPT can't reach a folder on your disk — it works
-from what you upload, so neither the inventory step nor the rules it reads
-its own limits from are there.
+```bash
+grok plugin marketplace add boulaajaj/ai-mise
+grok plugin install ai-mise
+```
+
+**Gemini CLI**
+
+```bash
+gemini extensions install https://github.com/boulaajaj/ai-mise --auto-update
+```
+
+**GitHub Copilot — and one command that covers several at once**
+
+```bash
+gh skill install boulaajaj/ai-mise ai-mise --scope user
+```
+
+Add `--agent claude-code`, `--agent codex`, `--agent gemini` or
+`--agent cursor` to put it where one of those looks instead.
+
+**Cursor** — Dashboard, Plugins, Team Marketplaces, Add Marketplace, Import
+from Repo, then this repository.
+
+**ChatGPT, Grok or Gemini in a browser, with nothing installed**
+
+Paste this:
+
+```
+Read https://raw.githubusercontent.com/boulaajaj/ai-mise/main/skills/ai-mise/SKILL.md and follow it. Remember it for future conversations.
+```
+
+The second sentence is what makes it stick. Where that does not work,
+[INSTALL.md](INSTALL.md) has the route for each one: a Gem for Gemini, an
+uploaded skill file for Grok, and an honest note that Meta AI has no reliable
+way in at all.
+
+## Giving it a name
+
+Every command above installs it under the folder name, so what you type is
+`/ai-mise`. To call it something of your own, clone this and run the
+installer instead:
+
+```bash
+git clone https://github.com/boulaajaj/ai-mise.git
+cd ai-mise
+sh install.sh          # or  .\install.ps1  on Windows
+```
+
+It asks what you would like to call it, installs under that name, and from
+then on that word is the trigger: `/celine` in Claude Code, `$celine` in
+Codex. It refuses rather than overwriting anything already sitting under that
+name, and it prints every path it writes so undoing it is obvious.
+
+## Things to ask it
+
+Start with the one that changes nothing:
+
+> Have a look at the AI setup I am using and at this project, and change
+> nothing. What can I already do here that I am not using? What would
+> actually improve my work on this? Then show me where things stand.
+
+Once you trust what it says back:
+
+> I keep repeating the same instructions about how this project's writing
+> should read. Is that a rule, a memory, or a skill? Pick the lightest one
+> and set it up.
+
+> What is switched on here that I never use, and what is it costing me?
+
+> Something changed on this platform since we last spoke. Is any of it worth
+> changing my setup for?
+
+On a real project it looks more like this:
+
+> I run a neighbourhood website. Read the repository, then tell me what I
+> keep doing by hand that my assistant could be doing instead, and what to
+> set up first.
+
+> Draft the standing instructions for anyone writing content on this site, so
+> I stop explaining the tone every time. Show them to me before you save
+> anything.
+
+> Of the open issues here, which are the same problem wearing different
+> clothes?
 
 ## What it sets out to do
 
