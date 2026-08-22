@@ -13,7 +13,7 @@ if they conflict, the docs win.
 - NEVER edit `control-plane/constitution/policy.yaml`. It is user-owned. Propose changes in conversation; Amine applies them by hand.
 - NEVER edit a merged ADR under `docs/decisions/` — merged ADRs are append-only; supersede with a new ADR. A *proposed* ADR may be created and revised inside its own PR, up until the merge that agrees to it.
 - Design changes require a decision record in `docs/decisions/` before or with the implementing PR.
-- Label design assertions [verified] / [prior art] / [default] (ADR-0004). Product-choice numbers live in policy.yaml, never hardcoded in prose or code.
+- Label design assertions [verified] / [prior art] / [default] (ADR-0004). Numbers that are *product* choices live in policy.yaml, never hardcoded in prose or code. Numbers governing this repository's own development belong here instead — the review-round limit below, the 200-line budget for this file. policy.yaml is the product's constitution and is user-owned; a development-harness threshold has no business in it, and could not be put there by an agent in any case.
 - Plain-language surface is an exit criterion of every phase: if a non-technical professional couldn't understand the output, the phase is not done.
 - An exit test names a capability, never a project (ADR-0011). A phase is done when the product does the thing for a case it has not met, in words the person understands. A named project may illustrate a phase; it may not define its exit.
 
