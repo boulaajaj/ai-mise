@@ -1,6 +1,8 @@
 # ai-mise — development harness
 
-This repo builds a governed workspace compiler. It governs its own development
+This repo builds AI-Mise: a concierge for the AI setup someone already has.
+It is invoked by name, orients to the host before anything else, audits what is
+already there before adding, and changes nothing without approval (ADR-0016). It governs its own development
 the same way: this file is the *projection* of the authoritative docs below —
 if they conflict, the docs win.
 
