@@ -15,11 +15,11 @@ if they conflict, the docs win.
 - Design changes require a decision record in `docs/decisions/` before or with the implementing PR.
 - Label design assertions [verified] / [prior art] / [default] (ADR-0004). Product-choice numbers live in policy.yaml, never hardcoded in prose or code.
 - Plain-language surface is an exit criterion of every phase: if a non-technical professional couldn't understand the output, the phase is not done.
-- Do not start a phase until the previous phase's exit test passes (phases and exit tests: `docs/architecture.md` §9).
+- An exit test names a capability, not an artefact (ADR-0011). Nothing is done because a file exists; it is done when the thing it promised can be shown working.
 
 ## Read before working
 
-- `docs/architecture.md` — the design (v2, authoritative)
+- `docs/architecture.md` — the earlier design. Superseded wherever it conflicts with ADR-0016 or `HANDOFF.md`, and being corrected under #99. Read `HANDOFF.md` first.
 - `HANDOFF.md` — current state, next actions, ground rules
 - `docs/meta/dev-harness.md` — how this repo evolves itself (retrospectives, proposals, the self-hosting ladder)
 - `docs/deployment.md` — target platforms and the v0 Personal Preview slice
