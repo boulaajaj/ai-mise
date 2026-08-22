@@ -15,7 +15,7 @@ if they conflict, the docs win.
 - Design changes require a decision record in `docs/decisions/` before or with the implementing PR.
 - Label design assertions [verified] / [prior art] / [default] (ADR-0004). Product-choice numbers live in policy.yaml, never hardcoded in prose or code.
 - Plain-language surface is an exit criterion of every phase: if a non-technical professional couldn't understand the output, the phase is not done.
-- An exit test names a capability, not an artefact (ADR-0011). Nothing is done because a file exists; it is done when the thing it promised can be shown working.
+- An exit test names a capability, never a project (ADR-0011). A phase is done when the product does the thing for a case it has not met, in words the person understands. A named project may illustrate a phase; it may not define its exit.
 
 ## Review and merge
 
