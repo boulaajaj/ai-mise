@@ -68,11 +68,15 @@ it. Any document still describing a builder is stale, not authoritative.
 ## The open question this project owns
 
 Every harness system surveyed in the August 2026 build-versus-adopt review
-needs a benchmark, or a stream of labelled tasks, to close its loop. A person
-has neither. *How do you know a personal harness got better?* is unanswered
-anywhere in the field, and answering it is what separates AI-Mise from a
-configuration generator. The evaluation work above is the first honest
-attempt at it.
+needs a benchmark, or a stream of labelled tasks, to close its loop.
+**[verified]** — the finding was unanimous across roughly twenty projects
+and papers, each checked against its primary source. A person has neither.
+
+That *how do you know a personal harness got better?* is therefore the
+question this project owns, and that answering it is what separates AI-Mise
+from a configuration generator, is *[default]* — our reading of that
+finding rather than a claim any source makes. The evaluation work above
+(#128, #129) is the first attempt at it.
 
 ## Known open questions
 
