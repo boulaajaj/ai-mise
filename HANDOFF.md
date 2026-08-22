@@ -1,62 +1,82 @@
-# Handoff — continuing AI-Mise in Claude Code
+# Handoff — continuing AI-Mise
 
-This repo is the Phase 0 deliverable (contract + threat model) plus the Phase 1
-read-only first-contact skill. This file tells a Claude Code session (or you)
-exactly where it stands and what to do next.
+This file tells the next session — yours, or another agent's — what AI-Mise
+is now, what is built, and what to do next. Read it before
+`docs/architecture.md`, which still describes the earlier design.
 
-## 0. This repo governs itself
+## What AI-Mise is
 
-ai-mise is self-hosting: read `CLAUDE.md` (the dev-harness rules) and
-`docs/meta/dev-harness.md` (how this repo evolves under its own governance —
-shadow-mode retrospectives in `docs/meta/retro-log.md`, `meta-harness` issues,
-periodic trajectory reviews). End every working session by appending a
-retro-log entry. Every gap we hit in our own process is product intelligence.
+A concierge for the AI setup someone already has. It is invoked by name and
+is not ambient. It orients to the host first — which assistant this is, what
+it offers, what is switched on and what is going unused — then works out what
+the person is actually trying to do, audits what is already there before
+adding anything, and recommends the lightest thing that would help: a native
+capability first, an established tool second, something built for them last.
 
-## 1. Ground rules for every future session
+It recommends, and it shows. It changes nothing without approval.
 
-- `control-plane/constitution/policy.yaml` is user-owned. No agent edits it. Ever. Propose changes in conversation; Amine applies them by hand.
-- Design changes require a decision record in `docs/decisions/` (see ADR-0001..0004 for the format and for why the architecture is shaped this way).
-- Claim hygiene (ADR-0004): label design assertions [verified] / [prior art] / [default]. Numbers that are product choices go in policy.yaml, not prose.
-- The plain-language surface is a first-class exit criterion in every phase. If a non-technical professional couldn't understand the output, the phase isn't done.
-- Read `docs/architecture.md` before writing code. `docs/history/blueprint-v1.md` is superseded context, kept for the research source list.
+It is **not** a workspace compiler and it does not build a workspace. That
+was the earlier design. ADR-0016 records the change; #124 and #125 shipped
+it. Any document still describing a builder is stale, not authoritative.
 
-## 2. Current state
+## Ground rules for every session
+
+- `control-plane/constitution/policy.yaml` is user-owned. No agent edits it.
+  Propose changes in conversation; Amine applies them by hand.
+- Never commit directly to `main`. Every change is a pull request.
+- Never edit a **merged** ADR under `docs/decisions/` — supersede it with a
+  new one. A **proposed** ADR may be revised inside its own pull request
+  (#113).
+- Claim hygiene (ADR-0004): label design assertions [verified], [prior art]
+  or [default]. Numbers that are product choices belong in policy.yaml
+  rather than in prose.
+- The plain-language surface is a first-class exit criterion. If a
+  non-technical person could not understand the output, it is not done.
+- `docs/meta/retro-log.md` is append-only. End a working session by adding
+  to it.
+
+## Where it stands
 
 | Piece | State |
 |---|---|
-| Product boundary, planes, lifecycle, scorecard | `docs/architecture.md` (v2, post-review) |
-| Authoritative policy + configurable defaults | `control-plane/constitution/policy.yaml` |
-| Transaction schemas | `control-plane/approval/*.schema.json` |
-| Threat suite | 34 scenarios defined, 0 automated (`control-plane/threat-tests/scenarios.md`) |
-| First validator | `protected_path_validator.py` — working; self-tested against traversal, protected paths, symlinks, tier smuggling |
-| First contact (Phase 1) | `skills/ai-mise/` — one SKILL.md whether or not there are materials (ADR-0012 decision 4), plus working `inventory.py` (hashing, symlink-refusing) |
-| Dev harness (self-hosting) | `CLAUDE.md`, `docs/meta/dev-harness.md`, `docs/meta/retro-log.md` |
-| Mutation gateway, adapters, evals | Directories exist; not implemented (Phase 2–3) |
+| The skill | `skills/ai-mise/SKILL.md` — orient, understand, anchor, audit, recommend, show |
+| Install | One repository, six manifests, each tool's own command. Verified live against the remote (#125) |
+| Naming | `install.sh` / `install.ps1` install under a chosen name, making that word the trigger |
+| Reach | Claude Code, Claude web/desktop/mobile, Codex, Grok Build, Gemini CLI, GitHub Copilot, Cursor; ChatGPT, Grok and Claude in a browser via one pasted URL |
+| Inventory | `skills/ai-mise/scripts/inventory.py` — hashing, symlink-refusing, reproducible |
+| First validator | `protected_path_validator.py` — working, self-tested |
+| Dev harness | `CLAUDE.md`, `docs/meta/dev-harness.md`, `docs/meta/retro-log.md` |
+| Evaluation | Not built. It is the open question this project owns — see below |
 
-## 3. Phase 0 — remaining items (do these first)
+## What to do next
 
-1. **Baselines** (needs Amine's machine): where a case provides a folder, run plain `/init` (try `CLAUDE_CODE_NEW_INIT=1`) on the same materials the bootstrapper is given, and snapshot the output. Store under `control-plane/evaluation/baselines/<case>/` (or record paths if too large). The blank-slate case has no folder and so has no `/init` baseline — `control-plane/evaluation/baselines/README.md` says why. A baseline exists to compare like with like (ADR-0011).
-2. **Validate the schemas**: write 3 example proposals (routine / structural / safety) and 2 receipts; check them against the schemas with a JSON-schema validator; fix schema friction now, not in Phase 2.
-3. **Policy schema**: write `control-plane/constitution/policy.schema.json` and validate policy.yaml against it.
+1. **Run it cold on a real project** (#18, #58). This is the only work in the
+   backlog that can return a negative result, and little downstream is worth
+   doing until it has. Run it against a code project and against a non-code
+   personal case, and do not reconcile the two: the gap between them says
+   which product this actually is.
+2. **Orientation and the understanding gate** (#85, #88). #85 owns learning
+   what the environment already knows before asking the person to repeat
+   themselves. #88 owns whether enough is understood to recommend anything —
+   including the layered analysis that makes a large project tractable, and
+   the difference between having looked at something and understanding it.
+3. **Evaluation.** A portable record of what a test run actually did, and a
+   behavioural regression suite for the skill across hosts. This is quality
+   assurance for an instruction, not automatic self-improvement — that was
+   deliberately descoped.
 
-Phase 0 exit: you can state exactly what is authoritative, what is generated, and which process may change each item. (The architecture doc states it; the baselines make it testable.)
+## The open question this project owns
 
-## 4. Phase 1 — read-only bootstrapper (next build work)
+Every harness system surveyed in the August 2026 build-versus-adopt review
+needs a benchmark, or a stream of labelled tasks, to close its loop. A person
+has neither. *How do you know a personal harness got better?* is unanswered
+anywhere in the field, and answering it is what separates AI-Mise from a
+configuration generator. The evaluation work above is the first honest
+attempt at it.
 
-Build order:
-1. Run `skills/ai-mise/` from nothing — no folder, no domain — and see what it reaches with nothing to read (#58). This is Phase 1's exit test (ADR-0011).
-2. Then run it against a real folder of materials and iterate on findings quality: every finding must cite manifest paths; safety-critical constraints must surface prominently and never be buried.
-3. Implement the unknowns ledger → four-part question contract → assumptions ledger flow exactly as `skills/ai-mise/SKILL.md` specifies; enforce the round cap from policy.yaml.
-4. Produce `proposal.md` and show it to Amine.
+## Known open questions
 
-Phase 1 exit: the proposal is good enough that Amine would seriously consider approving it. No writes, no wiki, no SQLite, no self-improvement.
-
-## 5. Phase 2 preview (do not start until Phase 1 exit passes)
-
-Mutation gateway (`stage-change`, `validate-change`, `apply-change`, `restore-change` in `control-plane/mutation/`), remaining validators (frontmatter, link, provenance, path — reuse `protected_path_validator.py` as the pattern), receipt issuance, and automation of the 34 threat scenarios. Phase 2 exit: unauthorized writes fail, approved writes succeed, restore reproduces exact directory hashes.
-
-## 6. Known open questions (inherited, unresolved)
-
-- Interview stopping quality is the least-grounded area of the whole design — expect Phase 1 iteration.
-- Anthropic platform guidance moves fast (200-line CLAUDE.md figure is from June 2026; `CLAUDE_CODE_NEW_INIT` is env-gated). Thresholds live in policy.yaml so drift is a one-line fix.
-- Auto-memory redirect mechanics (policy `platform.claude_code.auto_memory`) need a concrete implementation in Phase 3.
+- Interview stopping quality remains the least-grounded area of the design.
+- Platform capabilities move monthly, so anything freshness-sensitive is
+  checked live at runtime rather than answered from memory.
+- What is remembered between runs, and across hosts, is unsettled (#23).
