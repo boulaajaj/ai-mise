@@ -1,6 +1,6 @@
 # ADR-0016: AI-Mise starts from the environment, not from a folder
 
-**Status:** Proposed · 2026-08-05 (merge = agreement)
+**Status:** Accepted · 2026-08-21 (proposed 2026-08-05)
 **Trigger:** Amine's message, 2026-08-05, relaying an extended design exchange with another assistant and narrowing the product's scope by hand: it generates the best supporting arrangement it can for the person's problem, it is triggered rather than ambient, and it keeps track of everything it has built. Not all of that is decided here. Review of a first draft found it deciding five things at once; this record keeps the two that are genuinely one decision, and the rest is listed under *What this record does not decide* and settled elsewhere.
 
 ## Context
@@ -23,14 +23,27 @@ Both decisions below are *[default]* — chosen product behavior, not derived fr
 
 Three things travelled with the trigger and are decided elsewhere, because each is a separate argument that would otherwise have hidden inside this one.
 
-- **What AI-Mise promises, and how the promise is checked** — #80. The existing baseline stands: a proposal is compared against plain `/init` on the same materials, with the task, baseline, metric and target fixed before the run. No global threshold belongs in `policy.yaml` yet.
-- **What is remembered across workspaces** — #109. [[ADR-0013-local-history-by-default|ADR-0013]] governs history inside a workspace; the index across them is not built and is not decided here.
-- **Standing requests, and what a run may never change** — #110.
+- **What AI-Mise promises, and how the promise is checked.** Raised as #80, since folded into the first pilot (#18) and now the subject of the evaluation work. The existing baseline stands: a proposal is compared against plain `/init` on the same materials, with the task, baseline, metric and target fixed before the run. No global threshold belongs in `policy.yaml` yet.
+- **What is remembered across workspaces.** Raised as #109, since folded into #23. [[ADR-0013-local-history-by-default|ADR-0013]] governs history inside a workspace; the index across them is not built and is not decided here.
+- **Standing requests, and what a run may never change.** Raised as #110, since folded into #23.
+
+## What has happened since it was proposed
+
+Both decisions shipped before this record was merged, which is the wrong way
+round and worth saying plainly rather than tidying away. #124 rewrote the
+skill so that it orients to the host before it reads anything belonging to
+the person, and #125 made it an explicitly invoked skill, installed by name
+on every host that takes one. So this record documents behaviour that already
+exists rather than authorising behaviour that does not.
+
+It is merged anyway. The decision is still the decision, and the alternative
+is a product whose central choice is written down nowhere.
+
 
 ## Consequences
 
-- `control-plane/constitution/policy.yaml`'s `identity.boundary` no longer describes the product. This ADR does not change it and cannot: the control plane is a protected asset and that sentence is the person's to write. Until it is rewritten by hand, the repository's own law and its decisions disagree, and the law wins wherever anything compiles from it.
-- `docs/meta/direction.md` says AI-Mise *"quietly sets everything in place… and then gets out of your way"* **[verified]**. Decision 2 contradicts it directly. That page is not protected, so unlike the boundary sentence it can be corrected — by a separate pull request, not this one.
+- `control-plane/constitution/policy.yaml`'s `identity.boundary` no longer describes the product, and nothing now reads it. The skill stopped resolving policy when it became the concierge (#124), and the control plane left the install altogether (#125). The sentence is still the person's to write and this ADR does not change it. What changed is the stake: a disagreement between that file and these decisions no longer compiles into anything.
+- `docs/meta/direction.md` says AI-Mise *"quietly sets everything in place… and then gets out of your way"* **[verified]**. Decision 2 contradicts it directly. That page is not protected and can be corrected; the correction belongs with the documentation pass in #99.
 - #85 gains the capability record decision 1 implies, rather than that record becoming an issue of its own.
 - Nothing here requires a new phase scheme. The existing milestones already order this work; what they lacked was assignments, not structure.
 - The word for decision 1's underlying model is deliberately absent from every surface a person sees. The model may be typed and explicit internally; the vocabulary for it belongs in [[architecture]], and [[METHOD]]'s rule about plain language everywhere the user looks governs the rest.
