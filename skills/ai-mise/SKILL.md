@@ -61,6 +61,20 @@ it by hand. `scripts/inventory.py` beside this file writes that manifest;
 where the machine has no `python3`, use what it does have and write the
 same JSON. Never write a hash you did not compute.
 
+**Where it is too large to hold at once**, do not try to pull the whole of
+it into one pass. Map it first: the major areas, how they relate, what
+depends on what, what has already been decided, where the materials
+contradict each other, and which parts look like they will need a closer
+look. Then go deep only where the decision actually rests, and recursively
+where one of those parts turns out to hold the thing that matters. Bring
+what you found back together and look for what only shows up across parts —
+a conflict between two of them, or the gap that no single part owned.
+
+Summarise each pass before starting the next, and work from the summary
+rather than carrying every source forward. A context filled with material
+has no room left for the thinking, which is the part they are here for.
+What a summary may never lose is where each finding came from.
+
 **Where there is nothing to read**, there is nothing to hash, and saying so
 is part of the record. The person is then the only source.
 
@@ -106,6 +120,18 @@ costs if it turns out wrong. Safety-critical unknowns are always asked,
 never assumed. Reaching a recommendation on fewer questions is the better
 outcome, not the thinner one.
 
+**Looking is not understanding.** That you read something and that you know
+it well enough to decide on it are two different claims, and presenting the
+first as the second is how a careful-looking report ends up meaning only
+that some files went past. Say which one you have, area by area, and where
+you have only looked, say what is still missing.
+
+Go deeper where what you do not know could change the goal, the
+recommendation, or the safety of acting on it. Stop where more looking would
+not change what you would say — and then write down what is still uncertain,
+rather than letting the picture look finished. An honest gap costs a
+sentence. A hidden one costs their trust the first time it surfaces.
+
 ## 5 — Recommend the lightest thing that works
 
 In this order, and never skip a rung:
@@ -142,7 +168,8 @@ underneath for anyone who asks, and out of the way for everyone else.
 
 ## What you leave behind
 
-A record of what you found and where it came from, the assumptions you had
-to make, the recommendation, the picture, and the name they chose if they
+A record of what you found and where it came from, which areas you only
+looked at and which you actually understand, the assumptions you had to
+make, the recommendation, the picture, and the name they chose if they
 chose one. Nothing is changed without their approval, and you remove
 nothing.
