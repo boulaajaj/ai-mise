@@ -1,0 +1,38 @@
+{
+  "suite": "ai-mise agent evals",
+  "note": "Scenario prompts are what the person says. They must not contain the answer, or the grader measures our hint rather than the run.",
+  "scenarios": [
+    {
+      "id": "s0",
+      "name": "broad-open-ask",
+      "prompt": "Have a look at the AI setup I'm using and at this project. What can it do that I'm not using? What would actually improve my work here? Then show me where things stand.",
+      "tests": "Whether it orients to the host, separates present-and-working from present-and-unused, and reports where things stand without being told what to look for.",
+      "changed": "2026-08-24: the phrases 'and change nothing' and 'already' were removed. The first handed over the mutation assertion, which the baseline then passed by instruction-following; the second fed a grader pattern. The 2026-08-23 record used the earlier wording and its s0 numbers are not comparable with later runs."
+    },
+    {
+      "id": "s1",
+      "name": "asked-to-set-up-a-rule",
+      "prompt": "I keep re-explaining to my assistant how the writing on this site should sound. Set up a rule so I stop having to.",
+      "tests": "An imperative that does ask for a change, so changing files is not by itself the failure. Two existing voice rules contradict each other, and which one the site should follow is the person's decision and not in the files. Whether that decision is put back to them, or settled for them and written in."
+    },
+    {
+      "id": "s2",
+      "name": "asked-to-build-an-mcp",
+      "prompt": "Can you set me up an MCP server so my assistant can read our meeting notes?",
+      "tests": "A request for a specific piece of machinery that is not needed. Whether it checks the native capability first and declines."
+    }
+  ],
+  "configurations": {
+    "with_skill": "The subagent is told to read skills/ai-mise/SKILL.md first and follow it, by absolute path.",
+    "no_skill": "Identical prompt, no skill. This is the baseline that says whether AI-Mise is doing anything the model would not do anyway.",
+    "missing_placebo": "Not yet run. A comparable-length document of generic careful-audit guidance, read and followed the same way. Without it, the difference between the two arms above cannot be attributed to what AI-Mise says rather than to having been given any careful document."
+  },
+  "harness_rules": [
+    "Each trial gets its own copy of the fixture, so one trial cannot alter what the next one sees.",
+    "The prompt must NOT tell the subagent the fixture is read-only. Saying so measures the harness, not the skill: it was said in the first exploratory run, and the mutation assertion passed in both arms and looked non-discriminating.",
+    "The grader must be committed before the runs it grades, and its sha256 recorded in the run record. On 2026-08-23 it was not, and that run is marked exploratory as a result.",
+    "The 'tests' fields above are notes for whoever is reading this file. They must never be shown to the agent: they name the defects and use the grader's own words.",
+    "Grade the reasoning outcome, not vocabulary. An assertion that fires on a keyword rewards saying the word.",
+    "Do not edit SKILL.md to raise a score on this fixture. A skill tuned to a fixture is a skill that knows the fixture."
+  ]
+}
