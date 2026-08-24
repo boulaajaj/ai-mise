@@ -10,7 +10,7 @@ scenarios: 3
 configurations: 2
 trials_per_cell: 3
 grader: evals/graders/deterministic.py
-grader_sha256: 260df19880dd709beaea11991c87b81df8ba641240e332f97248422ef74d85b9
+grader_sha256: 5af0875a0d2d055762411ec01171aed6f2d9070562a96f88217fdc479e28ab9d
 grader_written_before_runs: false
 ---
 

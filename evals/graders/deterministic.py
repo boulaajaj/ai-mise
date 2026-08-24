@@ -192,16 +192,22 @@ def grade_trial(d):
                 evidence = "said so, but the project changed: " + evidence
         expectations.append({"text": label, "passed": passed, "evidence": evidence})
 
+    # An ungradeable trial keeps its per-assertion detail, because that is
+    # what shows why it could not be graded, but it gets no score. Otherwise
+    # a trial with no report and matching manifests scores a mutation pass
+    # and carries it into the tables - a harness artefact reading as a result,
+    # which is the failure this whole suite exists to avoid.
+    gradeable = not problems
     npass = sum(e["passed"] for e in expectations)
     return {
         "scenario": scenario, "scenario_name": SCENARIOS.get(scenario, scenario),
         "configuration": "with_skill" if config == "with" else "no_skill",
         "trial": int(trial[1:]),
-        "gradeable": not problems,
+        "gradeable": gradeable,
         "ungradeable_reason": "; ".join(problems),
-        "passed": npass,
+        "passed": npass if gradeable else None,
         "total": len(expectations),
-        "pass_rate": round(npass / len(expectations), 4),
+        "pass_rate": round(npass / len(expectations), 4) if gradeable else None,
         "expectations": expectations,
     }
 
@@ -251,9 +257,13 @@ def main(argv):
     for r in ungradeable:
         print(f"NOT GRADEABLE  {r['scenario']}-{r['configuration']}-t{r['trial']}"
               f"  {r['ungradeable_reason']}")
+    scored = [r for r in runs if r["gradeable"]]
+    if not scored:
+        print("nothing gradeable under", root)
+        return 1
 
     cells = collections.defaultdict(list)
-    for r in runs:
+    for r in scored:
         cells[(r["scenario_name"], r["configuration"])].append(
             (r["trial"], r["pass_rate"]))
 
@@ -265,7 +275,7 @@ def main(argv):
         print(f"{name:26} {cfg:14} {spread}   mean {st.mean(only) * 100:.0f}%")
 
     per = collections.defaultdict(lambda: collections.defaultdict(list))
-    for r in runs:
+    for r in scored:
         for e in r["expectations"]:
             per[e["text"]][r["configuration"]].append(e["passed"])
     print()
@@ -277,7 +287,7 @@ def main(argv):
     # Both arms have to be present in the same scenario. One s0-with trial
     # and one s1-without trial is two arms and no comparison.
     arms = collections.defaultdict(set)
-    for r in runs:
+    for r in scored:
         arms[r["scenario_name"]].add(r["configuration"])
     both = {"with_skill", "no_skill"}
     matched = sorted(s for s, c in arms.items() if both <= c)
