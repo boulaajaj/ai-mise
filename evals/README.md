@@ -104,6 +104,14 @@ somewhere defensible. The probes here have broken this rule before: an
 unanchored `native` matched *alternative*, and credited a baseline run with
 recommending a native capability.
 
+**Do not let a label claim more than the instrument sees.** These graders
+compare hashes and match regexes. They cannot see approval, intention, or
+the order things happened in, so a label saying "without approval",
+"before proposing" or "the dead server" is asserting something nobody
+checked — and it reads as evidence once it reaches a table. Name each
+assertion for the observation. "Left every project file byte-identical" is
+weaker than "changed nothing without approval", and it is what happened.
+
 **Do not put the answer in the prompt.** `broad-open-ask` used to end with
 "and change nothing", which handed over the one assertion that cannot
 otherwise be gamed. It has been removed, which is why the 2026-08-23 record's
