@@ -1,2 +1,3 @@
 install.sh text eol=lf
 evals/fixture.sh text eol=lf
+evals/graders/deterministic.py text eol=lf

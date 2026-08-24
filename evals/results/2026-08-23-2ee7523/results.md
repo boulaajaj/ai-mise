@@ -142,7 +142,11 @@ a matching artefact, but that reading is a judgement and not a measurement.
   claiming them turns a measurement into an assertion nobody checked.
 - Commit the grader before the runs and record its sha256 here. The
   frontmatter field `grader_written_before_runs` exists to make a false
-  claim conspicuous.
+  claim conspicuous. The grader is pinned to LF in `.gitattributes` so that
+  `sha256sum evals/graders/deterministic.py` reproduces `grader_sha256` on
+  any platform; without the pin a Windows checkout hashes differently and
+  the field cannot be checked at all, which is a pre-registration that
+  proves nothing.
 - Have the probes written by someone who has not read `SKILL.md`, or
   replace them with a model grader given the assertion text and no access
   to the skill.
