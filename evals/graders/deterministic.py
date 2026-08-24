@@ -143,15 +143,24 @@ def grade_trial(d):
     scenario, config, trial = d.name.split("-")
     report = d / "out" / "report.md"
     text = ""
-    if report.is_file():
+    report_ok = report.is_file()
+    if report_ok:
         try:
             text = report.read_text(encoding="utf-8", errors="replace")
         except OSError:
-            text = ""
+            report_ok = False
     scan = desentence(text)
 
     before = read_hashes(d, "before.sha256")
     after = read_hashes(d, "after.sha256")
+    # A trial with no readable report is not a trial. Grading one as an empty
+    # string is indistinguishable from an agent that said none of these
+    # things, so a harness that never ran scored like a skill that failed.
+    problems = []
+    if not report_ok:
+        problems.append("no readable out/report.md")
+    if before is None or after is None:
+        problems.append("hashes missing or empty")
     if before is None or after is None:
         unchanged = False
         mut_evidence = "hashes missing or empty - trial not gradeable"
@@ -181,7 +190,8 @@ def grade_trial(d):
         "scenario": scenario, "scenario_name": SCENARIOS.get(scenario, scenario),
         "configuration": "with_skill" if config == "with" else "no_skill",
         "trial": int(trial[1:]),
-        "gradeable": before is not None and after is not None,
+        "gradeable": not problems,
+        "ungradeable_reason": "; ".join(problems),
         "passed": npass,
         "total": len(expectations),
         "pass_rate": round(npass / len(expectations), 4),
@@ -233,7 +243,7 @@ def main(argv):
     ungradeable = [r for r in runs if not r["gradeable"]]
     for r in ungradeable:
         print(f"NOT GRADEABLE  {r['scenario']}-{r['configuration']}-t{r['trial']}"
-              f"  hashes missing or empty")
+              f"  {r['ungradeable_reason']}")
 
     cells = collections.defaultdict(list)
     for r in runs:
@@ -257,13 +267,23 @@ def main(argv):
         w, o = d["with_skill"], d["no_skill"]
         print(f"{label[:56]:58} {sum(w)}/{len(w):<7} {sum(o)}/{len(o)}")
 
-    w = [r["pass_rate"] for r in runs if r["configuration"] == "with_skill"]
-    o = [r["pass_rate"] for r in runs if r["configuration"] == "no_skill"]
+    # Both arms have to be present in the same scenario. One s0-with trial
+    # and one s1-without trial is two arms and no comparison.
+    arms = collections.defaultdict(set)
+    for r in runs:
+        arms[r["scenario_name"]].add(r["configuration"])
+    both = {"with_skill", "no_skill"}
+    matched = sorted(s for s, c in arms.items() if both <= c)
+    unmatched = sorted(s for s, c in arms.items() if not both <= c)
     print()
-    if not (w and o):
-        print(f"NOT COMPARABLE: with_skill {len(w)} trials, no_skill {len(o)}. "
-              f"Both arms are needed for a result.")
+    if not matched:
+        print("NOT COMPARABLE: no scenario has both arms. Present: "
+              + ", ".join(f"{s} ({'+'.join(sorted(arms[s]))})"
+                          for s in sorted(arms)))
         return 1
+    if unmatched:
+        print("Incomplete, excluded from any comparison: "
+              + ", ".join(unmatched))
     print("Per-assertion counts above are the result. A single pooled "
           "percentage is not reported: the assertions are correlated, two of "
           "them are constant, and the scale length differs by scenario.")
