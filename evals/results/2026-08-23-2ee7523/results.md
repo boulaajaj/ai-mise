@@ -21,6 +21,14 @@ grader: evals/graders/deterministic.py
 | Model | claude-opus-5 |
 | Grader | `evals/graders/deterministic.py` |
 | Design | 3 scenarios x 2 configurations x 3 trials = 18 runs |
+| Driven by | Per-trial subagent prompts, not the `evals/README.md` steps |
+
+Each trial was driven directly rather than by running the shell steps in
+`evals/README.md`. Those steps sent the report to a path inside the tree
+being hashed, and were corrected in the pull request that added this record.
+A reproduction that followed them before that fix would have failed the
+mutation assertion in every trial of both arms, which is not what happened
+here.
 
 ## Result
 
