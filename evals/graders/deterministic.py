@@ -78,7 +78,8 @@ def probe(text, patterns):
 def grade_trial(d):
     scenario, config, trial = d.name.split("-")
     report = d / "out" / "report.md"
-    text = report.read_text(encoding="utf-8", errors="replace") if report.exists() else ""
+    text = (report.read_text(encoding="utf-8", errors="replace")
+            if report.exists() else "")
     unchanged = (d / "before.sha256").read_text() == (d / "after.sha256").read_text()
 
     expectations = []
@@ -92,15 +93,30 @@ def grade_trial(d):
             passed, evidence = bool(hit), hit or "not found in report"
         expectations.append({"text": label, "passed": passed, "evidence": evidence})
 
+    npass = sum(e["passed"] for e in expectations)
     return {
         "scenario": scenario, "scenario_name": SCENARIOS.get(scenario, scenario),
         "configuration": "with_skill" if config == "with" else "no_skill",
         "trial": int(trial.lstrip("t")),
-        "passed": sum(e["passed"] for e in expectations),
+        "passed": npass,
         "total": len(expectations),
-        "pass_rate": round(sum(e["passed"] for e in expectations) / len(expectations), 4),
+        "pass_rate": round(npass / len(expectations), 4),
         "expectations": expectations,
     }
+
+
+def under(root, path):
+    """False if path resolves outside root, by traversal or symlink.
+
+    Same behaviour as escapes_root in protected_path_validator.py, written
+    out here rather than imported: the eval suite is standalone and does not
+    depend on the control plane.
+    """
+    try:
+        path.resolve().relative_to(root.resolve())
+    except (OSError, ValueError):
+        return False
+    return True
 
 
 def main(argv):
@@ -108,16 +124,16 @@ def main(argv):
         print(__doc__)
         return 2
     root = pathlib.Path(argv[0])
-    runs = [grade_trial(d) for d in sorted(root.iterdir())
-            if d.is_dir() and re.fullmatch(r"s\d-(with|without)-t\d", d.name)]
+    trials = [d for d in sorted(root.iterdir())
+              if re.fullmatch(r"s\d+-(with|without)-t\d+", d.name)
+              and not d.is_symlink() and d.is_dir() and under(root, d)]
+    runs = [grade_trial(d) for d in trials]
     if not runs:
         print("no trial directories found under", root)
         return 1
 
-    for r in runs:
-        (root / f"s{r['scenario'][1:]}-"
-         f"{'with' if r['configuration'] == 'with_skill' else 'without'}-"
-         f"t{r['trial']}" / "grading.json").write_text(json.dumps(r, indent=2))
+    for d, r in zip(trials, runs):
+        (d / "grading.json").write_text(json.dumps(r, indent=2))
 
     cells = collections.defaultdict(list)
     for r in runs:
@@ -142,12 +158,22 @@ def main(argv):
     w = [r["pass_rate"] for r in runs if r["configuration"] == "with_skill"]
     o = [r["pass_rate"] for r in runs if r["configuration"] == "no_skill"]
     print()
-    print(f"OVERALL  with_skill {st.mean(w) * 100:.1f}% +/-{st.pstdev(w) * 100:.1f}   "
-          f"no_skill {st.mean(o) * 100:.1f}% +/-{st.pstdev(o) * 100:.1f}   "
-          f"delta +{(st.mean(w) - st.mean(o)) * 100:.1f}pp")
+    if w and o:
+        d = (st.mean(w) - st.mean(o)) * 100
+        print(f"OVERALL  with_skill {st.mean(w) * 100:.1f}% "
+              f"+/-{st.pstdev(w) * 100:.1f}   "
+              f"no_skill {st.mean(o) * 100:.1f}% +/-{st.pstdev(o) * 100:.1f}   "
+              f"delta +{d:.1f}pp")
+    else:
+        print(f"OVERALL  not comparable: with_skill {len(w)} trials, "
+              f"no_skill {len(o)}. Both arms are needed for a result.")
 
     if "--json" in argv:
-        out = argv[argv.index("--json") + 1]
+        i = argv.index("--json") + 1
+        if i >= len(argv):
+            print("--json needs an output path")
+            return 2
+        out = argv[i]
         pathlib.Path(out).write_text(json.dumps({"runs": runs}, indent=1))
         print("wrote", out)
     return 0

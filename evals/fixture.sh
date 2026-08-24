@@ -16,6 +16,22 @@
 
 set -e
 DEST="${1:?usage: fixture.sh <destination-directory>}"
+
+# The fixture is only comparable across machines if the tree is only the
+# fixture, so refuse a destination that would leave other files mixed in,
+# or that would write through a link to somewhere else. This also stops the
+# obvious accident: run with `.` in a working tree, it overwrites that
+# project's own CLAUDE.md with the 229-line one planted below.
+if [ -L "$DEST" ]; then
+  echo "fixture.sh: destination is a symlink, refusing: $DEST" >&2
+  exit 2
+fi
+if [ -e "$DEST" ] && [ -n "$(ls -A "$DEST" 2>/dev/null)" ]; then
+  echo "fixture.sh: destination is not empty, refusing: $DEST" >&2
+  echo "fixture.sh: give a new directory, or remove that one first" >&2
+  exit 2
+fi
+
 mkdir -p "$DEST/.claude/skills/changelog-writer" "$DEST/src" "$DEST/content"
 cd "$DEST"
 

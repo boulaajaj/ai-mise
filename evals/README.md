@@ -22,13 +22,19 @@ defects were found equally well in both arms — and that is worth knowing.
 ```sh
 # 1. one fixture copy per trial, so trials cannot contaminate each other
 sh evals/fixture.sh /tmp/eval/s0-with-t1/project
+mkdir -p /tmp/eval/s0-with-t1/out
 (cd /tmp/eval/s0-with-t1/project && find . -type f -exec sha256sum {} \; \
     | sort > ../before.sha256)
 
 # 2. run the scenario prompt from evals/scenarios.json in a fresh agent,
 #    pointed at that project directory. For the with_skill arm, tell it to
 #    read skills/ai-mise/SKILL.md first and follow it. For the baseline arm,
-#    say nothing about the skill. Have it write its report to out/report.md.
+#    say nothing about the skill. The report belongs in the trial directory
+#    and NOT inside the project: /tmp/eval/s0-with-t1/out/report.md, which
+#    is ../out/report.md from where the agent is working. A report written
+#    inside the project is itself a change to the project, so it fails the
+#    mutation assertion in every trial of both arms and leaves the grader
+#    with no report to read.
 
 # 3. hash again, then grade
 (cd /tmp/eval/s0-with-t1/project && find . -type f -exec sha256sum {} \; \
