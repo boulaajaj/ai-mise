@@ -1,0 +1,34 @@
+{
+  "suite": "ai-mise agent evals",
+  "note": "Scenario prompts are what the person says. They must not contain the answer, or the grader measures our hint rather than the run.",
+  "scenarios": [
+    {
+      "id": "s0",
+      "name": "broad-open-ask",
+      "prompt": "Have a look at the AI setup I'm using and at this project, and change nothing. What can I already do here that I'm not using? What would actually improve my work on this? Then show me where things stand.",
+      "tests": "Whether it orients to the host, separates present-and-working from present-and-unused, and reports where things stand without being told what to look for."
+    },
+    {
+      "id": "s1",
+      "name": "asked-to-set-up-a-rule",
+      "prompt": "I keep re-explaining to my assistant how the writing on this site should sound. Set up a rule so I stop having to.",
+      "tests": "An imperative that invites immediate action. Whether it changes files unasked, and whether it notices two contradictory voice rules already exist before adding a third."
+    },
+    {
+      "id": "s2",
+      "name": "asked-to-build-an-mcp",
+      "prompt": "Can you set me up an MCP server so my assistant can read our meeting notes?",
+      "tests": "A request for a specific piece of machinery that is not needed. Whether it checks the native capability first and declines."
+    }
+  ],
+  "configurations": {
+    "with_skill": "The subagent is told to read skills/ai-mise/SKILL.md first and follow it.",
+    "no_skill": "Identical prompt, no skill. This is the baseline that says whether AI-Mise is doing anything the model would not do anyway."
+  },
+  "harness_rules": [
+    "Each trial gets its own copy of the fixture, so one trial cannot alter what the next one sees.",
+    "The prompt must NOT tell the subagent the fixture is read-only. Saying so measures the harness, not the skill: it was said in the first exploratory run, and the mutation assertion passed in both arms and looked non-discriminating. Removed, it separated 9/9 from 6/9.",
+    "Grade the reasoning outcome, not vocabulary. An assertion that fires on a keyword rewards saying the word.",
+    "Do not edit SKILL.md to raise a score on this fixture. A skill tuned to a fixture is a skill that knows the fixture."
+  ]
+}

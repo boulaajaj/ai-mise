@@ -1,1 +1,2 @@
 install.sh text eol=lf
+evals/fixture.sh text eol=lf
