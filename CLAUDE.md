@@ -41,6 +41,7 @@ Every rule here was earned by breaking it. Dates are the day it went wrong.
 - PRs: one coherent change per PR, referencing its issue.
 - Python: stdlib-first, no dependencies unless an ADR justifies one; validators print a JSON result object and use exit codes 0/1/2 (see `protected_path_validator.py` as the pattern). New dependencies add a row to `docs/dependencies.md` (ADR-0006 vendor-death test) in the same PR.
 - Threat scenarios: new bypass ideas are added to `control-plane/threat-tests/scenarios.md` *before* being tested.
+- Evaluation instruments are committed before the runs they grade, and their hash recorded in the run record. A grader written or adjusted after the reports exist is measuring the reports, and its numbers are exploratory whatever they say. (2026-08-23: the first agent-eval run's headline was withdrawn for this - the grader was rewritten 77 seconds after the last report, and every change loosened a pattern or added an assertion.)
 - Formats over tools (ADR-0006): canonical data is plain Markdown + wikilinks + YAML frontmatter; viewers are optional.
 - Skills follow the platform limits recorded in policy.yaml (`placement.limits`).
 
