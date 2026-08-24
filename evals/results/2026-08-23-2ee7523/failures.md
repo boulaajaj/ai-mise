@@ -1,3 +1,10 @@
+---
+type: agent-eval-failures
+date: 2026-08-23
+ai_mise_commit: 2ee752336b27cc0279714859061dd2e82bc2d363
+of_run: results.md
+---
+
 # Failures from the 2026-08-23 run
 
 Only failures are listed; passing evidence regenerates by re-running the

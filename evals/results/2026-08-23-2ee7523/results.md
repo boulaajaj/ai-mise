@@ -1,3 +1,16 @@
+---
+type: agent-eval-run
+date: 2026-08-23
+ai_mise_commit: 2ee752336b27cc0279714859061dd2e82bc2d363
+skill_md_lines: 175
+host: claude-code-subagents
+model: claude-opus-5
+scenarios: 3
+configurations: 2
+trials_per_cell: 3
+grader: evals/graders/deterministic.py
+---
+
 # Agent eval run — 2026-08-23
 
 | | |

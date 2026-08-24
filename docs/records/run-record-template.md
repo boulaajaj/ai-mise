@@ -1,3 +1,12 @@
+---
+type: run-record
+ai_mise_commit:
+host:
+model:
+date:
+pilot_issue:
+---
+
 # Run record — <short name>
 
 Owned by #128. One file per deliberate run. Plain Markdown, kept by whoever
