@@ -144,8 +144,9 @@ a matching artefact, but that reading is a judgement and not a measurement.
   frontmatter field `grader_written_before_runs` exists to make a false
   claim conspicuous. The grader is pinned to LF in `.gitattributes` so its
   bytes are identical in every checkout and the recorded hash reproduces
-  anywhere — by `sha256sum evals/graders/deterministic.py`, or `shasum -a
-  256`, or `certutil -hashfile <file> SHA256`, whichever the machine has.
+  anywhere — by `sha256sum evals/graders/deterministic.py`, or by
+  `shasum -a 256`, or by `certutil -hashfile <file> SHA256`, whichever the
+  machine has.
   Without the pin a Windows checkout hashes differently and the field
   cannot be checked at all, which is a pre-registration that proves
   nothing.
