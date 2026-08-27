@@ -139,7 +139,20 @@ jobs:
           check BARE.md 1 bare-name
           check MISSING.md 1 trigger-missing
           check OK.md 0 --
-          echo "self-test OK: both failure modes fire, clean docs pass"
+
+          # Invalid input answers with a result, not a traceback.
+          printf 'x\n' > /tmp/outside.md
+          set +e
+          out=$(python tools/check_documented_trigger.py --repo /tmp/trig --doc /tmp/outside.md 2>&1)
+          rc=$?
+          set -e
+          echo "$out"
+          if [ "$rc" -ne 2 ] || ! echo "$out" | grep -q '"passed": false'; then
+            echo "SELF-TEST FAILED: a doc outside --repo must exit 2 with a validator result"
+            exit 1
+          fi
+
+          echo "self-test OK: both failure modes fire, clean docs pass, bad input exits 2"
       - name: Inventory manifest is reproducible and path-clean (self-test)
         run: |
           set -e

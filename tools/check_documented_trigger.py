@@ -55,8 +55,12 @@ DEFAULT_DOCS = ("README.md", "INSTALL.md")
 PLUGIN_ROUTE = re.compile(r"claude plugin install", re.IGNORECASE)
 
 
+VALIDATOR = "documented_trigger"
+
+
 def fail(message: str) -> None:
-    print(json.dumps({"result": "error", "error": message}, indent=2))
+    """Invalid input: the repo's validator shape, and exit 2."""
+    print(json.dumps({"validator": VALIDATOR, "passed": False, "detail": message}, indent=2))
     raise SystemExit(2)
 
 
@@ -119,10 +123,12 @@ def check_doc(path: Path, repo: Path, plugin: str, triggers: list[str]) -> list[
             ),
         })
 
-    if PLUGIN_ROUTE.search(text) and not any(t in text for t in triggers):
+    route = PLUGIN_ROUTE.search(text)
+    if route and not any(t in text for t in triggers):
         violations.append({
             "doc": rel,
-            "line": None,
+            # The line that made the claim, so the fix has somewhere to go.
+            "line": text.count("\n", 0, route.start()) + 1,
             "kind": "trigger-missing",
             "found": None,
             "expected": triggers[0] if len(triggers) == 1 else triggers,
@@ -151,21 +157,31 @@ def main() -> int:
     plugin = read_plugin_name(repo)
     triggers = [f"/{plugin}:{skill}" for skill in read_skill_names(repo)]
 
-    docs = args.docs or [repo / name for name in DEFAULT_DOCS]
-    violations = []
-    for doc in docs:
-        doc = doc if doc.is_absolute() else repo / doc
+    docs, violations = [], []
+    for given in args.docs or [Path(name) for name in DEFAULT_DOCS]:
+        doc = (given if given.is_absolute() else repo / given).resolve()
         if not doc.is_file():
             fail(f"no such documentation file: {doc}")
+        # A doc outside --repo has no relative path to report, and letting
+        # relative_to raise would answer with a traceback instead of a result.
+        if not doc.is_relative_to(repo):
+            fail(f"--doc is outside --repo: {doc}")
+        docs.append(doc)
+
+    for doc in docs:
         violations.extend(check_doc(doc, repo, plugin, triggers))
 
     print(json.dumps({
-        "result": "fail" if violations else "pass",
+        "validator": VALIDATOR,
+        "passed": not violations,
+        "detail": (
+            f"{len(violations)} violation(s); docs name a command that does not exist"
+            if violations else
+            f"docs name the registered trigger: {', '.join(triggers)}"
+        ),
         "plugin": plugin,
         "valid_triggers": triggers,
-        "docs_checked": [
-            (d if d.is_absolute() else repo / d).relative_to(repo).as_posix() for d in docs
-        ],
+        "docs_checked": [d.relative_to(repo).as_posix() for d in docs],
         "violations": violations,
     }, indent=2))
     return 1 if violations else 0
