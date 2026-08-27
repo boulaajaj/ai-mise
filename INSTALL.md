@@ -133,7 +133,7 @@ was a hard question to answer.
 | `claude plugin install … --scope project` | `/ai-mise:ai-mise` | only when started from that one directory |
 | `gh skill install … --agent claude-code` | `/ai-mise` | everywhere, at user scope |
 | `install.sh` / `install.ps1` | the name you chose, e.g. `/celine` | everywhere, at user scope |
-| claude.ai marketplace | say the name | every surface on your account — see the known issue above |
+| claude.ai marketplace | — none | every surface on your account — see the known issue above |
 
 <!-- trigger-ok-end -->
 
