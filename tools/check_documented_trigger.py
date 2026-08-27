@@ -25,16 +25,25 @@ page for something to type finds the token, not the clause around it. Warn
 about the mistake by describing it — "the plugin name on its own" — rather
 than by printing it.
 
-Known constraint, recorded so a future editor is not surprised. The two
-non-plugin routes — `install.sh` and `gh skill install` — place the skill
-folder directly, so on those a bare word really is the trigger, and if either
-were documented using the default folder name the result would be a legal
-`/ai-mise` that this check would still reject. The docs avoid the collision
-by illustrating those routes with a chosen name (`/celine`) instead, which is
-clearer for the reader anyway: the whole point of those routes is that you
-pick the word. Should that stop being true, this rule needs to learn which
-route a passage is describing, and the honest way to teach it is a marker in
-the prose rather than a guess about surrounding text.
+There is one legitimate exception. The two non-plugin routes — `install.sh`
+and `gh skill install` — place the skill folder directly, so on those a bare
+word really is the trigger, and documenting one of them with the default
+folder name produces a correct `/ai-mise` that the rule above would reject.
+
+Rather than guess from surrounding text which route a passage describes, the
+prose says so, in a marked region:
+
+    <!-- trigger-ok-start: why the bare name is correct here -->
+    | gh skill install … | `/ai-mise` | everywhere |
+    <!-- trigger-ok-end -->
+
+Bare names inside such a region are allowed. The reason is required and is
+read by nobody — it exists so that opening a region is a decision somebody
+made and signed, rather than a way to silence the check. An unterminated
+region, or one opened without a reason, is itself a violation, and — this is
+the part that matters — a malformed marker opens no region at all. It is
+reported and then ignored, so the bare names underneath it are still found.
+Misuse of the escape hatch must never be quieter than not using it.
 
 Usage:
     check_documented_trigger.py [--repo <dir>] [--doc <path> ...]
@@ -117,16 +126,57 @@ def read_skill_names(repo: Path) -> list[str]:
     return names
 
 
+ALLOW_START = re.compile(r"<!--\s*trigger-ok-start:\s*(.*?)\s*-->")
+ALLOW_END = re.compile(r"<!--\s*trigger-ok-end\s*-->")
+
+
+def allowed_spans(text: str, rel: str) -> tuple[list[tuple[int, int]], list[dict]]:
+    """Character ranges where a bare name is signed off, plus any misuse of the marker."""
+    spans, violations = [], []
+    ends = [m.start() for m in ALLOW_END.finditer(text)]
+    for start in ALLOW_START.finditer(text):
+        reason = start.group(1)
+        line = text.count("\n", 0, start.start()) + 1
+
+        # Only a well-formed marker opens a span. A malformed one is reported
+        # and then ignored, so it cannot suppress the bare names underneath it
+        # — misuse of the escape hatch must never be quieter than not using it.
+        well_formed = True
+
+        if not reason:
+            violations.append({
+                "doc": rel, "line": line, "kind": "allow-without-reason",
+                "found": start.group(0), "expected": None,
+                "message": "trigger-ok-start must carry a reason",
+            })
+            well_formed = False
+
+        after = [e for e in ends if e > start.end()]
+        if not after:
+            violations.append({
+                "doc": rel, "line": line, "kind": "allow-unterminated",
+                "found": start.group(0), "expected": None,
+                "message": "trigger-ok-start with no matching trigger-ok-end",
+            })
+            well_formed = False
+
+        if well_formed:
+            spans.append((start.end(), after[0]))
+    return spans, violations
+
+
 def check_doc(path: Path, repo: Path, plugin: str, triggers: list[str]) -> list[dict]:
     text = path.read_text(encoding="utf-8")
     rel = path.relative_to(repo).as_posix()
-    violations = []
+    spans, violations = allowed_spans(text, rel)
 
     # `/<plugin>` as a command, i.e. not preceded by a path or package
     # segment (`boulaajaj/ai-mise`, `~/ai-mise/…`) and not continuing into
     # `:skill` or a longer path.
     bare = re.compile(rf"(?<![\w.~-])/{re.escape(plugin)}(?![:\w/-])")
     for match in bare.finditer(text):
+        if any(lo <= match.start() < hi for lo, hi in spans):
+            continue
         line = text.count("\n", 0, match.start()) + 1
         violations.append({
             "doc": rel,
