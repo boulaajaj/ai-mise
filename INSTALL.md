@@ -27,6 +27,10 @@ Inside a session already running, the same two steps are `/plugin marketplace
 add boulaajaj/ai-mise` and then `/plugin install ai-mise@ai-mise`. The scope
 picker appears there instead of the flag.
 
+Either way, what you type afterwards is `/ai-mise:ai-mise`. Claude Code
+namespaces a plugin's skills as `plugin:skill`, so the plugin name on its own
+is not a registered command on this route and answers `Unknown command`.
+
 **Codex**
 
 ```bash
@@ -88,11 +92,13 @@ the whole of it.
 
 ## Calling it something else
 
-Every installer above uses the folder name as the word you type, so you get
-`/ai-mise`. To call it something of your own, clone the repository and run
-`install.sh` or `install.ps1` instead. It asks for a name, installs under
-that name, and then that word is the trigger: `/celine` in Claude Code,
-`$celine` in Codex.
+The plugin installers above use the marketplace's plugin name, so on Claude
+Code you get `/ai-mise:ai-mise`. To call it something of your own, clone the
+repository and run `install.sh` or `install.ps1` instead. It asks for a name,
+installs under that name, and then that word is the trigger: `/celine` in
+Claude Code, `$celine` in Codex. A bare word this time, with nothing before
+the colon, because this route places the skill folder directly rather than
+inside a plugin.
 
 ## What is placed
 

@@ -22,7 +22,9 @@ claude plugin marketplace add boulaajaj/ai-mise
 claude plugin install ai-mise@ai-mise --scope user
 ```
 
-Then type `/ai-mise`, or just say it in your own words.
+Then type `/ai-mise:ai-mise`, or just say it in your own words. Claude Code
+namespaces a plugin's skills as `plugin:skill`, which is why the name appears
+twice — the plugin name on its own is not a registered command on this route.
 
 **Claude on the web, on the desktop, or on your phone**
 
@@ -79,9 +81,9 @@ way in at all.
 
 ## Giving it a name
 
-Every command above installs it under the folder name, so what you type is
-`/ai-mise`. To call it something of your own, clone this and run the
-installer instead:
+The plugin route above installs it under the marketplace's plugin name, so
+what you type there is `/ai-mise:ai-mise`. To call it something of your own,
+clone this and run the installer instead:
 
 ```bash
 git clone https://github.com/boulaajaj/ai-mise.git
@@ -91,8 +93,10 @@ sh install.sh          # or  .\install.ps1  on Windows
 
 It asks what you would like to call it, installs under that name, and from
 then on that word is the trigger: `/celine` in Claude Code, `$celine` in
-Codex. It refuses rather than overwriting anything already sitting under that
-name, and it prints every path it writes so undoing it is obvious.
+Codex. A bare word this time, with nothing before the colon, because this
+route places the skill folder directly rather than inside a plugin. It
+refuses rather than overwriting anything already sitting under that name, and
+it prints every path it writes so undoing it is obvious.
 
 ## Things to ask it
 

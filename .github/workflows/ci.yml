@@ -98,6 +98,48 @@ jobs:
           lines=$(wc -l < CLAUDE.md)
           echo "CLAUDE.md: $lines lines (limit 200)"
           [ "$lines" -le 200 ]
+
+      - name: Documented trigger matches the registered command (self-test)
+        run: |
+          set -e
+          # The docs this repo actually ships must name a command that exists.
+          python tools/check_documented_trigger.py
+
+          # And every failure mode must fire on its own, so a green result
+          # means the check looked rather than that it never objects.
+          rm -rf /tmp/trig
+          mkdir -p /tmp/trig/.claude-plugin /tmp/trig/skills/demo
+          printf '{"name":"demo","plugins":[{"name":"demo","source":"./"}]}\n' \
+            > /tmp/trig/.claude-plugin/marketplace.json
+          printf -- '---\nname: demo\ndescription: d\n---\n\nbody\n' \
+            > /tmp/trig/skills/demo/SKILL.md
+          printf 'Run `claude plugin install demo@demo` then type `/demo`.\n' \
+            > /tmp/trig/BARE.md
+          printf 'Run `claude plugin install demo@demo` and you are done.\n' \
+            > /tmp/trig/MISSING.md
+          printf 'Run `claude plugin install demo@demo` then type `/demo:demo`.\n' \
+            > /tmp/trig/OK.md
+
+          check() {  # <fixture> <expected exit> <needle or -->
+            set +e
+            out=$(python tools/check_documented_trigger.py --repo /tmp/trig --doc "$1")
+            rc=$?
+            set -e
+            echo "$out"
+            if [ "$rc" -ne "$2" ]; then
+              echo "SELF-TEST FAILED: $1 expected exit $2, got $rc"
+              exit 1
+            fi
+            if [ "$3" != "--" ] && ! echo "$out" | grep -q "\"kind\": \"$3\""; then
+              echo "SELF-TEST FAILED: $1 did not report failure mode: $3"
+              exit 1
+            fi
+          }
+
+          check BARE.md 1 bare-name
+          check MISSING.md 1 trigger-missing
+          check OK.md 0 --
+          echo "self-test OK: both failure modes fire, clean docs pass"
       - name: Inventory manifest is reproducible and path-clean (self-test)
         run: |
           set -e
