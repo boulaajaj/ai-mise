@@ -164,6 +164,31 @@ jobs:
             exit 1
           fi
 
+          # A source climbing out of the repository is not the repository root.
+          for bad_source in '../' './..' '..'; do
+            printf '{"name":"demo","plugins":[{"name":"demo","source":"%s"}]}\n' "$bad_source" \
+              > /tmp/trig/.claude-plugin/marketplace.json
+            set +e
+            out=$(python tools/check_documented_trigger.py --repo /tmp/trig --doc OK.md 2>&1)
+            rc=$?
+            set -e
+            if [ "$rc" -ne 2 ]; then
+              echo "$out"
+              echo "SELF-TEST FAILED: source $bad_source must not count as repo-local"
+              exit 1
+            fi
+            echo "ok: source $bad_source -> exit 2"
+          done
+          printf '{"name":"demo","plugins":[{"name":"demo","source":"./"}]}\n' \
+            > /tmp/trig/.claude-plugin/marketplace.json
+
+          # CRLF frontmatter parses: \s* absorbs the carriage return.
+          printf -- '---\r\nname: demo\r\ndescription: d\r\n---\r\n\r\nbody\r\n' \
+            > /tmp/trig/skills/demo/SKILL.md
+          check OK.md 0 --
+          printf -- '---\nname: demo\ndescription: d\n---\n\nbody\n' \
+            > /tmp/trig/skills/demo/SKILL.md
+
           echo "self-test OK: every failure mode fires, a signed-off region passes, bad input exits 2"
       - name: Inventory manifest is reproducible and path-clean (self-test)
         run: |
