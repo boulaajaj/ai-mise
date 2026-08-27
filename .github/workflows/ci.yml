@@ -99,6 +99,110 @@ jobs:
           echo "CLAUDE.md: $lines lines (limit 200)"
           [ "$lines" -le 200 ]
 
+      - name: Documented trigger matches the registered command (self-test)
+        run: |
+          set -e
+          # The docs this repo actually ships must name a command that exists.
+          python tools/check_documented_trigger.py
+
+          # And every failure mode must fire on its own, so a green result
+          # means the check looked rather than that it never objects.
+          rm -rf /tmp/trig
+          mkdir -p /tmp/trig/.claude-plugin /tmp/trig/skills/demo
+          printf '{"name":"demo","plugins":[{"name":"demo","source":"./"}]}\n' \
+            > /tmp/trig/.claude-plugin/marketplace.json
+          printf -- '---\nname: demo\ndescription: d\n---\n\nbody\n' \
+            > /tmp/trig/skills/demo/SKILL.md
+          printf 'Run `claude plugin install demo@demo` then type `/demo`.\n' \
+            > /tmp/trig/BARE.md
+          printf 'Run `claude plugin install demo@demo` and you are done.\n' \
+            > /tmp/trig/MISSING.md
+          printf 'Run `claude plugin install demo@demo` then type `/demo:demo`.\n' \
+            > /tmp/trig/OK.md
+
+          check() {  # <fixture> <expected exit> <needle or -->
+            set +e
+            out=$(python tools/check_documented_trigger.py --repo /tmp/trig --doc "$1")
+            rc=$?
+            set -e
+            echo "$out"
+            if [ "$rc" -ne "$2" ]; then
+              echo "SELF-TEST FAILED: $1 expected exit $2, got $rc"
+              exit 1
+            fi
+            if [ "$3" != "--" ] && ! echo "$out" | grep -q "\"kind\": \"$3\""; then
+              echo "SELF-TEST FAILED: $1 did not report failure mode: $3"
+              exit 1
+            fi
+          }
+
+          check BARE.md 1 bare-name
+          check MISSING.md 1 trigger-missing
+          check OK.md 0 --
+
+          # Invalid input answers with a result, not a traceback.
+          printf 'x\n' > /tmp/outside.md
+          set +e
+          out=$(python tools/check_documented_trigger.py --repo /tmp/trig --doc /tmp/outside.md 2>&1)
+          rc=$?
+          set -e
+          echo "$out"
+          if [ "$rc" -ne 2 ] || ! echo "$out" | grep -q '"passed": false'; then
+            echo "SELF-TEST FAILED: a doc outside --repo must exit 2 with a validator result"
+            exit 1
+          fi
+
+          # A source climbing out of the repository is not the repository root.
+          for bad_source in '../' './..' '..'; do
+            printf '{"name":"demo","plugins":[{"name":"demo","source":"%s"}]}\n' "$bad_source" \
+              > /tmp/trig/.claude-plugin/marketplace.json
+            set +e
+            out=$(python tools/check_documented_trigger.py --repo /tmp/trig --doc OK.md 2>&1)
+            rc=$?
+            set -e
+            if [ "$rc" -ne 2 ]; then
+              echo "$out"
+              echo "SELF-TEST FAILED: source $bad_source must not count as repo-local"
+              exit 1
+            fi
+            echo "ok: source $bad_source -> exit 2"
+          done
+          printf '{"name":"demo","plugins":[{"name":"demo","source":"./"}]}\n' \
+            > /tmp/trig/.claude-plugin/marketplace.json
+
+          # Every malformed manifest shape answers with a result, not a
+          # traceback. Swept rather than patched line by line, because this
+          # class of finding had already been fixed in the sibling validator.
+          badshape() {  # <label> <marketplace json>
+            printf '%s\n' "$2" > /tmp/trig/.claude-plugin/marketplace.json
+            set +e
+            out=$(python tools/check_documented_trigger.py --repo /tmp/trig --doc OK.md 2>&1)
+            rc=$?
+            set -e
+            if [ "$rc" -ne 2 ] || ! echo "$out" | grep -q '"passed": false'; then
+              echo "$out"
+              echo "SELF-TEST FAILED: $1 must exit 2 with a validator result"
+              exit 1
+            fi
+            echo "ok: $1 -> exit 2"
+          }
+          badshape "manifest is a list"  '["not","an","object"]'
+          badshape "plugins is a dict"   '{"name":"d","plugins":{"a":1}}'
+          badshape "plugins is a string" '{"name":"d","plugins":"oops"}'
+          badshape "plugins is empty"    '{"name":"d","plugins":[]}'
+          badshape "entry is a string"   '{"name":"d","plugins":["oops"]}'
+          badshape "name is a number"    '{"name":"d","plugins":[{"name":7,"source":"./"}]}'
+          printf '{"name":"demo","plugins":[{"name":"demo","source":"./"}]}\n' \
+            > /tmp/trig/.claude-plugin/marketplace.json
+
+          # CRLF frontmatter parses: \s* absorbs the carriage return.
+          printf -- '---\r\nname: demo\r\ndescription: d\r\n---\r\n\r\nbody\r\n' \
+            > /tmp/trig/skills/demo/SKILL.md
+          check OK.md 0 --
+          printf -- '---\nname: demo\ndescription: d\n---\n\nbody\n' \
+            > /tmp/trig/skills/demo/SKILL.md
+
+          echo "self-test OK: both failure modes fire, clean docs pass, bad input exits 2"
       - name: Skill frontmatter parses, and stays within the recorded limits
         run: |
           python - <<'PYEOF'
