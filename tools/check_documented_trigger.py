@@ -40,8 +40,10 @@ prose says so, in a marked region:
 Bare names inside such a region are allowed. The reason is required and is
 read by nobody — it exists so that opening a region is a decision somebody
 made and signed, rather than a way to silence the check. An unterminated
-region, or one opened without a reason, is itself a violation: otherwise the
-escape hatch could quietly swallow the rest of the file.
+region, or one opened without a reason, is itself a violation, and — this is
+the part that matters — a malformed marker opens no region at all. It is
+reported and then ignored, so the bare names underneath it are still found.
+Misuse of the escape hatch must never be quieter than not using it.
 
 Usage:
     check_documented_trigger.py [--repo <dir>] [--doc <path> ...]
@@ -135,12 +137,20 @@ def allowed_spans(text: str, rel: str) -> tuple[list[tuple[int, int]], list[dict
     for start in ALLOW_START.finditer(text):
         reason = start.group(1)
         line = text.count("\n", 0, start.start()) + 1
+
+        # Only a well-formed marker opens a span. A malformed one is reported
+        # and then ignored, so it cannot suppress the bare names underneath it
+        # — misuse of the escape hatch must never be quieter than not using it.
+        well_formed = True
+
         if not reason:
             violations.append({
                 "doc": rel, "line": line, "kind": "allow-without-reason",
                 "found": start.group(0), "expected": None,
                 "message": "trigger-ok-start must carry a reason",
             })
+            well_formed = False
+
         after = [e for e in ends if e > start.end()]
         if not after:
             violations.append({
@@ -148,8 +158,10 @@ def allowed_spans(text: str, rel: str) -> tuple[list[tuple[int, int]], list[dict
                 "found": start.group(0), "expected": None,
                 "message": "trigger-ok-start with no matching trigger-ok-end",
             })
-            continue
-        spans.append((start.end(), after[0]))
+            well_formed = False
+
+        if well_formed:
+            spans.append((start.end(), after[0]))
     return spans, violations
 
 

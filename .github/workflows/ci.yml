@@ -149,7 +149,11 @@ jobs:
           check ALLOWED.md 0 --
           check NOREASON.md 1 allow-without-reason
           check UNTERM.md 1 allow-unterminated
-          # An unterminated region must not swallow the rest of the file.
+          # A malformed marker opens no region, so the bare names underneath
+          # it are still reported. Asserted for BOTH misuse forms: checking
+          # only that the misuse fires is a weaker test than the guarantee,
+          # and it let a suppression bug through once already.
+          check NOREASON.md 1 bare-name
           check UNTERM.md 1 bare-name
 
           # Invalid input answers with a result, not a traceback.
