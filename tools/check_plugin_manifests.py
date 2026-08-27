@@ -65,7 +65,11 @@ def load_json(path: Path, label: str) -> dict:
 
 
 def is_repo_local(source) -> bool:
-    """True for a plugin shipped from this repository rather than fetched."""
+    """True for a plugin shipped from this repository rather than fetched.
+
+    Only ever asked about a source already known to be a string or an object,
+    so an absent or malformed one cannot reach here and be read as "remote".
+    """
     return isinstance(source, str)
 
 
@@ -84,13 +88,22 @@ def check(repo: Path) -> list[dict]:
         if not isinstance(entry, dict):
             fail(f"marketplace.json plugins[{position}] must be an object, "
                  f"found {type(entry).__name__}")
+        # Both fields are required by the schema. Left unchecked, a missing
+        # source reads as "not a string" and the entry would be waved through
+        # as remote — the validator skipping exactly what it is here to catch.
+        if not isinstance(entry.get("name"), str) or not entry["name"]:
+            fail(f"marketplace.json plugins[{position}] must have a name")
+        if not isinstance(entry.get("source"), (str, dict)):
+            fail(f"marketplace.json plugins[{position}] ({entry['name']}) must have a "
+                 f"source that is a relative path or an object, found "
+                 f"{type(entry.get('source')).__name__}")
 
     manifest_path = repo / ".claude-plugin" / "plugin.json"
     manifest = load_json(manifest_path, "plugin.json")
 
     for entry in entries:
         source = entry.get("source")
-        name = entry.get("name", "<unnamed>")
+        name = entry["name"]
 
         if not is_repo_local(source):
             # Fetched from elsewhere; its manifest is not ours to validate.

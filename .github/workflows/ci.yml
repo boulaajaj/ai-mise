@@ -218,5 +218,13 @@ jobs:
           bad "plugins is empty"             '{"name":"demo","plugins":[]}' "$GOOD"
           bad "a plugin entry is not object" '{"name":"demo","plugins":["oops"]}' "$GOOD"
           bad "plugin.json is not an object" "$MP" '["not","an","object"]'
+          # An entry with no usable source must not be waved through as "remote".
+          bad "entry has no source"   '{"name":"demo","plugins":[{"name":"demo"}]}' "$GOOD"
+          bad "entry source is null"  '{"name":"demo","plugins":[{"name":"demo","source":null}]}' "$GOOD"
+          bad "entry has no name"     '{"name":"demo","plugins":[{"source":"./"}]}' "$GOOD"
+
+          # A genuinely remote plugin still passes: its manifest is not ours.
+          mkfix /tmp/m_rem '{"name":"demo","plugins":[{"name":"x","source":{"source":"github","repo":"a/b"}}]}' "$GOOD"
+          expect /tmp/m_rem 0 --
 
           echo "self-test OK: every failure mode fires, clean layout passes, malformed input exits 2"
