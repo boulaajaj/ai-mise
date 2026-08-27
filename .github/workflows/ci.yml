@@ -151,7 +151,20 @@ jobs:
           check UNTERM.md 1 allow-unterminated
           # An unterminated region must not swallow the rest of the file.
           check UNTERM.md 1 bare-name
-          echo "self-test OK: every failure mode fires, clean docs and a signed-off region pass"
+
+          # Invalid input answers with a result, not a traceback.
+          printf 'x\n' > /tmp/outside.md
+          set +e
+          out=$(python tools/check_documented_trigger.py --repo /tmp/trig --doc /tmp/outside.md 2>&1)
+          rc=$?
+          set -e
+          echo "$out"
+          if [ "$rc" -ne 2 ] || ! echo "$out" | grep -q '"passed": false'; then
+            echo "SELF-TEST FAILED: a doc outside --repo must exit 2 with a validator result"
+            exit 1
+          fi
+
+          echo "self-test OK: every failure mode fires, a signed-off region passes, bad input exits 2"
       - name: Inventory manifest is reproducible and path-clean (self-test)
         run: |
           set -e
