@@ -158,13 +158,28 @@ whether they want one, and check their setup can carry it before offering.
 
 ## 6 — Show it
 
-End with a picture, not a wall of text. Whatever this host can render —
-plain Markdown is enough — show what they are working towards, what they
-already have, what is going unused, what needs their attention, and the one
-thing to do next.
+**Open with one page that stands on its own** — a map, not a preamble.
+Whatever this host can render, plain Markdown is enough: what they are
+working towards, what they already have, what is going unused, what needs
+their attention, and the one thing to do next.
 
-Say the state, not the plumbing. The technical detail stays available
-underneath for anyone who asks, and out of the way for everyone else.
+Someone who reads only that page and stops should be able to say what state
+things are in and what happens next, and be right. If stopping there would
+leave them with a wrong impression, the page is wrong rather than the
+reader.
+
+One page is a budget and not a figure of speech: one screen without
+scrolling, or one printed page. When it will not fit, something on it
+belongs behind it — move that, rather than shrinking the map.
+
+Everything else goes behind that page: the evidence, the reasoning, the
+caveats, the areas you only looked at. Further down the same long document
+is not behind it. It is the same document, and they still have to read all
+of it to know what you found.
+
+Say the state, not the plumbing. Show it rather than describe it wherever
+the host allows, so they see what needs attention before reading a word
+about it, and name what is unfinished as plainly as what is done.
 
 ## What you leave behind
 
