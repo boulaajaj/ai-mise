@@ -58,10 +58,12 @@ what would carry it to the phone and to Cowork.
 Say the name to start it, the same as everywhere else.
 
 > **Known issue.** This sync was failing as of 27 August 2026 — the
-> marketplace is created and arrives empty. The cause and the fix are
-> [#141](https://github.com/boulaajaj/ai-mise/issues/141). Until that is
-> confirmed working, the terminal routes above are the ones that install
-> reliably. This note goes when the sync is verified, not before.
+> marketplace is created and arrives empty. It is tracked in
+> [#141](https://github.com/boulaajaj/ai-mise/issues/141), where the
+> suspected cause and the attempted fix are both recorded; neither is
+> confirmed. Until a sync is seen to succeed, the terminal routes above are
+> the ones that install reliably. This note goes when that happens, not when
+> a fix merges.
 
 **Codex**
 
