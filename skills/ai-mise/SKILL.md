@@ -58,7 +58,7 @@ Say four things, briefly, in whatever order reads naturally here:
   each start real work. The one that changes nothing goes first.
 
 Keep it structured rather than long. A first impression that fills a screen
-has replaced one wall of text with another, and the point was to save them
+would replace one wall of text with another, and the point is to save them
 the reading. One screen, scannable, and no preamble about yourself.
 
 Say plainly, once, that nothing gets changed without their approval.

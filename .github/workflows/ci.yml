@@ -102,7 +102,7 @@ jobs:
       - name: Skill frontmatter parses, and stays within the recorded limits
         run: |
           python - <<'PYEOF'
-          import pathlib, re, sys, yaml
+          import pathlib, re, yaml
           # A skill whose frontmatter does not parse is a skill that may simply
           # not load, with no error anyone sees. Claude Code tolerated an
           # unquoted description containing ": " for months; a stricter host

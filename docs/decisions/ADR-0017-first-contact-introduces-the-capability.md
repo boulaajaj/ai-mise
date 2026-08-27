@@ -5,7 +5,11 @@
 
 ## Context
 
-The install succeeded in two commands, first try, twice **[verified]** — the friction log records the terminal output. What failed was everything after it. The documented command did not exist (#140), the account sync left an empty marketplace (#141), and when a working invocation was finally found it opened onto nothing a person could act on.
+The install succeeded in two commands, first try, twice **[verified]** — the friction log records the terminal output. What failed was everything after it, and each of those failures is observed rather than inferred:
+
+- The documented command did not exist **[verified]** — four invocations were tried and their output captured (#140).
+- The account sync failed three times and left an empty marketplace **[verified]** — the error and the network trace are both in the log (#141).
+- The working invocation opened onto nothing a person could act on **[verified]** — the session ended there, and the report of it is what triggered this record.
 
 That third failure is the one this record is about, because it is the only one that would have survived fixing the other two. `SKILL.md` §2 said the first thing to say should be short, should promise that nothing changes without approval, and should "leave an easy thing to say next". Nowhere did it say what AI-Mise can do, how else to reach it, or what to ask. The material that would have answered all three exists — the README's "Things to ask it" — and it is in a file the person is not reading. They have just installed a skill; they are talking to the skill.
 
@@ -31,7 +35,7 @@ The instruction to keep the first impression *short* also survives, and is the r
 
 ## Consequences
 
-- The skill's frontmatter `description` becomes load-bearing for invocation rather than merely descriptive. It is the only part of this that a host reads before deciding whether AI-Mise is relevant, so a change to it is a change to whether the product can be reached at all, and should be treated with the care given to an interface.
+- The skill's frontmatter `description` becomes load-bearing for invocation rather than merely descriptive. This repository now treats it as an interface: wherever a host decides relevance from what a skill declares about itself, that field is what decides whether AI-Mise is reached at all, so changes to it are reviewed as interface changes rather than as wording. How each host actually dispatches is its own business and moves month to month, so the rule recorded here is about the care taken *[default]*, not a claim about what every host does.
 - Every install document has to invert: name first, typed form second. #142, #143 and #144 all touch these files and should carry the inversion rather than adding it separately.
 - README and INSTALL currently promise that the account sync "turns up on the phone as well". That is false until #141 is confirmed fixed, and a promise about reach is exactly the kind this record makes prominent. It goes or it gets qualified.
 - The first-contact presentation is now the product's most-read output, and nothing tests it. That belongs with the behavioural regression work in #129 rather than being invented here — but it should be said plainly that this decision ships untested behaviour on the most exposed surface there is.
