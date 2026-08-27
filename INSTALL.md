@@ -132,7 +132,7 @@ was a hard question to answer.
 | `claude plugin install … --scope user` | `/ai-mise:ai-mise` | everywhere you use Claude Code |
 | `claude plugin install … --scope project` | `/ai-mise:ai-mise` | only when started from that one directory |
 | `gh skill install … --agent claude-code` | `/ai-mise` | everywhere, at user scope |
-| `install.sh` / `install.ps1` | the name you chose, e.g. `/celine` | everywhere, at user scope |
+| `install.sh` / `install.ps1` | the name you chose, with each tool's own prefix — `/celine` in Claude Code, `$celine` in Codex | everywhere, at user scope |
 | claude.ai marketplace | — none | every surface on your account — see the known issue above |
 
 <!-- trigger-ok-end -->

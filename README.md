@@ -14,12 +14,12 @@ It recommends, and it shows you. It changes nothing without your yes.
 This is version 0.1, and it is worth being exact about what installing it
 gets you, because the rest of this page describes where it is going.
 
-| | |
+| Question | Answer in version 0.1 |
 | --- | --- |
-| **What it does** | Reads the setup you are in and the project you point it at, then tells you what it found and what it would change |
-| **What you get back** | A page you read, in plain words |
-| **What it changes** | Nothing, ever, without you saying yes |
-| **What is not built** | The workspace it would build for you, the undo history, the rendered state map |
+| **What does it do?** | Reads the setup you are in and the project you point it at, then tells you what it found and what it would change |
+| **What do you get back?** | A page you read, in plain words |
+| **What does it change?** | Nothing, ever, without you saying yes |
+| **What is not built yet?** | The workspace it would build for you, the undo history, the rendered state map |
 
 Everything from *"What it sets out to do"* onward is the shape this is being
 built into rather than a description of what is there. Where a section covers
