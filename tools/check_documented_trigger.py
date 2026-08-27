@@ -79,7 +79,19 @@ def read_plugin_name(repo: Path) -> str:
         data = json.loads(manifest.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         fail(f"{manifest.name} is not valid JSON: {exc}")
-    plugins = data.get("plugins") or []
+    # Every shape is checked before it is used. A manifest that parses to a
+    # list, or a plugins value that is a string, would otherwise meet .get()
+    # and answer with a traceback — the one thing a validator must not do.
+    if not isinstance(data, dict):
+        fail(f"{manifest.name} must be a JSON object, found {type(data).__name__}")
+    plugins = data.get("plugins")
+    if not isinstance(plugins, list) or not plugins:
+        fail(f"{manifest.name} must declare a non-empty plugins array")
+    for position, entry in enumerate(plugins):
+        if not isinstance(entry, dict):
+            fail(f"{manifest.name} plugins[{position}] must be an object, "
+                 f"found {type(entry).__name__}")
+
     # Only a plugin sourced from this repository is one whose trigger these
     # docs are entitled to describe.
     #
@@ -91,7 +103,7 @@ def read_plugin_name(repo: Path) -> str:
     if len(local) != 1:
         fail(f"expected exactly one repo-local plugin in {manifest.name}, found {len(local)}")
     name = local[0].get("name")
-    if not name:
+    if not isinstance(name, str) or not name:
         fail(f"repo-local plugin in {manifest.name} has no name")
     return name
 
