@@ -9,11 +9,32 @@ something built for you last.
 
 It recommends, and it shows you. It changes nothing without your yes.
 
+## What runs today
+
+This is version 0.1, and it is worth being exact about what installing it
+gets you, because the rest of this page describes where it is going.
+
+| | |
+| --- | --- |
+| **What it does** | Reads the setup you are in and the project you point it at, then tells you what it found and what it would change |
+| **What you get back** | A page you read, in plain words |
+| **What it changes** | Nothing, ever, without you saying yes |
+| **What is not built** | The workspace it would build for you, the undo history, the rendered state map |
+
+Everything from *"What it sets out to do"* onward is the shape this is being
+built into rather than a description of what is there. Where a section covers
+something unbuilt, it says so.
+
 ## Installing it
 
 AI-Mise is an [Agent Skill](https://agentskills.io) in the open `SKILL.md`
 format, so one folder works in every tool below, and nothing here needs a
 runtime you do not already have.
+
+**However you install it, the way to start it is to say its name.** "AI-Mise,
+have a look at my setup" is the whole interface. Every tool below also has a
+typed shortcut, and each one is noted — but you never need it, and none of
+them is the way in.
 
 **Claude Code**
 
@@ -22,15 +43,25 @@ claude plugin marketplace add boulaajaj/ai-mise
 claude plugin install ai-mise@ai-mise --scope user
 ```
 
-Then type `/ai-mise:ai-mise`, or just say it in your own words. Claude Code
-namespaces a plugin's skills as `plugin:skill`, which is why the name appears
-twice — the plugin name on its own is not a registered command on this route.
+Then just say `ai-mise`. If you prefer typing, the shortcut is
+`/ai-mise:ai-mise` — Claude Code namespaces a plugin's skills as
+`plugin:skill`, which is why the name appears twice, and why the plugin name
+on its own is not a registered command on this route.
 
 **Claude on the web, on the desktop, or on your phone**
 
 Customize in the sidebar, then Plugins, the plus button, Add marketplace, Add
-from a repository, and paste `https://github.com/boulaajaj/ai-mise`. It syncs
-through your account, so it turns up on the phone as well.
+from a repository, and paste `https://github.com/boulaajaj/ai-mise`. This
+route goes through your account rather than through one machine, which is
+what would carry it to the phone and to Cowork.
+
+Say the name to start it, the same as everywhere else.
+
+> **Known issue.** This sync was failing as of 27 August 2026 — the
+> marketplace is created and arrives empty. The cause and the fix are
+> [#141](https://github.com/boulaajaj/ai-mise/issues/141). Until that is
+> confirmed working, the terminal routes above are the ones that install
+> reliably. This note goes when the sync is verified, not before.
 
 **Codex**
 

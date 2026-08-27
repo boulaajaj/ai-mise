@@ -2,6 +2,11 @@
 
 One command, or one sentence. Find the line for the thing you are using.
 
+**Whichever route you take, you start it by saying its name.** "AI-Mise, have
+a look at my setup" works everywhere. The typed shortcuts below differ from
+tool to tool, and from route to route within the same tool — which is worth
+knowing, and is why each one is spelled out. None of them is required.
+
 ## If you have a terminal
 
 The single command that covers the most tools:
@@ -27,9 +32,16 @@ Inside a session already running, the same two steps are `/plugin marketplace
 add boulaajaj/ai-mise` and then `/plugin install ai-mise@ai-mise`. The scope
 picker appears there instead of the flag.
 
-Either way, what you type afterwards is `/ai-mise:ai-mise`. Claude Code
-namespaces a plugin's skills as `plugin:skill`, so the plugin name on its own
-is not a registered command on this route and answers `Unknown command`.
+Then say `ai-mise`. If you would rather type, the shortcut on this route is
+`/ai-mise:ai-mise` — Claude Code namespaces a plugin's skills as
+`plugin:skill`, so the plugin name on its own is not a registered command
+here and answers `Unknown command`.
+
+**About `--scope`.** `--scope user` installs it for you everywhere, which is
+almost always what you want. `--scope project` installs it only for the
+directory you are standing in, so Claude Code loads it when started from
+there and nowhere else — which looks exactly like a failed install if you
+then go and check from somewhere else.
 
 **Codex**
 
@@ -58,8 +70,15 @@ from Repo, then this repository.
 
 **Claude, on the web, on the desktop, or on your phone.** Customize in the
 sidebar, then Plugins, then the plus button, Add marketplace, Add from a
-repository, and paste `https://github.com/boulaajaj/ai-mise`. It syncs
-through your account, so it turns up on the phone as well.
+repository, and paste `https://github.com/boulaajaj/ai-mise`. This route goes
+through your account rather than through one machine, which is what would
+carry it to the phone and to Cowork. Say the name to start it.
+
+> **Known issue.** This sync was failing as of 27 August 2026: the
+> marketplace is created and arrives empty. The cause and the fix are
+> [#141](https://github.com/boulaajaj/ai-mise/issues/141). Until it is
+> confirmed working, the terminal routes above are the ones that install
+> reliably. This note goes when the sync is verified, not before.
 
 ## If your assistant cannot install anything
 
@@ -100,6 +119,24 @@ Claude Code, `$celine` in Codex. A bare word this time, with nothing before
 the colon, because this route places the skill folder directly rather than
 inside a plugin.
 
+### What each route leaves you with
+
+Saying the name works in every row. The differences are in what you can type
+and where it is available, and they are the reason "is it even installed?"
+was a hard question to answer.
+
+<!-- trigger-ok-start: the gh skill route places the skill folder directly rather than inside a plugin, so the bare folder name really is its trigger -->
+
+| Route | Typed shortcut | Available where |
+| --- | --- | --- |
+| `claude plugin install … --scope user` | `/ai-mise:ai-mise` | everywhere you use Claude Code |
+| `claude plugin install … --scope project` | `/ai-mise:ai-mise` | only when started from that one directory |
+| `gh skill install … --agent claude-code` | `/ai-mise` | everywhere, at user scope |
+| `install.sh` / `install.ps1` | the name you chose, e.g. `/celine` | everywhere, at user scope |
+| claude.ai marketplace | say the name | every surface on your account — see the known issue above |
+
+<!-- trigger-ok-end -->
+
 ## What is placed
 
 The skill folder, `ai-mise`, holding `SKILL.md` and the scripts beside it.
@@ -122,15 +159,28 @@ said out loud.
 
 ## Check it worked
 
-Two checks.
+There are five states between running the installer and having something
+useful, and only two of them are ours. Knowing which one you are in is the
+difference between a two-minute fix and an afternoon.
 
-The first is that it loads, so you can start it by name.
+| State | How you can tell | If you are stuck here |
+| --- | --- | --- |
+| **Installed** | the installer printed the paths it wrote | re-run it and read what it printed; it stops rather than overwriting |
+| **Loaded** | the tool lists it — `/plugin` in Claude Code, `/skills` in Codex | wrong scope is the usual cause: a project-scope install only loads from its own directory |
+| **Trusted** | no "this workspace has not been trusted" warning | accept the trust prompt. Until you do, the tool ignores the permissions in the folder's settings and says so |
+| **Authenticated** | you are signed in to the tool itself | run `/login`. Headless runs (`claude -p`) fail here with `Not logged in` |
+| **Invokable** | you say the name and it answers | if the first four hold and it still does nothing, that one is ours — please open an issue |
 
-The second is that it does something. Ask it to look at the setup you are
-already in, and to change nothing. What comes back should name things you
-recognise — what is switched on here, what is sitting there unused. If it
-describes a generic AI setup rather than yours, it did not orient, and that
-is worth knowing before you rely on it.
+The middle three are the tool's gates, not AI-Mise's. They are listed here
+because they all land between "installed" and "working", which is exactly
+where it is easy to conclude the thing is broken when it is not.
+
+Then check that it actually does something. Say its name and ask it to look
+at the setup you are already in, changing nothing. What comes back should
+name things you recognise — what is switched on here, what is sitting unused
+— and should end with something you can do next. If it describes a generic AI
+setup rather than yours, it did not orient, and that is worth knowing before
+you rely on it.
 
 ## Removing it
 

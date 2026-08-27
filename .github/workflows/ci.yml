@@ -119,6 +119,13 @@ jobs:
             > /tmp/trig/MISSING.md
           printf 'Run `claude plugin install demo@demo` then type `/demo:demo`.\n' \
             > /tmp/trig/OK.md
+          # The signed-off escape hatch, and the two ways of abusing it.
+          printf 'Type `/demo:demo`.\n<!-- trigger-ok-start: a real reason -->\n`/demo`\n<!-- trigger-ok-end -->\n' \
+            > /tmp/trig/ALLOWED.md
+          printf 'Type `/demo:demo`.\n<!-- trigger-ok-start: -->\n`/demo`\n<!-- trigger-ok-end -->\n' \
+            > /tmp/trig/NOREASON.md
+          printf 'Type `/demo:demo`.\n<!-- trigger-ok-start: oops -->\n`/demo`\n' \
+            > /tmp/trig/UNTERM.md
 
           check() {  # <fixture> <expected exit> <needle or -->
             set +e
@@ -139,7 +146,12 @@ jobs:
           check BARE.md 1 bare-name
           check MISSING.md 1 trigger-missing
           check OK.md 0 --
-          echo "self-test OK: both failure modes fire, clean docs pass"
+          check ALLOWED.md 0 --
+          check NOREASON.md 1 allow-without-reason
+          check UNTERM.md 1 allow-unterminated
+          # An unterminated region must not swallow the rest of the file.
+          check UNTERM.md 1 bare-name
+          echo "self-test OK: every failure mode fires, clean docs and a signed-off region pass"
       - name: Inventory manifest is reproducible and path-clean (self-test)
         run: |
           set -e
