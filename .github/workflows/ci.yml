@@ -199,6 +199,10 @@ jobs:
           # "./.." starts with "./" and is not the repo root — it climbs out.
           mkfix /tmp/m_esc  '{"name":"demo","plugins":[{"name":"demo","source":"./.."}]}' "$GOOD"
           expect /tmp/m_esc  1 source-escapes-repo
+          # …but "..foo" is an ordinary directory rather than a climb, and a
+          # string-prefix test cannot tell the two apart.
+          mkfix /tmp/m_dots '{"name":"demo","plugins":[{"name":"demo","source":"./..foo","version":"1.0.0"}]}' "$GOOD"
+          expect /tmp/m_dots 0 --
 
           # Malformed manifests answer with a result and exit 2, not a traceback.
           bad() {  # <label> <marketplace json> <plugin json>

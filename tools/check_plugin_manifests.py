@@ -119,7 +119,13 @@ def check(repo: Path) -> list[dict]:
 
         # A relative source resolves against the marketplace root, so one that
         # climbs out of it points at something this repository does not ship.
-        if posixpath.normpath(source).startswith(".."):
+        #
+        # Compared as path segments rather than as a string prefix: ".." is a
+        # segment that climbs, while "..foo" is an ordinary directory whose
+        # name happens to begin with dots, and startswith("..") cannot tell
+        # them apart.
+        normalised = posixpath.normpath(source)
+        if normalised == ".." or normalised.startswith("../"):
             violations.append({
                 "kind": "source-escapes-repo",
                 "plugin": name,
