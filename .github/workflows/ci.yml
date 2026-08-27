@@ -149,3 +149,52 @@ jobs:
               print('self-test OK: reproducible, path-clean, symlink-refusing')
           raise SystemExit(1 if fails else 0)
           PYEOF
+
+      - name: Plugin manifests satisfy the stricter sync path (self-test)
+        run: |
+          set -e
+          # This repo must satisfy the rules the account sync enforces, not
+          # only the looser ones the CLI applies to a local clone.
+          python tools/check_plugin_manifests.py
+
+          # And every failure mode must fire on its own.
+          mkfix() {  # <dir> <marketplace json> <plugin json, or - for none>
+            rm -rf "$1"; mkdir -p "$1/.claude-plugin" "$1/skills/demo"
+            printf '%s\n' "$2" > "$1/.claude-plugin/marketplace.json"
+            [ "$3" = "-" ] || printf '%s\n' "$3" > "$1/.claude-plugin/plugin.json"
+          }
+          expect() {  # <dir> <expected exit> <expected kind, or -- for none>
+            set +e
+            out=$(python tools/check_plugin_manifests.py --repo "$1")
+            rc=$?
+            set -e
+            if [ "$rc" -ne "$2" ]; then
+              echo "$out"
+              echo "SELF-TEST FAILED: $1 expected exit $2, got $rc"
+              exit 1
+            fi
+            if [ "$3" != "--" ] && ! echo "$out" | grep -q "\"kind\": \"$3\""; then
+              echo "$out"
+              echo "SELF-TEST FAILED: $1 did not report failure mode: $3"
+              exit 1
+            fi
+            echo "ok: $1 -> exit $rc ${3}"
+          }
+
+          MP='{"name":"demo","plugins":[{"name":"demo","source":"./","version":"1.0.0"}]}'
+          GOOD='{"name":"demo","version":"1.0.0"}'
+
+          mkfix /tmp/m_ok   "$MP" "$GOOD"                        ; expect /tmp/m_ok   0 --
+          mkfix /tmp/m_miss "$MP" -                              ; expect /tmp/m_miss 1 manifest-missing
+          mkfix /tmp/m_name "$MP" '{"name":"WRONG","version":"1.0.0"}'
+          expect /tmp/m_name 1 name-mismatch
+          mkfix /tmp/m_ver  "$MP" '{"name":"demo","version":"9.9.9"}'
+          expect /tmp/m_ver  1 version-mismatch
+          mkfix /tmp/m_src  '{"name":"demo","plugins":[{"name":"demo","source":"nope/"}]}' '{"name":"demo"}'
+          expect /tmp/m_src  1 bad-relative-source
+          mkfix /tmp/m_bin  "$MP" "$GOOD" ; mkdir -p /tmp/m_bin/bin
+          expect /tmp/m_bin  1 reserved-bin
+          mkfix /tmp/m_skl  "$MP" "$GOOD" ; rm -rf /tmp/m_skl/skills
+          expect /tmp/m_skl  1 skills-missing
+
+          echo "self-test OK: all six failure modes fire, clean layout passes"
