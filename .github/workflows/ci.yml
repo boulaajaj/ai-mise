@@ -219,6 +219,49 @@ jobs:
             > /tmp/trig/skills/demo/SKILL.md
 
           echo "self-test OK: every failure mode fires, a signed-off region passes, bad input exits 2"
+      - name: Skill frontmatter parses, and stays within the recorded limits
+        run: |
+          python - <<'PYEOF'
+          import pathlib, re, yaml
+          # A skill whose frontmatter does not parse is a skill that may simply
+          # not load, with no error anyone sees. Claude Code tolerated an
+          # unquoted description containing ": " for months; a stricter host
+          # would not have, and nothing here would have said so.
+          policy = yaml.safe_load(pathlib.Path(
+              'control-plane/constitution/policy.yaml').read_text())
+          max_lines = policy['placement']['limits']['skill_md_max_lines']
+          fails = []
+          skills = sorted(pathlib.Path('skills').glob('*/SKILL.md'))
+          if not skills:
+              print('FAIL: no skills found'); raise SystemExit(1)
+          for path in skills:
+              text = path.read_text(encoding='utf-8')
+              match = re.match(r'^---\s*\n(.*?)\n---\s*\n', text, re.DOTALL)
+              if not match:
+                  fails.append(f'{path}: no YAML frontmatter'); continue
+              try:
+                  front = yaml.safe_load(match.group(1))
+              except yaml.YAMLError as exc:
+                  first = str(exc).splitlines()[0]
+                  fails.append(f'{path}: frontmatter is not valid YAML: {first}')
+                  continue
+              if not isinstance(front, dict):
+                  fails.append(f'{path}: frontmatter is not a mapping'); continue
+              for key in ('name', 'description'):
+                  if not front.get(key):
+                      fails.append(f'{path}: frontmatter has no {key}')
+              if front.get('name') and front['name'] != path.parent.name:
+                  fails.append(f'{path}: name {front["name"]!r} != folder '
+                               f'{path.parent.name!r} — the folder is the trigger')
+              n = len(text.splitlines())
+              if n > max_lines:
+                  fails.append(f'{path}: {n} lines exceeds limit {max_lines}')
+              else:
+                  print(f'{path}: OK ({n} lines, limit {max_lines})')
+          for f in fails:
+              print('FAIL:', f)
+          raise SystemExit(1 if fails else 0)
+          PYEOF
       - name: Inventory manifest is reproducible and path-clean (self-test)
         run: |
           set -e
@@ -270,3 +313,86 @@ jobs:
               print('self-test OK: reproducible, path-clean, symlink-refusing')
           raise SystemExit(1 if fails else 0)
           PYEOF
+
+      - name: Plugin manifests satisfy the stricter sync path (self-test)
+        run: |
+          set -e
+          # This repo must satisfy the rules the account sync enforces, not
+          # only the looser ones the CLI applies to a local clone.
+          python tools/check_plugin_manifests.py
+
+          # And every failure mode must fire on its own.
+          mkfix() {  # <dir> <marketplace json> <plugin json, or - for none>
+            rm -rf "$1"; mkdir -p "$1/.claude-plugin" "$1/skills/demo"
+            printf '%s\n' "$2" > "$1/.claude-plugin/marketplace.json"
+            [ "$3" = "-" ] || printf '%s\n' "$3" > "$1/.claude-plugin/plugin.json"
+          }
+          expect() {  # <dir> <expected exit> <expected kind, or -- for none>
+            set +e
+            out=$(python tools/check_plugin_manifests.py --repo "$1")
+            rc=$?
+            set -e
+            if [ "$rc" -ne "$2" ]; then
+              echo "$out"
+              echo "SELF-TEST FAILED: $1 expected exit $2, got $rc"
+              exit 1
+            fi
+            if [ "$3" != "--" ] && ! echo "$out" | grep -q "\"kind\": \"$3\""; then
+              echo "$out"
+              echo "SELF-TEST FAILED: $1 did not report failure mode: $3"
+              exit 1
+            fi
+            echo "ok: $1 -> exit $rc ${3}"
+          }
+
+          MP='{"name":"demo","plugins":[{"name":"demo","source":"./","version":"1.0.0"}]}'
+          GOOD='{"name":"demo","version":"1.0.0"}'
+
+          mkfix /tmp/m_ok   "$MP" "$GOOD"                        ; expect /tmp/m_ok   0 --
+          mkfix /tmp/m_miss "$MP" -                              ; expect /tmp/m_miss 1 manifest-missing
+          mkfix /tmp/m_name "$MP" '{"name":"WRONG","version":"1.0.0"}'
+          expect /tmp/m_name 1 name-mismatch
+          mkfix /tmp/m_ver  "$MP" '{"name":"demo","version":"9.9.9"}'
+          expect /tmp/m_ver  1 version-mismatch
+          mkfix /tmp/m_src  '{"name":"demo","plugins":[{"name":"demo","source":"nope/"}]}' '{"name":"demo"}'
+          expect /tmp/m_src  1 bad-relative-source
+          mkfix /tmp/m_bin  "$MP" "$GOOD" ; mkdir -p /tmp/m_bin/bin
+          expect /tmp/m_bin  1 reserved-bin
+          mkfix /tmp/m_skl  "$MP" "$GOOD" ; rm -rf /tmp/m_skl/skills
+          expect /tmp/m_skl  1 skills-missing
+          # "./.." starts with "./" and is not the repo root — it climbs out.
+          mkfix /tmp/m_esc  '{"name":"demo","plugins":[{"name":"demo","source":"./.."}]}' "$GOOD"
+          expect /tmp/m_esc  1 source-escapes-repo
+          # …but "..foo" is an ordinary directory rather than a climb, and a
+          # string-prefix test cannot tell the two apart.
+          mkfix /tmp/m_dots '{"name":"demo","plugins":[{"name":"demo","source":"./..foo","version":"1.0.0"}]}' "$GOOD"
+          expect /tmp/m_dots 0 --
+
+          # Malformed manifests answer with a result and exit 2, not a traceback.
+          bad() {  # <label> <marketplace json> <plugin json>
+            mkfix /tmp/m_bad "$2" "$3"
+            set +e
+            out=$(python tools/check_plugin_manifests.py --repo /tmp/m_bad 2>&1)
+            rc=$?
+            set -e
+            if [ "$rc" -ne 2 ] || ! echo "$out" | grep -q '"passed": false'; then
+              echo "$out"
+              echo "SELF-TEST FAILED: $1 must exit 2 with a validator result"
+              exit 1
+            fi
+            echo "ok: $1 -> exit 2"
+          }
+          bad "plugins is not a list"        '{"name":"demo","plugins":{"a":1}}' "$GOOD"
+          bad "plugins is empty"             '{"name":"demo","plugins":[]}' "$GOOD"
+          bad "a plugin entry is not object" '{"name":"demo","plugins":["oops"]}' "$GOOD"
+          bad "plugin.json is not an object" "$MP" '["not","an","object"]'
+          # An entry with no usable source must not be waved through as "remote".
+          bad "entry has no source"   '{"name":"demo","plugins":[{"name":"demo"}]}' "$GOOD"
+          bad "entry source is null"  '{"name":"demo","plugins":[{"name":"demo","source":null}]}' "$GOOD"
+          bad "entry has no name"     '{"name":"demo","plugins":[{"source":"./"}]}' "$GOOD"
+
+          # A genuinely remote plugin still passes: its manifest is not ours.
+          mkfix /tmp/m_rem '{"name":"demo","plugins":[{"name":"x","source":{"source":"github","repo":"a/b"}}]}' "$GOOD"
+          expect /tmp/m_rem 0 --
+
+          echo "self-test OK: every failure mode fires, clean layout passes, malformed input exits 2"
