@@ -98,6 +98,50 @@ jobs:
           lines=$(wc -l < CLAUDE.md)
           echo "CLAUDE.md: $lines lines (limit 200)"
           [ "$lines" -le 200 ]
+
+      - name: Skill frontmatter parses, and stays within the recorded limits
+        run: |
+          python - <<'PYEOF'
+          import pathlib, re, sys, yaml
+          # A skill whose frontmatter does not parse is a skill that may simply
+          # not load, with no error anyone sees. Claude Code tolerated an
+          # unquoted description containing ": " for months; a stricter host
+          # would not have, and nothing here would have said so.
+          policy = yaml.safe_load(pathlib.Path(
+              'control-plane/constitution/policy.yaml').read_text())
+          max_lines = policy['placement']['limits']['skill_md_max_lines']
+          fails = []
+          skills = sorted(pathlib.Path('skills').glob('*/SKILL.md'))
+          if not skills:
+              print('FAIL: no skills found'); raise SystemExit(1)
+          for path in skills:
+              text = path.read_text(encoding='utf-8')
+              match = re.match(r'^---\s*\n(.*?)\n---\s*\n', text, re.DOTALL)
+              if not match:
+                  fails.append(f'{path}: no YAML frontmatter'); continue
+              try:
+                  front = yaml.safe_load(match.group(1))
+              except yaml.YAMLError as exc:
+                  first = str(exc).splitlines()[0]
+                  fails.append(f'{path}: frontmatter is not valid YAML: {first}')
+                  continue
+              if not isinstance(front, dict):
+                  fails.append(f'{path}: frontmatter is not a mapping'); continue
+              for key in ('name', 'description'):
+                  if not front.get(key):
+                      fails.append(f'{path}: frontmatter has no {key}')
+              if front.get('name') and front['name'] != path.parent.name:
+                  fails.append(f'{path}: name {front["name"]!r} != folder '
+                               f'{path.parent.name!r} — the folder is the trigger')
+              n = len(text.splitlines())
+              if n > max_lines:
+                  fails.append(f'{path}: {n} lines exceeds limit {max_lines}')
+              else:
+                  print(f'{path}: OK ({n} lines, limit {max_lines})')
+          for f in fails:
+              print('FAIL:', f)
+          raise SystemExit(1 if fails else 0)
+          PYEOF
       - name: Inventory manifest is reproducible and path-clean (self-test)
         run: |
           set -e
