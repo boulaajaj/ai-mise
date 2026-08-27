@@ -17,6 +17,8 @@ rather than discovered by a person on a phone:
                         the plugin's name, so the entry resolves to nothing
     version-mismatch    same, for a pinned version
     bad-relative-source a relative source that does not start with "./"
+    source-escapes-repo a relative source that climbs out of the marketplace
+                        root, and so points at something not shipped here
     reserved-bin        a top-level bin/ directory, which the account
                         distribution path rejects outright
     skills-missing      the plugin declares a skill directory that is not there
@@ -33,23 +35,33 @@ Exit codes: 0 = pass, 1 = violations found, 2 = invalid input.
 """
 import argparse
 import json
+import posixpath
 import sys
 from pathlib import Path
 
 
+VALIDATOR = "plugin_manifests"
+
+
 def fail(message: str) -> None:
-    print(json.dumps({"result": "error", "error": message}, indent=2))
+    """Invalid input: the repo's validator shape, and exit 2."""
+    print(json.dumps({"validator": VALIDATOR, "passed": False, "detail": message}, indent=2))
     raise SystemExit(2)
 
 
 def load_json(path: Path, label: str) -> dict:
+    """Parse a manifest, or fail as invalid input. Never returns a non-mapping."""
     if not path.is_file():
         return {}
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        data = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         fail(f"{label} is not valid JSON: {exc}")
-    return {}
+    # A list or a bare string parses fine and then meets .get() further down,
+    # which would answer with an AttributeError rather than a result.
+    if not isinstance(data, dict):
+        fail(f"{label} must be a JSON object, found {type(data).__name__}")
+    return data
 
 
 def is_repo_local(source) -> bool:
@@ -65,9 +77,13 @@ def check(repo: Path) -> list[dict]:
         fail("no .claude-plugin/marketplace.json")
     marketplace = load_json(marketplace_path, "marketplace.json")
 
-    entries = marketplace.get("plugins") or []
-    if not entries:
-        fail("marketplace.json declares no plugins")
+    entries = marketplace.get("plugins")
+    if not isinstance(entries, list) or not entries:
+        fail("marketplace.json must declare a non-empty plugins array")
+    for position, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            fail(f"marketplace.json plugins[{position}] must be an object, "
+                 f"found {type(entry).__name__}")
 
     manifest_path = repo / ".claude-plugin" / "plugin.json"
     manifest = load_json(manifest_path, "plugin.json")
@@ -88,10 +104,25 @@ def check(repo: Path) -> list[dict]:
                 "message": 'a relative source must start with "./"',
             })
 
+        # A relative source resolves against the marketplace root, so one that
+        # climbs out of it points at something this repository does not ship.
+        if posixpath.normpath(source).startswith(".."):
+            violations.append({
+                "kind": "source-escapes-repo",
+                "plugin": name,
+                "found": source,
+                "message": "a relative source must stay inside the repository",
+            })
+            continue
+
         # "./" means the plugin root is the repository root, which is the only
         # layout this repo uses. Anything deeper would need its own manifest
         # beside it, and that is a different check than this one.
-        if source.strip("./") != "":
+        #
+        # Compared exactly rather than with strip("./"), which removes any
+        # run of "." and "/" from both ends and so would read "./.." — a
+        # traversal out of the repository — as the repository root.
+        if source not in ("./", "."):
             continue
 
         if not manifest:
@@ -154,7 +185,13 @@ def main() -> int:
 
     violations = check(repo)
     print(json.dumps({
-        "result": "fail" if violations else "pass",
+        "validator": VALIDATOR,
+        "passed": not violations,
+        "detail": (
+            "; ".join(f"{v['kind']}: {v['message']}" for v in violations)
+            if violations else
+            "manifests satisfy the rules the account sync enforces"
+        ),
         "repo": repo.name,
         "violations": violations,
     }, indent=2))

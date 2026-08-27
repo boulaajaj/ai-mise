@@ -196,5 +196,27 @@ jobs:
           expect /tmp/m_bin  1 reserved-bin
           mkfix /tmp/m_skl  "$MP" "$GOOD" ; rm -rf /tmp/m_skl/skills
           expect /tmp/m_skl  1 skills-missing
+          # "./.." starts with "./" and is not the repo root — it climbs out.
+          mkfix /tmp/m_esc  '{"name":"demo","plugins":[{"name":"demo","source":"./.."}]}' "$GOOD"
+          expect /tmp/m_esc  1 source-escapes-repo
 
-          echo "self-test OK: all six failure modes fire, clean layout passes"
+          # Malformed manifests answer with a result and exit 2, not a traceback.
+          bad() {  # <label> <marketplace json> <plugin json>
+            mkfix /tmp/m_bad "$2" "$3"
+            set +e
+            out=$(python tools/check_plugin_manifests.py --repo /tmp/m_bad 2>&1)
+            rc=$?
+            set -e
+            if [ "$rc" -ne 2 ] || ! echo "$out" | grep -q '"passed": false'; then
+              echo "$out"
+              echo "SELF-TEST FAILED: $1 must exit 2 with a validator result"
+              exit 1
+            fi
+            echo "ok: $1 -> exit 2"
+          }
+          bad "plugins is not a list"        '{"name":"demo","plugins":{"a":1}}' "$GOOD"
+          bad "plugins is empty"             '{"name":"demo","plugins":[]}' "$GOOD"
+          bad "a plugin entry is not object" '{"name":"demo","plugins":["oops"]}' "$GOOD"
+          bad "plugin.json is not an object" "$MP" '["not","an","object"]'
+
+          echo "self-test OK: every failure mode fires, clean layout passes, malformed input exits 2"
