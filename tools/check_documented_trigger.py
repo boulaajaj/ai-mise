@@ -75,7 +75,12 @@ def read_plugin_name(repo: Path) -> str:
     plugins = data.get("plugins") or []
     # Only a plugin sourced from this repository is one whose trigger these
     # docs are entitled to describe.
-    local = [p for p in plugins if str(p.get("source", "")).strip("/.") == ""]
+    #
+    # Compared against the known local forms rather than with strip("/."),
+    # which removes any run of "." and "/" from both ends and so read "../"
+    # and "./.." — paths climbing out of the repository — as the repository
+    # root itself.
+    local = [p for p in plugins if p.get("source") in ("", ".", "./")]
     if len(local) != 1:
         fail(f"expected exactly one repo-local plugin in {manifest.name}, found {len(local)}")
     name = local[0].get("name")
